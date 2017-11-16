@@ -1,8 +1,11 @@
 package com.employe.user;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.db.mysql.DBOEmployeUsers;
 
 public class EmployeUserClass extends EmployeClass{
 
@@ -44,7 +47,11 @@ public class EmployeUserClass extends EmployeClass{
 		}catch(NoSuchAlgorithmException ex) {
 			ex.printStackTrace();
 		}
-		//TODO: Compare with MySQL Entry and return
+		DBOEmployeUsers dbo = new DBOEmployeUsers();
+		HashMap<Integer, HashMap<String, String>> result = dbo.getUserByUserName(this.EmployeUserName);
+		//TODO: VALIDATE RESULT Hash 
+		
+		
 		return "null";
 	}
 	
