@@ -33,9 +33,9 @@ public class MySQL {
 		}
 	}
 
-	public HashMap<Integer, HashMap<String,String>> query(String query) {
+	public ArrayList<HashMap> query(String query) {
 		createConnection();
-		HashMap<Integer, HashMap<String, String>> resultSet = new HashMap<Integer, HashMap<String, String>>();
+		ArrayList<HashMap> resultSet = new ArrayList();
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
@@ -44,14 +44,12 @@ public class MySQL {
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 				columnsList.add(rsmd.getColumnName(i));
 			}
-			int iterator = 0;
 			while (rs.next()) {
 				HashMap<String, String> newEntry = new HashMap<String, String>();
 				for (String col : columnsList) {
-					newEntry.put(col,rs.getString(col));
-					resultSet.put(iterator,newEntry);
+					newEntry.put(col, rs.getString(col));
+					resultSet.add(newEntry);
 				}
-				iterator++;
 			}
 		} catch (SQLException e) {
 			// handle any errors
