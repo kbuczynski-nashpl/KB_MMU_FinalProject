@@ -22,7 +22,7 @@ public class EmployeUserClass extends EmployeClass {
 		if (userLoginUtils.validateUserName(employeUserName) == true) {
 			EmployeUserName = employeUserName;
 		} else {
-			EmployeUserName = "FAIL: Wrong User Name";
+			EmployeUserName = null;
 		}
 	}
 

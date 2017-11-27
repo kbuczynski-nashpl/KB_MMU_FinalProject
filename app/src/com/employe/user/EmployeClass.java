@@ -52,7 +52,7 @@ public class EmployeClass {
 		if (userLoginUtils.validateEmail(employeEmail) == true) {
 			EmployeEmail = employeEmail;
 		} else {
-			EmployeEmail = "FAIL: Wrong Email";
+			EmployeEmail = null;
 		}
 	}
 
