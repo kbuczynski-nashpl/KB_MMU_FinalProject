@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,12 +66,15 @@ public class userLoginUtils {
 		}
 	}
 
-	public static boolean logIn(String usrname, String psw) {
+	public static List logIn(String usrname, String psw) {
 		DBOClient dob = new DBOClient();
 		ArrayList<HashMap> usr = dob.getUserByUserName(usrname);
+		List result = new ArrayList();
+
 
 		if (usr.size() > 1) {
-			return false;
+			result.add("false");
+			return result;
 		}
 
 		ClientUserClass cuc = new ClientUserClass();
@@ -79,11 +83,14 @@ public class userLoginUtils {
 		cuc.setClientEmail(usr.get(0).get("client_email").toString());
 		cuc.setId(Integer.valueOf(usr.get(0).get("client_id").toString()));
 		cuc.setLogedIn();
-
+		
 		if (cuc.getIsLogedIn() == true) {
-			return true;
+			result.add("true");
+			result.add(cuc);
+			return result;
 		} else {
-			return false;
+			result.add("false");
+			return result;
 		}
 	}
 }

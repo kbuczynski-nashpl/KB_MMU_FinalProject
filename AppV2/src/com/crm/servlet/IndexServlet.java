@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.crm.client.user.ClientUserClass;
 import com.crm.servlet.sessionHandler.SessionProperties;
 
 @WebServlet(urlPatterns = { "/"})
@@ -29,8 +30,14 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp");
-		dispatcher.forward(request, response);
+		if(checkUserSession(request) == false) {
+			System.out.println("GO TO LOGIN");
+			response.sendRedirect("login");
+		} else {
+			System.out.println("GO TO HOME");
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**
@@ -40,18 +47,23 @@ public class IndexServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void checkUser(HttpServletRequest request) {
+	private boolean checkUserSession(HttpServletRequest request) {
 		HttpSession _SESSION = request.getSession();
 		String _SESSION_ID = _SESSION.getId();
 		long _SESSION_START_TIME = _SESSION.getCreationTime();
 		long _SESSION_LAST_ACCESS_TIME = _SESSION.getLastAccessedTime();
 		Boolean _SESSION_IS_NEW = _SESSION.isNew();
-		if(_SESSION_IS_NEW == true) {
+		System.out.println(_SESSION_IS_NEW);
+		if(_SESSION_IS_NEW == true || _SESSION.getAttribute("client") == null) {
 			 SessionProperties _SESSION_PROPERTIES = new SessionProperties(_SESSION_ID, _SESSION_START_TIME, _SESSION_LAST_ACCESS_TIME, _SESSION_IS_NEW);
 			_SESSION.setAttribute("SESSION", _SESSION_PROPERTIES);
 		} else {
 			SessionProperties _SESSION_PROPERTIES = (SessionProperties) _SESSION.getAttribute("SESSION");
+			ClientUserClass client = (ClientUserClass) _SESSION.getAttribute("CLIENT");
+			if(client.getIsLogedIn() == true) {
+				return true;
+			}
 		}
-				
+		return false;
 	}
 }

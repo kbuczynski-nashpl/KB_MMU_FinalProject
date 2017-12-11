@@ -13,9 +13,9 @@ import java.util.List;
 public class MySQL {
 
 	private final String mysqlAddress = "localhost";
-	private final String mysqlDataBase = "buczynsk";
-	private final String mysqlUserName = "buczynsk";
-	private final String mysqlPsw = "drasTern9";
+	private final String mysqlDataBase = "CRM";
+	private final String mysqlUserName = "root";
+	private final String mysqlPsw = "admin";
 
 	private Connection con = null;
 	private static Statement stmt = null;
