@@ -1,15 +1,15 @@
 package com.crm.client.user;
 
-public class ClientClass {
+public class CRMUserMaster {
 
 	private Integer id = 0;
-	private String clientName = "";
+	private String userCompanyName = "";
 	
 	public String getClientName() {
-		return clientName;
+		return userCompanyName;
 	}
 	public void setClientName(String clientName) {
-		this.clientName = clientName;
+		this.userCompanyName = clientName;
 	}
 	public Integer getId() {
 		return id;

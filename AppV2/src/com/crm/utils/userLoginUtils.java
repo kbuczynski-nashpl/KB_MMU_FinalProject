@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.crm.client.user.ClientUserClass;
-import com.db.mysql.models.DBOClient;
+import com.crm.client.user.CRMUser;
+import com.db.mysql.models.DBO_CRMUser;
 
 public class userLoginUtils {
 
@@ -36,11 +36,11 @@ public class userLoginUtils {
 	}
 
 	public static boolean validateLogin(String psw, String userName) {
-		DBOClient dbo = new DBOClient();
+		DBO_CRMUser dbo = new DBO_CRMUser();
 		ArrayList<HashMap> result = dbo.getUserByUserName(userName);
 		for (HashMap<String, String> res : result) {
-			String entryPsw = res.get("client_psw");
-			String entryUsrName = res.get("client_username");
+			String entryPsw = res.get("user_psw");
+			String entryUsrName = res.get("user_username");
 			if (entryPsw.equals(psw) && entryUsrName.equals(userName)) {
 				return true;
 			}
@@ -67,22 +67,28 @@ public class userLoginUtils {
 	}
 
 	public static List logIn(String usrname, String psw) {
-		DBOClient dob = new DBOClient();
+		DBO_CRMUser dob = new DBO_CRMUser();
 		ArrayList<HashMap> usr = dob.getUserByUserName(usrname);
 		List result = new ArrayList();
 
 
-		if (usr.size() > 1) {
+		if (usr.size() < 1) {
 			result.add("false");
 			return result;
 		}
 
-		ClientUserClass cuc = new ClientUserClass();
+		CRMUser cuc = new CRMUser();
 		cuc.setClientPsw(psw);
 		cuc.setClientUsername(usrname);
-		cuc.setClientEmail(usr.get(0).get("client_email").toString());
-		cuc.setId(Integer.valueOf(usr.get(0).get("client_id").toString()));
-		cuc.setLogedIn();
+		try {
+			cuc.setClientEmail(usr.get(0).get("user_email").toString());
+			cuc.setId(Integer.valueOf(usr.get(0).get("user_master_id").toString()));
+			cuc.setLogedIn();
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		
 		
 		if (cuc.getIsLogedIn() == true) {
 			result.add("true");

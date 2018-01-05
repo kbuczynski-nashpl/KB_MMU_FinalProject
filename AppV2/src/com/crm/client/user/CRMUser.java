@@ -2,14 +2,14 @@ package com.crm.client.user;
 
 import com.crm.utils.userLoginUtils;
 
-public class ClientUserClass extends ClientClass{
+public class CRMUser extends CRMUserMaster{
 
 	private String clientUsername = "";
 	private String clientPsw = "";
 	private String clientEmail = "";
 	private Boolean isLoggedIn = false;
 	
-	public ClientUserClass() {
+	public CRMUser() {
 		super();
 	}
 	public String getClientPsw() {

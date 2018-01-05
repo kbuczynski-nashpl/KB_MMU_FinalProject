@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.crm.client.user.ClientUserClass;
+import com.crm.client.user.CRMUser;
 import com.crm.servlet.sessionHandler.SessionProperties;
 
 @WebServlet(urlPatterns = { "/"})
@@ -54,12 +54,12 @@ public class IndexServlet extends HttpServlet {
 		long _SESSION_LAST_ACCESS_TIME = _SESSION.getLastAccessedTime();
 		Boolean _SESSION_IS_NEW = _SESSION.isNew();
 		System.out.println(_SESSION_IS_NEW);
-		if(_SESSION_IS_NEW == true || _SESSION.getAttribute("client") == null) {
+		if(_SESSION_IS_NEW == true || _SESSION.getAttribute("CLIENT") == null) {
 			 SessionProperties _SESSION_PROPERTIES = new SessionProperties(_SESSION_ID, _SESSION_START_TIME, _SESSION_LAST_ACCESS_TIME, _SESSION_IS_NEW);
 			_SESSION.setAttribute("SESSION", _SESSION_PROPERTIES);
 		} else {
 			SessionProperties _SESSION_PROPERTIES = (SessionProperties) _SESSION.getAttribute("SESSION");
-			ClientUserClass client = (ClientUserClass) _SESSION.getAttribute("CLIENT");
+			CRMUser client = (CRMUser) _SESSION.getAttribute("CLIENT");
 			if(client.getIsLogedIn() == true) {
 				return true;
 			}

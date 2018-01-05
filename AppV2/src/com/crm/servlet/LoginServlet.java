@@ -35,20 +35,20 @@ public class LoginServlet extends HttpServlet {
 		} else if ((request.getParameter("password") == null) && (request.getParameter("password") == null)) {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
 			dispatcher.forward(request, response);
-
 		} else {
 			String psw = request.getParameter("password");
 			String usr = request.getParameter("username");
 			List res = userLoginUtils.logIn(usr, psw);
 			Boolean debugFlag = true;
-			if (res.get(1).equals("true") || debugFlag == true) {
-				this.writeToSession(res.get(0), request);
+			if (res.get(0).equals("true") || debugFlag == true) {
+				this.writeToSession(res.get(1), request);
 			} else {
 				request.setAttribute("error", "Invalid Username or Password");
-				RequestDispatcher dispatcher = this.getServletContext()
-						.getRequestDispatcher("/WEB-INF/views/login.jsp");
+				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
 				dispatcher.forward(request, response);
+
 			}
+			response.sendRedirect("index");
 		}
 	}
 
