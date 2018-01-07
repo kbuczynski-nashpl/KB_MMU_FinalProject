@@ -26,8 +26,6 @@ public class LoginServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		// Set standard HTTP/1.0 no-cache header.
 		response.setHeader("Pragma", "no-cache");
-		System.out.println(request.getParameter("username"));
-		System.out.println(request.getParameter("password"));
 		if ((request.getParameter("password") == "") && (request.getParameter("password") == "")) {
 			request.setAttribute("error", "Invalid Username or Password");
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");

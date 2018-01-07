@@ -31,10 +31,8 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(checkUserSession(request) == false) {
-			System.out.println("GO TO LOGIN");
 			response.sendRedirect("login");
 		} else {
-			System.out.println("GO TO HOME");
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp");
 			dispatcher.forward(request, response);
 		}
