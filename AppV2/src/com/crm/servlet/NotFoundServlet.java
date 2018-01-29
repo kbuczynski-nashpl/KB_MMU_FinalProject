@@ -1,5 +1,6 @@
 package com.crm.servlet;
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,35 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewCustomerServlet
+ * Servlet implementation class ErrorServlet
  */
-@WebServlet("/ViewCustomerServlet")
-public class ViewCustomerServlet extends HttpServlet {
+@WebServlet("/ErrorServlet")
+public class NotFoundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewCustomerServlet() {
+    public NotFoundServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-        	String url = request.getRequestURL().toString();
-        	String idStr = url.substring(url.lastIndexOf('/') + 1);
-        	int id = Integer.parseInt(idStr);
-    		System.out.println(id);
-        } catch (NumberFormatException e) {
-        	System.err.println(e.getMessage());
-        	System.err.println(e.getStackTrace());
-        	response.sendRedirect("404");
-        	return;
-        }
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/view.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/404.jsp");
 		dispatcher.forward(request, response);
 	}
 
