@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.crm.client.user.CRMUser;
 import com.crm.servlet.sessionHandler.SessionProperties;
+import com.crm.utils.userLoginUtils;
 
 @WebServlet(urlPatterns = { "/"})
 public class IndexServlet extends HttpServlet {
@@ -30,12 +31,8 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(checkUserSession(request) == false) {
-			response.sendRedirect("login");
-		} else {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/index.jsp");
 			dispatcher.forward(request, response);
-		}
 	}
 
 	/**
@@ -45,23 +42,4 @@ public class IndexServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private boolean checkUserSession(HttpServletRequest request) {
-		HttpSession _SESSION = request.getSession();
-		String _SESSION_ID = _SESSION.getId();
-		long _SESSION_START_TIME = _SESSION.getCreationTime();
-		long _SESSION_LAST_ACCESS_TIME = _SESSION.getLastAccessedTime();
-		Boolean _SESSION_IS_NEW = _SESSION.isNew();
-		System.out.println(_SESSION_IS_NEW);
-		if(_SESSION_IS_NEW == true || _SESSION.getAttribute("CLIENT") == null) {
-			 SessionProperties _SESSION_PROPERTIES = new SessionProperties(_SESSION_ID, _SESSION_START_TIME, _SESSION_LAST_ACCESS_TIME, _SESSION_IS_NEW);
-			_SESSION.setAttribute("SESSION", _SESSION_PROPERTIES);
-		} else {
-			SessionProperties _SESSION_PROPERTIES = (SessionProperties) _SESSION.getAttribute("SESSION");
-			CRMUser client = (CRMUser) _SESSION.getAttribute("CLIENT");
-			if(client.getIsLogedIn() == true) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

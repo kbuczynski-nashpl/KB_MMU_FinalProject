@@ -26,6 +26,10 @@ public class LoginServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		// Set standard HTTP/1.0 no-cache header.
 		response.setHeader("Pragma", "no-cache");
+		if(userLoginUtils.checkUserSession(request) == true) {
+			response.sendRedirect("index");
+			return;
+		}
 		if ((request.getParameter("password") == "") && (request.getParameter("password") == "")) {
 			request.setAttribute("error", "Invalid Username or Password");
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
@@ -47,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 
 			}
 			response.sendRedirect("index");
+			return;
 		}
 	}
 
