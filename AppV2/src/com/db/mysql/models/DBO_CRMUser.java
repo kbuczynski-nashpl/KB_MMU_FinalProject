@@ -10,7 +10,7 @@ public class DBO_CRMUser extends MySQL {
 		super();
 	}
 	
-	public ArrayList<HashMap> getUserByUserName(String userName) {
+	public ArrayList<HashMap<String, String>> getUserByUserName(String userName) {
 		String queryString = "SELECT * FROM CRM_user WHERE user_username = " + "'" + userName + "'";
 		return query(queryString);
 	}

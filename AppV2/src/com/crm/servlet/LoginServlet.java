@@ -1,12 +1,10 @@
 package com.crm.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			String psw = request.getParameter("password");
 			String usr = request.getParameter("username");
-			List res = userLoginUtils.logIn(usr, psw);
+			List<Object> res = userLoginUtils.logIn(usr, psw);
 			Boolean debugFlag = true;
 			if (res.get(0).equals("true") || debugFlag == true) {
 				this.writeToSession(res.get(1), request);

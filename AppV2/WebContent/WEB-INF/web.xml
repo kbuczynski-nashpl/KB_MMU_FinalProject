@@ -42,4 +42,12 @@
     <servlet-name>NotFoundServlet</servlet-name>
     <url-pattern>/404</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SomethingWentWrong</servlet-name>
+    <servlet-class>com.crm.servlet.SomethingWentWrongServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SomethingWentWrong</servlet-name>
+    <url-pattern>/500</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,17 +1,14 @@
 package com.crm.client.company;
 
-public class CRMCompanyAddress extends CRMCompany {
-	
+public class CRM_company_address{
+	private int id = 0;
+	private int company_id = 0;
 	private String companyAddressLine1 = "";
 	private String companyAddressLine2 = "";
 	private String companyAddressPostCode = "";
 	private String companyAddressCity = "";
 	private String companyAddressCountry = "";
 	
-	public CRMCompanyAddress() {
-		super();
-	}
-
 	public String getCompanyAddressLine1() {
 		return companyAddressLine1;
 	}
@@ -50,6 +47,22 @@ public class CRMCompanyAddress extends CRMCompany {
 
 	public void setCompanyAddressCountry(String companyAddressCountry) {
 		this.companyAddressCountry = companyAddressCountry;
+	}
+
+	public int getCompany_id() {
+		return company_id;
+	}
+
+	public void setCompany_id(int company_id) {
+		this.company_id = company_id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

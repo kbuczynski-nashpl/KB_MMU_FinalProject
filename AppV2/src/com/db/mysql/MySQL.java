@@ -12,35 +12,36 @@ import java.util.List;
 
 public class MySQL {
 
-	private final String mysqlAddress = "localhost";
-	private final String mysqlDataBase = "CRM";
-	private final String mysqlUserName = "root";
-	private final String mysqlPsw = "admin";
+	private final static String mysqlAddress = "localhost";
+	private final static String mysqlDataBase = "CRM";
+	private final static String mysqlUserName = "root";
+	private final static String mysqlPsw = "admin";
 
-	private Connection con = null;
+	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
 
-	protected void createConnection() {
+	private void createConnection() {
 		try {
 			String driverName = "com.mysql.jdbc.Driver";
 			Class.forName(driverName).newInstance();
-			String url = "jdbc:mysql://" + this.mysqlAddress + "/" + this.mysqlDataBase;
-			this.con = DriverManager.getConnection(url, this.mysqlUserName, this.mysqlPsw);
+			String url = "jdbc:mysql://" + mysqlAddress + "/" + mysqlDataBase;
+			con = DriverManager.getConnection(url, mysqlUserName, mysqlPsw);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public ArrayList<HashMap> query(String query) {
+	public ArrayList<HashMap<String, String>> query(String query) {
 		createConnection();
-		ArrayList<HashMap> resultSet = new ArrayList();
+		ArrayList<HashMap<String, String>> resultSet = new ArrayList<HashMap<String, String>>();
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
-			List<String> columnsList = new ArrayList<String>(rsmd.getColumnCount());
+			List<String> columnsList = new ArrayList<String>();
+			int tmpCounter = 0;
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 				columnsList.add(rsmd.getColumnName(i));
 			}
@@ -48,9 +49,11 @@ public class MySQL {
 				HashMap<String, String> newEntry = new HashMap<String, String>();
 				for (String col : columnsList) {
 					newEntry.put(col, rs.getString(col));
-					resultSet.add(newEntry);
 				}
+				resultSet.add(newEntry);
+				tmpCounter++;
 			}
+			System.out.println(tmpCounter);
 		} catch (SQLException e) {
 			// handle any errors
 			System.out.println("SQLException: " + e.getMessage());
@@ -64,14 +67,14 @@ public class MySQL {
 	}
 
 	public Connection getConnection() {
-		return this.con;
+		return con;
 	}
 
 	public String dataBaseConnectionInfo() {
-		return "Address: " + this.mysqlAddress + " Database: " + this.mysqlDataBase;
+		return "Address: " + mysqlAddress + " Database: " + mysqlDataBase;
 	}
 
-	protected void closeConnection() {
+	private void closeConnection() {
 
 		if (rs != null) {
 			try {

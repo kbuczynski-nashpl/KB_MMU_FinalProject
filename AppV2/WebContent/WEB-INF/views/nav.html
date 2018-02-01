@@ -1,23 +1,116 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="#">WebKB</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarResponsive" aria-controls="navbarResponsive"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
-						<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Companies</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Settings</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Log Out</a></li>
-			</ul>
-		</div>
-	</div>
+<nav class="navbar fixed-top navbar-light bg-light">
+	<a class="navbar-brand" href="#">Navbar</a>
+		<i id="toggleNav" class="fa fa-bars fa-2x" onclick="toggleNav()" style="left: 2%;"></i>
+		
 </nav>
+<div class="panel-main" style="display: none;" id="panel-main">
+			<div class="panel-content">
+
+				<div class="row">
+					<div class="col-md-6">
+						<i data-aria="hidden" class="fa fa-home fa-3x"></i>
+					</div>
+
+					<div class="col-md-6">
+						<p>Home</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<i data-aria="hidden" class="fa fa-info fa-3x"></i>
+					</div>
+
+					<div class="col-md-6">
+						<p>About</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<i data-aria="hidden" class="fa fa-address-book fa-3x"></i>
+					</div>
+
+					<div class="col-md-6">
+						<p>Contact</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<i data-aria="hidden" class="fa fa-sign-out fa-3x"></i>
+					</div>
+
+					<div class="col-md-6">
+						<p>Sign Out</p>
+					</div>
+				</div>
+
+			</div>
+			<div class="panel-footer">
+				<p class="text-muted">More</p>
+			</div>
+		</div>
+<script>
+	function toggleNav() {
+		if ($("#panel-main").css("display") == "none"){
+			$("#panel-main").fadeIn();
+			$("#panel-main").fadeIn("slow");
+			$("#panel-main").fadeIn(3000);
+			$("#panel-main").css("display", "block");
+		
+		} else {
+			$("#panel-main").fadeOut();
+			$("#panel-main").fadeOut("slow");
+			$("#panel-main").fadeOut(3000);
+			$("#panel-main").css("display", "none");
+		}
+	}
+</script>
+<style>
+#toggleNav {
+	cursor: pointer;
+}
+
+.panel-main {
+	background-color: white;
+	max-width: 800px;
+	max-height: auto;
+	min-width: 180px;
+	min-height: auto;
+	box-shadow: 1px 1px 2px 2px #ccc;
+	z-index: 1000;
+	position: fixed;
+	top: auto;
+	right: 1%;
+}
+
+.panel-content {
+	text-align: center;
+}
+
+.panel-content i {
+	color: #4B515D;
+}
+
+.panel-content p {
+	margin-top: 12px;
+	margin-left: -10px;
+	font-size: 18px;
+	text-align: left;
+}
+
+.panel-content .row {
+	
+}
+
+.panel-content .row:hover {
+	/* background-color: rgba(75, 81, 93, 0.4);*/
+	cursor: pointer;
+}
+
+.panel-footer {
+	text-align: center;
+	padding: 0;
+	margin-bottom: -10px;
+}
+</style>

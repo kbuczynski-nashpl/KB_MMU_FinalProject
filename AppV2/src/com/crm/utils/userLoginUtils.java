@@ -41,7 +41,7 @@ public class userLoginUtils {
 
 	public static boolean validateLogin(String psw, String userName) {
 		DBO_CRMUser dbo = new DBO_CRMUser();
-		ArrayList<HashMap> result = dbo.getUserByUserName(userName);
+		ArrayList<HashMap<String, String>> result = dbo.getUserByUserName(userName);
 		for (HashMap<String, String> res : result) {
 			String entryPsw = res.get("user_psw");
 			String entryUsrName = res.get("user_username");
@@ -70,10 +70,10 @@ public class userLoginUtils {
 		}
 	}
 
-	public static List logIn(String usrname, String psw) {
+	public static List<Object> logIn(String usrname, String psw) {
 		DBO_CRMUser dob = new DBO_CRMUser();
-		ArrayList<HashMap> usr = dob.getUserByUserName(usrname);
-		List result = new ArrayList();
+		ArrayList<HashMap<String, String>> usr = dob.getUserByUserName(usrname);
+		List<Object> result = new ArrayList<Object>();
 
 
 		if (usr.size() < 1) {
@@ -114,7 +114,6 @@ public class userLoginUtils {
 			 SessionProperties _SESSION_PROPERTIES = new SessionProperties(_SESSION_ID, _SESSION_START_TIME, _SESSION_LAST_ACCESS_TIME, _SESSION_IS_NEW);
 			_SESSION.setAttribute("SESSION", _SESSION_PROPERTIES);
 		} else {
-			SessionProperties _SESSION_PROPERTIES = (SessionProperties) _SESSION.getAttribute("SESSION");
 			CRMUser client = (CRMUser) _SESSION.getAttribute("CLIENT");
 			if(client.getIsLogedIn() == true) {
 				return true;
