@@ -73,8 +73,6 @@ public class ViewCustomerServlet extends HttpServlet {
 			request.setAttribute("crmCompanyEmailAddresses", crmCompanyEmailAddresses);
 			request.setAttribute("crmCompanyNotes", crmCompanyNotes);
 			request.setAttribute("crmPhoneNumbers", crmPhoneNumbers);
-
-			// TODO: use JSTL Library to show information in jsp page
 		} catch (Exception e) {
 			System.err.println(e.getCause());
 			System.err.println(e.getLocalizedMessage());
