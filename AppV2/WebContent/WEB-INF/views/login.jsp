@@ -14,10 +14,14 @@
 <div class = "container">
 	<div class="wrapper">
 		<form action='login' method="POST" name="Login_Form" class="form-signin">       
-		    <h3 class="form-signin-heading">Welcome! Please Sign In</h3>
+		    <h3 class="form-signin-heading">WebKB CRM System</h3>
 			  <hr class="colorgraph"><br>
-			  <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Username" required="" autofocus="" autocomplete="username"/>
-			  <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" autocomplete="current-password" required=""/>     		  
+			  <div>
+			  	<input type="text" class="form-control" id="loginUsername" name="username" placeholder="Username" required="" autofocus="" autocomplete="username"/>
+			  </div>
+			  <div>
+			  	<input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" autocomplete="current-password" required=""/>
+			  </div>     		  
 			 
 			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>  			
 		</form>			
@@ -51,7 +55,7 @@
 }
 
 input[type="text"] {
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

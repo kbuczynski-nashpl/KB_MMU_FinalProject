@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ErrorServlet
  */
-@WebServlet("/ErrorServlet")
+@WebServlet("/Error")
 public class NotFoundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

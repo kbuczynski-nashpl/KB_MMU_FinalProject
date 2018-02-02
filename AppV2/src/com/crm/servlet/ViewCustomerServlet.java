@@ -61,6 +61,13 @@ public class ViewCustomerServlet extends HttpServlet {
 			ArrayList<CRM_company_email_address> crmCompanyEmailAddresses = dbo2.getByCompanyId(id);
 			ArrayList<CRM_company_notes> crmCompanyNotes = dbo3.getByCompanyId(id);
 			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = dbo4.getByCompanyId(id);
+			
+			System.out.println(crmCompany.toString());
+			System.out.println(crmCompanyAddresses);
+			System.out.println(crmCompanyEmailAddresses);
+			System.out.println(crmCompanyNotes);
+			System.out.println(crmPhoneNumbers);
+			
 			request.setAttribute("crmCompany", crmCompany);
 			request.setAttribute("crmCompanyAddresses", crmCompanyAddresses);
 			request.setAttribute("crmCompanyEmailAddresses", crmCompanyEmailAddresses);
@@ -69,9 +76,9 @@ public class ViewCustomerServlet extends HttpServlet {
 
 			// TODO: use JSTL Library to show information in jsp page
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			System.err.println(e.getCause());
+			System.err.println(e.getLocalizedMessage());
 			System.err.println(e.getStackTrace());
-			response.sendRedirect("500");
 			return;
 		}
 

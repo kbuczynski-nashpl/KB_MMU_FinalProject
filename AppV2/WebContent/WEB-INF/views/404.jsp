@@ -9,7 +9,7 @@
 <body class="bg">
 	<div class="error">
 		<div class="error-code m-b-10 m-t-20">
-			404 <i class="fas fa-exclamation"></i>
+			 404 !
 		</div>
 		<h3 class="font-bold">We couldn't find the page..</h3>
 

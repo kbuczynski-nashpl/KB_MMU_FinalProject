@@ -26,7 +26,7 @@ public class DBO_CRM_company_phoneNo extends MySQL{
 			CRM_company_phoneNo companyPhoneNumber = new CRM_company_phoneNo();
 			companyPhoneNumber.setId(Integer.parseInt(entries.get("id").toString()));
 			companyPhoneNumber.setCompany_id(Integer.parseInt(entries.get("company_id").toString()));
-			companyPhoneNumber.setCompany_phoneNo(Integer.parseInt(entries.get("company_phoneNo").toString()));
+			companyPhoneNumber.setCompany_phoneNo(entries.get("company_phoneNo").toString());
 			companyPhoneNumber.setCompany_phoneNo_prefix(entries.get("company_phoneNo_prefix").toString());
 			companyPhones.add(companyPhoneNumber);
 		}

@@ -3,7 +3,7 @@ package com.crm.client.company;
 public class CRM_company_phoneNo {
 	private int id = 0;
 	private int company_id = 0;
-	private Integer company_phoneNo = 0;
+	private String company_phoneNo = "";
 	private String company_phoneNo_prefix = "";
 
 	public int getId() {
@@ -18,16 +18,16 @@ public class CRM_company_phoneNo {
 		return company_id;
 	}
 
-	public void setCompany_id(int company_id) {
-		this.company_id = company_id;
+	public void setCompany_id(int string) {
+		this.company_id = string;
 	}
 
-	public Integer getCompany_phoneNo() {
+	public String getCompany_phoneNo() {
 		return company_phoneNo;
 	}
 
-	public void setCompany_phoneNo(Integer company_phoneNo) {
-		this.company_phoneNo = company_phoneNo;
+	public void setCompany_phoneNo(String string) {
+		this.company_phoneNo = string;
 	}
 
 	public String getCompany_phoneNo_prefix() {
