@@ -17,7 +17,12 @@ public class DBO_CRM_company_email_address extends MySQL{
 		ArrayList<CRM_company_email_address> companyEmailAddresses = new ArrayList<CRM_company_email_address>();
 		for(HashMap<String, String> entries : resultFromMysql) {
 			CRM_company_email_address crmCompanyEmailAddress = new CRM_company_email_address();
-			crmCompanyEmailAddress.setCompany_email_active(Boolean.parseBoolean(entries.get("company_email_active").toString()));
+			if (entries.get("company_email_active").toString().equals("1")) {
+				crmCompanyEmailAddress.setCompany_email_active(true);
+			} else {
+				crmCompanyEmailAddress.setCompany_email_active(false);
+
+			}
 			crmCompanyEmailAddress.setCompany_email_address(entries.get("company_email_address").toString());
 			crmCompanyEmailAddress.setCompany_email_Type(entries.get("company_email_type").toString());
 			crmCompanyEmailAddress.setCompany_id(Integer.parseInt(entries.get("company_id").toString()));

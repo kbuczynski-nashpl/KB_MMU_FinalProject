@@ -62,11 +62,7 @@ public class ViewCustomerServlet extends HttpServlet {
 			ArrayList<CRM_company_notes> crmCompanyNotes = dbo3.getByCompanyId(id);
 			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = dbo4.getByCompanyId(id);
 			
-			System.out.println(crmCompany.toString());
-			System.out.println(crmCompanyAddresses);
-			System.out.println(crmCompanyEmailAddresses);
-			System.out.println(crmCompanyNotes);
-			System.out.println(crmPhoneNumbers);
+			System.out.println(crmCompanyEmailAddresses.get(0).toString());
 			
 			request.setAttribute("crmCompany", crmCompany);
 			request.setAttribute("crmCompanyAddresses", crmCompanyAddresses);

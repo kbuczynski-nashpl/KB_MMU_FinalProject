@@ -5,6 +5,8 @@ public class CRM_company_email_address{
 	private int company_id = 0;
 	private String company_email_address = "";
 	private Boolean company_email_active = false;
+	private String company_email_Type = "";
+
 	public int getId() {
 		return id;
 	}
@@ -35,6 +37,13 @@ public class CRM_company_email_address{
 	public void setCompany_email_Type(String company_email_Type) {
 		this.company_email_Type = company_email_Type;
 	}
-	private String company_email_Type = "";
+	public String toString() {
+		String str = "ID: " + this.id + 
+				" Company ID: " + this.company_id + 
+				" Email Address: " + this.company_email_address + 
+				" Email Active: "  + this.company_email_active + 
+				" Email Type: " + this.company_email_Type;
+		return str;
+	}
 
 }

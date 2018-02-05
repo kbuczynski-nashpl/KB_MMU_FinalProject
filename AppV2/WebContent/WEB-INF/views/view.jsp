@@ -11,8 +11,13 @@
 	<div class="container-fluid">
 		<%@include file="nav.html"%>
 	</div>
+	</br>
+	</br>
+	</br>
 	<div class="container page-header">
-		<h1>TEST</h1>
+		<h1>
+			<c:out value="${crmCompany.getCompany_name()}" />
+		</h1>
 	</div>
 	<div class="container-fluid">
 		<div class="row">
@@ -34,10 +39,26 @@
 				</div>
 			</div>
 			<div class="col-9">
-				<div class="row">
+				<div class="row col-12">
 					<div class="tab-content" id="v-pills-tabContent">
 						<div class="tab-pane fade show active" id="v-pills-home"
-							role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+							role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="form-group row">
+								<label for="company_name_label" class="col-5 col-form-label">Company Name: </label>
+								<div class="col-7">
+									<input class="form-control" type="text" value="<c:out value="${crmCompany.getCompany_name()}" />"
+										id="company_name" readonly>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="company_name_label" class="col-5 col-form-label">Company Active Email: </label>
+								<div class="col-7">
+										<input class="form-control" type="text" 
+										value="<c:forEach items="${crmCompanyEmailAddresses}" var="crmEmail"><c:if test="${crmEmail.getCompany_email_active() == true}">${crmEmail.getCompany_email_address()}</c:if></c:forEach>"
+										id="company_name" readonly>
+								</div>
+							</div>
+						</div>
 						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
 							aria-labelledby="v-pills-profile-tab">...</div>
 						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
