@@ -3,8 +3,6 @@ package com.crm.utils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -17,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 public class ApplicationFilter implements Filter {
 
-	private List<String> extensions = new ArrayList<String>();
+	private ArrayList<String> resources = new ArrayList<String>();
 	@Override
 	public void destroy() {
 	}
@@ -30,15 +28,23 @@ public class ApplicationFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 	        HttpServletResponse res = (HttpServletResponse) response;
 	        HttpSession session = req.getSession(false);
-	        String loginURI = req.getContextPath() + "/login";
-
-	        boolean loggedIn = session != null && session.getAttribute("CLIENT") != null;
-	        boolean loginRequest = req.getRequestURI().equals(loginURI);
 	        
-	        if (loggedIn || loginRequest) {
+	        String path= ((HttpServletRequest) request).getRequestURI();
+			System.out.println("Validating for page: " + path);
+			
+			for(String extension : this.resources) {
+				if(path.endsWith(extension)){
+					chain.doFilter(request,response);
+					return;
+				}
+			}
+	        
+	        boolean loggedIn = session != null && session.getAttribute("CLIENT") != null;
+	        
+	        if (loggedIn) {
 	            chain.doFilter(req, res);
 	        } else {
-	        	res.sendRedirect(loginURI);
+	        	res.sendRedirect("login");
 	        }
 	        
 	        
@@ -47,7 +53,13 @@ public class ApplicationFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
-		String testParam = config.getInitParameter("test-param");
-		System.out.println("Test Param: " + testParam);
+		System.out.println("Adding extension to exclude");
+		this.resources.add(".css");
+		this.resources.add(".js");
+		this.resources.add(".jpeg");
+		this.resources.add(".png");
+		this.resources.add(".jsp");
+		this.resources.add(".html");
+		this.resources.add("login");
 	}
 }

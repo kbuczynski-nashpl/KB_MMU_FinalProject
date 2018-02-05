@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MySQL {
 
-	private final static String mysqlAddress = "localhost";
+	private final static String mysqlAddress = "192.168.1.111";
 	private final static String mysqlDataBase = "CRM";
 	private final static String mysqlUserName = "root";
 	private final static String mysqlPsw = "admin";
@@ -53,7 +53,6 @@ public class MySQL {
 				resultSet.add(newEntry);
 				tmpCounter++;
 			}
-			System.out.println(tmpCounter);
 		} catch (SQLException e) {
 			// handle any errors
 			System.out.println("SQLException: " + e.getMessage());

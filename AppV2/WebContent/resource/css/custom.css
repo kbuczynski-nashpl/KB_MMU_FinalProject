@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-.body{
-	top: 1px;
-	border: solid 2px;
+body{
+	min-height: auto;
+	max-height: 100%;
+	margin: 5%;
 }
