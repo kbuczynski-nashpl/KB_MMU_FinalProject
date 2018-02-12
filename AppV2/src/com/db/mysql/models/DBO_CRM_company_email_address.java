@@ -31,5 +31,6 @@ public class DBO_CRM_company_email_address extends MySQL{
 		}
 		return companyEmailAddresses;
 	}
+	
 
 }

@@ -6,6 +6,7 @@ package com.db.mysql.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.crm.client.company.CRM_company;
 import com.crm.client.company.CRM_company_phoneNo;
 import com.db.mysql.MySQL;
 
@@ -32,4 +33,5 @@ public class DBO_CRM_company_phoneNo extends MySQL{
 		}
 		return companyPhones;
 	}
+	
 }
