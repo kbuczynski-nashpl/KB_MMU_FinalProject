@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar fixed-top navbar-light bg-light" style="position: fixed;">
 	<a class="navbar-brand" href="#">WebKB CRM</a>
 		<i id="toggleNav" class="fa fa-bars fa-2x" onclick="toggleNav()" style="left: 2%;"></i>
@@ -37,23 +40,20 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<i data-aria="hidden" class="fa fa-sign-out fa-3x"></i>
+						<i data-aria="hidden" class="fa fa-sign-out-alt fa-3x"></i>
 					</div>
 
 					<div class="col-md-6">
-						<p>Sign Out</p>
+						<a href="${pageContext.request.contextPath}/logout"><p>Sign Out</p></a>
 					</div>
 				</div>
 
-			</div>
-			<div class="panel-footer">
-				<p class="text-muted">More</p>
 			</div>
 		</div>
 <script>
 	function toggleNav() {
 		if ($("#panel-main").css("display") == "none"){
-			$("#panel-main").fadeIn();
++			$("#panel-main").fadeIn();
 			$("#panel-main").fadeIn("slow");
 			$("#panel-main").fadeIn(3000);
 			$("#panel-main").css("display", "block");

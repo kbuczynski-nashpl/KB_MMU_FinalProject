@@ -24,9 +24,13 @@ public class LoginServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		// Set standard HTTP/1.0 no-cache header.
 		response.setHeader("Pragma", "no-cache");
-		if(userLoginUtils.checkUserSession(request) == true) {
-			response.sendRedirect("index");
-			return;
+		if (userLoginUtils.checkUserSession(request) == true) {
+			if (request.getSession().getAttribute("REDIRECT") != null) {
+				response.sendRedirect(request.getSession().getAttribute("REDIRECT").toString());
+			} else {
+				response.sendRedirect("index");
+				return;
+			}
 		}
 		if ((request.getParameter("password") == "") && (request.getParameter("password") == "")) {
 			request.setAttribute("error", "Invalid Username or Password");
@@ -43,12 +47,17 @@ public class LoginServlet extends HttpServlet {
 				this.writeToSession(res.get(1), request);
 			} else {
 				request.setAttribute("error", "Invalid Username or Password");
-				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
+				RequestDispatcher dispatcher = this.getServletContext()
+						.getRequestDispatcher("/WEB-INF/views/login.jsp");
 				dispatcher.forward(request, response);
 			}
-			response.sendRedirect("index");
-			return;
-
+			if (request.getSession().getAttribute("REDIRECT") != null) {
+				response.sendRedirect(request.getSession().getAttribute("REDIRECT").toString());
+				return;
+			}
+				response.sendRedirect("index");
+				return;
+			
 		}
 	}
 

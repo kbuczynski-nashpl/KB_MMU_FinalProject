@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class ApplicationFilter implements Filter {
 
 	private ArrayList<String> resources = new ArrayList<String>();
+
 	@Override
 	public void destroy() {
 	}
@@ -23,32 +24,33 @@ public class ApplicationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-			String ipAddress = request.getRemoteAddr();
-			System.out.println("IP " + ipAddress + ", Time " + new Date().toString());
-			HttpServletRequest req = (HttpServletRequest) request;
-	        HttpServletResponse res = (HttpServletResponse) response;
-	        HttpSession session = req.getSession(false);
-	        
-	        String path= ((HttpServletRequest) request).getRequestURI();
-			System.out.println("Validating for page: " + path);
-			
-			for(String extension : this.resources) {
-				if(path.endsWith(extension)){
-					chain.doFilter(request,response);
-					return;
-				}
+		String ipAddress = request.getRemoteAddr();
+		System.out.println("IP " + ipAddress + ", Time " + new Date().toString());
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		HttpSession session = req.getSession(false);
+
+		String path = ((HttpServletRequest) request).getRequestURI();
+		String baseURL = path.substring(0, path.length() - ((HttpServletRequest) request).getRequestURI().length())
+				+ ((HttpServletRequest) request).getContextPath() + "/";
+		System.out.println("Validating for page: " + path);
+		for (String extension : this.resources) {
+			if (path.endsWith(extension)) {
+				chain.doFilter(request, response);
+				return;
 			}
-	        
-	        boolean loggedIn = session != null && session.getAttribute("CLIENT") != null;
-	        
-	        if (loggedIn) {
-	            chain.doFilter(req, res);
-	        } else {
-	        	res.sendRedirect("login");
-	        }
-	        
-	        
-	     
+		}
+		boolean loggedIn = session != null && session.getAttribute("CLIENT") != null;
+		
+		if (loggedIn) {
+			session.setAttribute("REDIRECT", path);
+			chain.doFilter(req, res);
+			return;
+		} else {
+			session.setAttribute("REDIRECT", path);
+			res.sendRedirect(baseURL + "login");
+		}
+
 	}
 
 	@Override
@@ -58,7 +60,6 @@ public class ApplicationFilter implements Filter {
 		this.resources.add(".js");
 		this.resources.add(".jpeg");
 		this.resources.add(".png");
-		this.resources.add(".jsp");
 		this.resources.add(".html");
 		this.resources.add("login");
 	}

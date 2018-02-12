@@ -18,13 +18,19 @@ public class DBO_CRM_company_address extends MySQL{
 		for(HashMap<String, String> entries : resultFromMysql) {
 			CRM_company_address crmCompanyAddress = new CRM_company_address();
 			crmCompanyAddress.setCompany_id(Integer.parseInt(entries.get("company_id").toString()));
-			crmCompanyAddress.setCompanyAddressCity(entries.get("company_address_city").toString());
-			crmCompanyAddress.setCompanyAddressCountry(entries.get("company_address_country").toString());
-			crmCompanyAddress.setCompanyAddressLine1(entries.get("company_address_line1").toString());
+			crmCompanyAddress.setCompany_address_city(entries.get("company_address_city").toString());
+			crmCompanyAddress.setCompany_address_country(entries.get("company_address_country").toString());
+			crmCompanyAddress.setCompany_address_line1(entries.get("company_address_line1").toString());
 			if(!StringUtils.isNullOrEmpty(entries.get("company_address_line2"))) {
-				crmCompanyAddress.setCompanyAddressLine2(entries.get("company_address_line2").toString());
+				crmCompanyAddress.setCompany_address_line2(entries.get("company_address_line2").toString());
 			}
-			crmCompanyAddress.setCompanyAddressPostCode(entries.get("company_address_postcode").toString());
+			if (entries.get("company_address_active").toString().equals("1")) {
+				crmCompanyAddress.setCompany_address_active(true);
+			} else {
+				crmCompanyAddress.setCompany_address_active(false);
+
+			}
+			crmCompanyAddress.setCompany_address_postcode(entries.get("company_address_postcode").toString());
 			crmCompanyAddress.setId(Integer.parseInt(entries.get("id").toString()));
 			companyAddresses.add(crmCompanyAddress);
 		}

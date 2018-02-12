@@ -27,11 +27,13 @@ public class DBO_CRM_company_notes extends MySQL{
 			CRM_company_notes companyNote = new CRM_company_notes();
 			companyNote.setId(Integer.parseInt(entries.get("id").toString()));
 			companyNote.setCompany_id(Integer.parseInt(entries.get("company_id").toString()));
-			companyNote.setCompany_note(entries.get("company_note").toString());
+			companyNote.setCrm_company_note_title(entries.get("company_note_title").toString());
+			String companyNoteString = entries.get("company_note").toString();
+			companyNoteString = companyNoteString.replaceAll("\r", "").replaceAll("\n", "");
+			companyNote.setCompany_note(companyNoteString);
 			companyNote.setCompany_note_by_date_fromString(entries.get("company_note_by_date").toString());
 			companyNote.setCompany_note_by_id(Integer.parseInt(entries.get("company_note_by_id").toString()));
-			companyNotes.add(companyNote);
-		}
+			companyNotes.add(companyNote);		}
 		return companyNotes;
 	}
 }

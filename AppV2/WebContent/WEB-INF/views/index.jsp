@@ -6,7 +6,7 @@
 <jsp:include page="header.jsp" />
 <body>
 	<div class="container">
-		<%@include file="nav.html"%>
+		<%@include file="nav.jsp"%>
 	</div>
 	<div class="container" style="margin-top: 65px">
 		<div class="row mt-5">
