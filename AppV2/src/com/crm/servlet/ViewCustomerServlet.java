@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.crm.client.company.CRM_company_address;
 import com.crm.client.company.CRM_company_email_address;
 import com.crm.client.company.CRM_company_notes;
+import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.company.CRM_company_phoneNo;
 import com.db.mysql.models.DBO_CRM_company;
 import com.db.mysql.models.DBO_CRM_company_address;
 import com.db.mysql.models.DBO_CRM_company_email_address;
 import com.db.mysql.models.DBO_CRM_company_notes;
+import com.db.mysql.models.DBO_CRM_company_personnel;
 import com.db.mysql.models.DBO_CRM_company_phoneNo;
 
 /**
@@ -55,18 +57,21 @@ public class ViewCustomerServlet extends HttpServlet {
 		DBO_CRM_company_email_address dbo2 = new DBO_CRM_company_email_address();
 		DBO_CRM_company_notes dbo3 = new DBO_CRM_company_notes();
 		DBO_CRM_company_phoneNo dbo4 = new DBO_CRM_company_phoneNo();
+		DBO_CRM_company_personnel dbo5 = new DBO_CRM_company_personnel();
 		try {
 			Object crmCompany = dbo0.getById(id);
 			ArrayList<CRM_company_address> crmCompanyAddresses = dbo1.getByCompanyId(id);
 			ArrayList<CRM_company_email_address> crmCompanyEmailAddresses = dbo2.getByCompanyId(id);
 			ArrayList<CRM_company_notes> crmCompanyNotes = dbo3.getByCompanyId(id);
 			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = dbo4.getByCompanyId(id);
+			ArrayList<CRM_company_personnel> crmCompanyPersonnel = dbo5.getByCompanyId(id);
 						
 			request.setAttribute("crmCompany", crmCompany);
 			request.setAttribute("crmCompanyAddresses", crmCompanyAddresses);
 			request.setAttribute("crmCompanyEmailAddresses", crmCompanyEmailAddresses);
 			request.setAttribute("crmCompanyNotes", crmCompanyNotes);
 			request.setAttribute("crmPhoneNumbers", crmPhoneNumbers);
+			request.setAttribute("crmCompanyPersonnel", crmCompanyPersonnel);
 		} catch (Exception e) {
 			System.err.println(e.getCause());
 			System.err.println(e.getLocalizedMessage());

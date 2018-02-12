@@ -10,9 +10,7 @@
 <body>
 	<%@include file="nav.html"%>
 	<div class="page-header container-fluid">
-				<h1>
-					${crmCompany.getCompany_name()}
-				</h1>
+		<h1>${crmCompany.getCompany_name()}</h1>
 	</div>
 	<div class="container-fluid">
 		<div class="row">
@@ -21,16 +19,16 @@
 					role="tablist" aria-orientation="vertical">
 					<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
 						href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-						aria-selected="true">Home</a> <a class="nav-link"
+						aria-selected="true">Main</a> <a class="nav-link"
 						id="v-pills-profile-tab" data-toggle="pill"
 						href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
-						aria-selected="false">Profile</a> <a class="nav-link"
+						aria-selected="false">Users</a> <a class="nav-link"
 						id="v-pills-messages-tab" data-toggle="pill"
 						href="#v-pills-messages" role="tab"
-						aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+						aria-controls="v-pills-messages" aria-selected="false">Emails</a>
 					<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
 						href="#v-pills-settings" role="tab"
-						aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+						aria-controls="v-pills-settings" aria-selected="false">Notes</a>
 				</div>
 			</div>
 			<div class="col-9">
@@ -58,7 +56,36 @@
 							</div>
 						</div>
 						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-							aria-labelledby="v-pills-profile-tab">...</div>
+							aria-labelledby="v-pills-profile-tab">
+							<div class="form-group row">
+								<table class="table">
+									<thead class="thead-inverse">
+										<tr>
+											<th>ID</th>
+											<th>Forname</th>
+											<th>Surnname</th>
+											<th>Email</th>
+											<th>Phone No</th>
+											<th>Phone No Prefix</th>
+											<th>Company Postion</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<c:forEach items="${crmCompanyPersonnel}" var="crmPersonnel">
+											<td>${crmPersonnel.getId()}</td>
+											<td>${crmPersonnel.getCompany_personnel_forname()}</td>
+											<td>${crmPersonnel.getCompany_personnel_surname()}</td>
+											<td>${crmPersonnel.getCompany_personnel_email()}</td>
+											<td>${crmPersonnel.getCompany_personnel_phoneNo()}</td>
+											<td>${crmPersonnel.getCompany_personnel_phoneNo_prefix()}</td>
+											<td>${crmPersonnel.getCompany_personnel_position()}</td>
+											</c:forEach>										
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
 							aria-labelledby="v-pills-messages-tab">...</div>
 						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel"

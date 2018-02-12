@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2018 at 09:13 AM
+-- Generation Time: Feb 12, 2018 at 10:38 AM
 -- Server version: 10.2.12-MariaDB-10.2.12+maria~xenial
--- PHP Version: 7.0.22-0ubuntu0.16.04.1
+-- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,6 +32,13 @@ CREATE TABLE `CRM_company` (
   `company_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `CRM_company`
+--
+
+INSERT INTO `CRM_company` (`id`, `CRM_user_master_id`, `company_name`) VALUES
+(1, 1, 'Test Company 1');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,13 @@ CREATE TABLE `CRM_company_address` (
   `company_address_country` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `CRM_company_address`
+--
+
+INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, `company_address_line2`, `company_address_postcode`, `company_address_city`, `company_address_country`) VALUES
+(1, 1, 'Test Address 1', NULL, 'OL7 0AA', 'Manchester', 'United Kingdom');
+
 -- --------------------------------------------------------
 
 --
@@ -57,10 +71,17 @@ CREATE TABLE `CRM_company_address` (
 CREATE TABLE `CRM_company_email_address` (
   `id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
-  `company_emailAddress` text NOT NULL,
+  `company_email_address` text NOT NULL,
   `company_email_active` tinyint(1) NOT NULL,
   `company_email_type` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `CRM_company_email_address`
+--
+
+INSERT INTO `CRM_company_email_address` (`id`, `company_id`, `company_email_address`, `company_email_active`, `company_email_type`) VALUES
+(1, 1, 'nash25pl@gmail.com', 1, 'Private email address');
 
 -- --------------------------------------------------------
 
@@ -76,6 +97,37 @@ CREATE TABLE `CRM_company_notes` (
   `company_note_by_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `CRM_company_notes`
+--
+
+INSERT INTO `CRM_company_notes` (`id`, `company_id`, `company_note`, `company_note_by_id`, `company_note_by_date`) VALUES
+(1, 1, 'Note Test 1', 1, '2018-02-01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CRM_company_personnel`
+--
+
+CREATE TABLE `CRM_company_personnel` (
+  `id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `company_personnel_surname` varchar(25) NOT NULL,
+  `company_personnel_forname` varchar(25) NOT NULL,
+  `company_personnel_email` varchar(25) NOT NULL,
+  `company_personnel_phoneNo` bigint(20) NOT NULL,
+  `company_personnel_phoneNo_prefix` varchar(5) NOT NULL,
+  `company_personnel_position` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `CRM_company_personnel`
+--
+
+INSERT INTO `CRM_company_personnel` (`id`, `company_id`, `company_personnel_surname`, `company_personnel_forname`, `company_personnel_email`, `company_personnel_phoneNo`, `company_personnel_phoneNo_prefix`, `company_personnel_position`) VALUES
+(1, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO');
+
 -- --------------------------------------------------------
 
 --
@@ -85,9 +137,16 @@ CREATE TABLE `CRM_company_notes` (
 CREATE TABLE `CRM_company_phoneNo` (
   `id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
-  `company_phoneNo` int(20) NOT NULL,
+  `company_phoneNo` bigint(20) NOT NULL,
   `company_phoneNo_prefix` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `CRM_company_phoneNo`
+--
+
+INSERT INTO `CRM_company_phoneNo` (`id`, `company_id`, `company_phoneNo`, `company_phoneNo_prefix`) VALUES
+(1, 1, 7708873917, '+44');
 
 -- --------------------------------------------------------
 
@@ -158,36 +217,43 @@ INSERT INTO `CRM_user_master` (`id`, `user_company_name`) VALUES
 --
 ALTER TABLE `CRM_company`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `client_id` (`CRM_user_master_id`);
+  ADD KEY `CRM_user_master_id` (`CRM_user_master_id`);
 
 --
 -- Indexes for table `CRM_company_address`
 --
 ALTER TABLE `CRM_company_address`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `client_company_id` (`company_id`);
+  ADD KEY `company_id` (`company_id`);
 
 --
 -- Indexes for table `CRM_company_email_address`
 --
 ALTER TABLE `CRM_company_email_address`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `client_companies_id` (`company_id`);
+  ADD KEY `company_id` (`company_id`);
 
 --
 -- Indexes for table `CRM_company_notes`
 --
 ALTER TABLE `CRM_company_notes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `client_company_id` (`company_id`),
-  ADD KEY `client_company_by_id` (`company_note_by_id`);
+  ADD KEY `company_id` (`company_id`),
+  ADD KEY `company_note_by_id` (`company_note_by_id`);
+
+--
+-- Indexes for table `CRM_company_personnel`
+--
+ALTER TABLE `CRM_company_personnel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `company_id` (`company_id`);
 
 --
 -- Indexes for table `CRM_company_phoneNo`
 --
 ALTER TABLE `CRM_company_phoneNo`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `client_companies_id` (`company_id`);
+  ADD KEY `company_id` (`company_id`);
 
 --
 -- Indexes for table `CRM_user`
@@ -214,30 +280,10 @@ ALTER TABLE `CRM_user_master`
 --
 
 --
--- AUTO_INCREMENT for table `CRM_company`
+-- AUTO_INCREMENT for table `CRM_company_personnel`
 --
-ALTER TABLE `CRM_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `CRM_company_address`
---
-ALTER TABLE `CRM_company_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `CRM_company_email_address`
---
-ALTER TABLE `CRM_company_email_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `CRM_company_notes`
---
-ALTER TABLE `CRM_company_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `CRM_company_phoneNo`
---
-ALTER TABLE `CRM_company_phoneNo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `CRM_company_personnel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `CRM_user`
 --
@@ -261,8 +307,7 @@ ALTER TABLE `CRM_user_master`
 -- Constraints for table `CRM_company`
 --
 ALTER TABLE `CRM_company`
-  ADD CONSTRAINT `CRM_company_ibfk_1` FOREIGN KEY (`CRM_user_master_id`) REFERENCES `CRM_user_master` (`id`),
-  ADD CONSTRAINT `CRM_company_ibfk_2` FOREIGN KEY (`id`) REFERENCES `CRM_company_phoneNo` (`company_id`);
+  ADD CONSTRAINT `CRM_company_ibfk_1` FOREIGN KEY (`CRM_user_master_id`) REFERENCES `CRM_user_master` (`id`);
 
 --
 -- Constraints for table `CRM_company_address`
@@ -282,6 +327,18 @@ ALTER TABLE `CRM_company_email_address`
 ALTER TABLE `CRM_company_notes`
   ADD CONSTRAINT `CRM_company_notes_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `CRM_company` (`id`),
   ADD CONSTRAINT `CRM_company_notes_ibfk_2` FOREIGN KEY (`company_note_by_id`) REFERENCES `CRM_user` (`id`);
+
+--
+-- Constraints for table `CRM_company_personnel`
+--
+ALTER TABLE `CRM_company_personnel`
+  ADD CONSTRAINT `CRM_company_personnel_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `CRM_company` (`id`);
+
+--
+-- Constraints for table `CRM_company_phoneNo`
+--
+ALTER TABLE `CRM_company_phoneNo`
+  ADD CONSTRAINT `CRM_company_phoneNo_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `CRM_company` (`id`);
 
 --
 -- Constraints for table `CRM_user`
