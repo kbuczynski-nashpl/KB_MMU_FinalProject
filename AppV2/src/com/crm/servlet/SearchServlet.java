@@ -2,6 +2,7 @@ package com.crm.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.crm.client.company.CRM_company;
 import com.crm.utils.userLoginUtils;
 import com.db.mysql.models.DBO_CRM_company;
 import com.db.mysql.models.DBO_CRM_company_email_address;
@@ -37,11 +39,11 @@ public class SearchServlet extends HttpServlet {
 		try {
 			String url = request.getRequestURL().toString();
 			String keyword = url.substring(url.lastIndexOf('/') + 1);
-			this.search(keyword);
+			keyword = java.net.URLDecoder.decode(keyword, "UTF-8");
+			request.setAttribute("SEARCHRESULT", this.search(keyword));
 		} catch (NullPointerException e) {
-			request.setAttribute("NULLSEARCH", "NO KEYWORD TO SEARCH FOR");
+			request.setAttribute("SEARCHRESULT", "NO KEYWORD TO SEARCH FOR");
 		}
-			
 		
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/search.jsp");
 		dispatcher.forward(request, response);
@@ -55,37 +57,45 @@ public class SearchServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void search(String keyword) {
+	private HashMap<Integer, CRM_company> search(String keyword) {
 		String type = "";
 		
 		if(StringUtils.isStrictlyNumeric(keyword) == true) {
 			type = "NUMBER";
-		} else if(userLoginUtils.validateEmail(keyword) == true) {
+		} else if(userLoginUtils.validateEmail(keyword) != true) {
 			type = "EMAIL";
 		} else {
 			type = "ALL";
 		}
-		ArrayList<ArrayList<?>> searchResult = this.gatherData(keyword, type);
+		return this.gatherData(keyword, type);
 	}
 	
-	private ArrayList<ArrayList<?>> gatherData(String keyword, String type) {
-		ArrayList<ArrayList<?>> data = new ArrayList<ArrayList<?>>();
+	private HashMap<Integer, CRM_company> gatherData(String keyword, String type) {
 		DBO_CRM_company dbo0 = new DBO_CRM_company();
 		switch (type) {
 			case "NUMBER":
-				data.add(dbo0.getCompanyByPhoneNumber(Integer.parseInt(keyword)));
-				break;
+				keyword = this.cleanTelNumber(keyword);
+				int number = Integer.parseInt(keyword.trim());
+				return dbo0.getCompanyByPhoneNumber(number);
 			case "EMAIL":
-				data.add(dbo0.getCompanyByEmailAddress(keyword));
-				break;
+				keyword = keyword.toLowerCase();
+				return dbo0.getCompanyByEmailAddress(keyword);
 			case "ALL":
-				data.add(dbo0.searchForCompany(keyword));
-				break;
+				return dbo0.searchForCompany(keyword);
 			default :
-				data.add(dbo0.searchForCompany(keyword));
-				break;
+				return dbo0.searchForCompany(keyword);
 		}
-		return data;
+	}
+	
+	private String cleanTelNumber(String keyword) {
+		keyword = keyword.replaceAll("\\D+", "");
+		if(keyword.startsWith("0")) {
+			keyword = keyword.substring(0, keyword.length());
+		}
+		if(keyword.startsWith("0")) {
+			cleanTelNumber(keyword);
+		}
+		return keyword;
 	}
 
 }

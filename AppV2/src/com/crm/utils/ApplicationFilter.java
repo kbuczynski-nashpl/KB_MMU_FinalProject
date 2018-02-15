@@ -47,7 +47,10 @@ public class ApplicationFilter implements Filter {
 			chain.doFilter(req, res);
 			return;
 		} else {
-			session.setAttribute("REDIRECT", path);
+			if(session == null) {
+				session = req.getSession();
+			}
+			session.setAttribute("REDIRECT", path);				
 			res.sendRedirect(baseURL + "login");
 		}
 

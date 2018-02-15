@@ -45,18 +45,19 @@ public class LoginServlet extends HttpServlet {
 			List<Object> res = userLoginUtils.logIn(usr, psw);
 			if (res.get(0).equals("true")) {
 				this.writeToSession(res.get(1), request);
+				if (request.getSession().getAttribute("REDIRECT") != null) {
+					response.sendRedirect(request.getSession().getAttribute("REDIRECT").toString());
+					return;
+				} else {
+					response.sendRedirect("index");
+					return;
+				}
 			} else {
 				request.setAttribute("error", "Invalid Username or Password");
 				RequestDispatcher dispatcher = this.getServletContext()
 						.getRequestDispatcher("/WEB-INF/views/login.jsp");
 				dispatcher.forward(request, response);
 			}
-			if (request.getSession().getAttribute("REDIRECT") != null) {
-				response.sendRedirect(request.getSession().getAttribute("REDIRECT").toString());
-				return;
-			}
-				response.sendRedirect("index");
-				return;
 			
 		}
 	}
