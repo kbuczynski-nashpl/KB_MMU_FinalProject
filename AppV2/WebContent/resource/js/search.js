@@ -9,9 +9,22 @@ function getSearchWindow() {
 		contentType : "application/html",
 		async : false,
 		success : function(data) {
-			$('#modalContent').append(data);
+			$('#modalContentSearchBox').append(data);
 		}
 	});
+}
+function getAddNewWindow() {
+	let url = window.location.origin + "/AppV2/add";
+	$.ajax({
+		type : "POST",
+		url : url,
+		contentType: "application/html",
+		asunc: false,
+		success : function(data){
+			$('#modalContentAddNewBox').append(data);
+		}
+	});
+	
 }
 function toggleNav() {
 	if ($("#panel-main").css("display") == "none") {
@@ -30,6 +43,12 @@ function toggleNav() {
 $(".modal").on("hidden.bs.modal", function() {
 	$("#modalContent").html("");
 });
+
+$("#add_new_btn").on('click', function(e) {
+		getAddNewWindow();
+		$('#addModal').modal('toggle');
+});
+
 
 $("#search_navBar").on('keyup', function(e) {
 	if (e.keyCode == 13) {

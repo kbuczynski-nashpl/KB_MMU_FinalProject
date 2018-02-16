@@ -58,20 +58,63 @@
 	</div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Search Box -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog"
 	aria-labelledby="searchModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" id="modalContent"
+		<div class="modal-content" id="modalContentSearchBox"
 			style="padding: 3%">
 			<div class="modal-body" id="modalBody"></div>
 		</div>
 	</div>
 </div>
-<script>
-	
-</script>
+
+<!-- Modal Add Box -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+	aria-labelledby="addModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="modalContentAddNewBox"
+			style="padding: 3%">
+			<div class="modal-body" id="modalBody"></div>
+		</div>
+	</div>
+</div>
+
+<div id="Add">
+	<a id="add_new_btn" href="#"> Add New</a>
+</div>
 <style>
+#Add {
+	height: 0px;
+	width: 85px;
+	position: fixed;
+	right: 0;
+	top: 50%;
+	z-index: 1000;
+	border-radius: 25px;
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+}
+#Add a{
+	display: block;
+	background:#000;
+	height: 52px;
+	padding-top: 10px;
+	width: 155px;
+	text-align: center;
+	border-radius: 25px 25px 0px 0px;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 17px;
+	font-weight: bold;
+	text-decoration: none;
+}
+#Add a:hover {
+	background:#00495d;
+}
+
 #toggleNav {
 	cursor: pointer;
 }
