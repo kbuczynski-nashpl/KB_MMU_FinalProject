@@ -64,7 +64,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="modalContentSearchBox"
 			style="padding: 3%">
-			<div class="modal-body" id="modalBody"></div>
+			<div class="modal-body" id="modalSearchBody" style="margin-top:2%; margin-bottom: 5%"></div>
 		</div>
 	</div>
 </div>
@@ -75,7 +75,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="modalContentAddNewBox"
 			style="padding: 3%">
-			<div class="modal-body" id="modalBody"></div>
+			<div class="modal-body container" id="modalAddBody" style="margin-top: 2%; margin-bottom: 5%;"></div>
 		</div>
 	</div>
 </div>
@@ -89,7 +89,7 @@
 	width: 85px;
 	position: fixed;
 	right: 0;
-	top: 50%;
+	top: 75%;
 	z-index: 1000;
 	border-radius: 25px;
 	transform: rotate(-90deg);
@@ -152,7 +152,6 @@
 }
 
 .panel-content .row:hover {
-	/* background-color: rgba(75, 81, 93, 0.4);*/
 	cursor: pointer;
 }
 

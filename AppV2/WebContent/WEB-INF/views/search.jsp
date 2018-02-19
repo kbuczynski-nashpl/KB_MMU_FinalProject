@@ -8,7 +8,7 @@
 			<div class="col-sm-4">
 				<div class="card text-center">
 					<div class="card-block">
-						<h3 class="card-title">${searchItem.value.getCompany_name()}</h3>
+						<h4 class="card-title">${searchItem.value.getCompany_name()}</h4>
 						<div class="container ">
 							<a
 								href="${pageContext.request.contextPath}/view/${searchItem.key}"

@@ -1,34 +1,26 @@
-function getSearchWindow() {
-	let searchValue = $("#search_navBar").val();
-	searchValue = encodeURI(searchValue);
-	// MAY NEED TO CHANGE THIS WHEN DEPLOYING
-	let url = window.location.origin + "/AppV2/search/" + searchValue
+function ajaxCall(path, data){
+	let url = window.location.origin + "/AppV2/" + path;
 	$.ajax({
-		type : "POST",
+		type: "POST",
 		url : url,
-		contentType : "application/html",
-		async : false,
-		success : function(data) {
-			$('#modalContentSearchBox').append(data);
+		contentType : data.contentType,
+		data: data,
+		async: false,
+		success: function(returnData){
+			if(data.isModal === true){
+				$(data.modalId).html(returnData);
+			}
+			if(data.responseRequired === true){
+				return returnData.responseValue;
+			}
 		}
-	});
-}
-function getAddNewWindow() {
-	let url = window.location.origin + "/AppV2/add";
-	$.ajax({
-		type : "POST",
-		url : url,
-		contentType: "application/html",
-		asunc: false,
-		success : function(data){
-			$('#modalContentAddNewBox').append(data);
-		}
-	});
+	})
 	
 }
+
 function toggleNav() {
 	if ($("#panel-main").css("display") == "none") {
-		+$("#panel-main").fadeIn();
+		$("#panel-main").fadeIn();
 		$("#panel-main").fadeIn("slow");
 		$("#panel-main").fadeIn(3000);
 		$("#panel-main").css("display", "block");
@@ -41,18 +33,26 @@ function toggleNav() {
 	}
 }
 $(".modal").on("hidden.bs.modal", function() {
-	$("#modalContent").html("");
+	$(".modal-body").html("");
 });
 
 $("#add_new_btn").on('click', function(e) {
-		getAddNewWindow();
+		let data = {};
+		data.contentType = "application/html";
+		data.isModal = true;
+		data.modalId = "#modalAddBody"; 
+		ajaxCall("add", data);
 		$('#addModal').modal('toggle');
 });
 
 
 $("#search_navBar").on('keyup', function(e) {
 	if (e.keyCode == 13) {
-		getSearchWindow();
+		let data = {};
+		data.contentType = "application/html";
+		data.isModal = true;
+		data.modalId = "#modalSearchBody"; 
+		ajaxCall("search/", data);
 		$('#searchModal').modal('toggle');
 	}
 });
