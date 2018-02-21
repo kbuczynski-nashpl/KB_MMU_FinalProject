@@ -68,7 +68,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>AddNewServlet</servlet-name>
-  	<url-pattern>/add</url-pattern>
+  	<url-pattern>/add/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>

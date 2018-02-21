@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="header.jsp" />
 <div class="container-fluid">
 	<div class="container" id="add-new-page-1">
 		<div class="container">
@@ -151,7 +150,7 @@
 			displayPage("NEXT");
 		});
 		$('#submitNew').on("click", function(){
-			dataBuildUp();
+			addNewdataBuildUp();
 		});
 		
 	});
@@ -210,7 +209,7 @@
 		}
 	}
 
-	function dataBuildUp() {
+	function addNewdataBuildUp() {
 			let data = {};
 			let url = window.location.origin + "/AppV2/add";
 			data.companyName = $("#company-name-input").val();
@@ -224,14 +223,13 @@
 			data.emailactive = $("#company-email-active-input").val();
 			data.phoneNonumber = $("#company-phone-number-input").val();
 			data.phoneNoprefix = $("#company-phone-prefix-input").val();
-			redirectPost(url, data);
+			addNewredirectToConfirmPost(url, data);
 	}
 	
-	function redirectPost(url, data) {
+	function addNewredirectToConfirmPost(url, data) {
 		data.isModal = true;
 		data.modalId = "#modalAddBody";
 		$("#modalAddBody").html("");
-		console.log(data);
 		ajaxCall("add", data);
 	}
 </script>

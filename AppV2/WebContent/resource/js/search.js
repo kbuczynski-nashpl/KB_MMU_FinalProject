@@ -5,7 +5,7 @@ function ajaxCall(path, data){
 		url : url,
 		contentType : data.contentType,
 		data: data,
-		async: false,
+		async: true,
 		success: function(returnData){
 			if(data.isModal === true){
 				$(data.modalId).html(returnData);
@@ -42,7 +42,7 @@ $("#add_new_btn").on('click', function(e) {
 		data.isModal = true;
 		data.modalId = "#modalAddBody"; 
 		ajaxCall("add", data);
-		$('#addModal').modal('toggle');
+		$('#addModal').modal('show');
 });
 
 

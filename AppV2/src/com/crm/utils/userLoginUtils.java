@@ -2,6 +2,7 @@ package com.crm.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +12,13 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.crm.client.user.CRMUser;
+import com.crm.client.user.CRM_user;
+import com.crm.client.user.CRM_user_information;
+import com.crm.client.user.CRM_user_master;
 import com.crm.servlet.sessionHandler.SessionProperties;
-import com.db.mysql.models.DBO_CRMUser;
+import com.db.mysql.models.DBO_CRM_user;
+import com.db.mysql.models.DOB_CRM_user_information;
+import com.db.mysql.models.DOB_CRM_user_master;
 
 public class userLoginUtils {
 
@@ -40,15 +45,13 @@ public class userLoginUtils {
 	}
 
 	public static boolean validateLogin(String psw, String userName) {
-		DBO_CRMUser dbo = new DBO_CRMUser();
-		ArrayList<HashMap<String, String>> result = dbo.getUserByUserName(userName);
-		for (HashMap<String, String> res : result) {
-			String entryPsw = res.get("user_psw");
-			String entryUsrName = res.get("user_username");
+		DBO_CRM_user dbo = new DBO_CRM_user();
+		CRM_user cuc = dbo.getUserByUserName(userName);
+			String entryPsw = cuc.getUser_psw();
+			String entryUsrName = cuc.getUser_username();
 			if (entryPsw.equals(psw) && entryUsrName.equals(userName)) {
 				return true;
 			}
-		}
 		return false;
 	}
 
@@ -70,50 +73,47 @@ public class userLoginUtils {
 		}
 	}
 
-	public static List<Object> logIn(String usrname, String psw) {
-		DBO_CRMUser dob = new DBO_CRMUser();
-		ArrayList<HashMap<String, String>> usr = dob.getUserByUserName(usrname);
-		List<Object> result = new ArrayList<Object>();
-
-
-		if (usr.size() < 1) {
-			result.add("false");
-			return result;
-		}
-
-		CRMUser cuc = new CRMUser();
-		cuc.setClientPsw(psw);
-		cuc.setClientUsername(usrname);
+	public static HashMap<String, Object> logIn(String usrname, String psw){
+		DBO_CRM_user dob0 = new DBO_CRM_user();
+		DOB_CRM_user_master dob1 = new DOB_CRM_user_master();
+		DOB_CRM_user_information dob2 = new DOB_CRM_user_information();
+		CRM_user cuc = dob0.getUserByUserName(usrname);
+		CRM_user_master cum = dob1.getById(cuc.getId());
+		CRM_user_information cui = new CRM_user_information();
 		try {
-			cuc.setClientEmail(usr.get(0).get("user_email").toString());
-			cuc.setId(Integer.valueOf(usr.get(0).get("user_master_id").toString()));
+			cui = dob2.getByUserId(cuc.getId());
+		} catch (NumberFormatException e1) {
+			e1.printStackTrace();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+				
+		try {
 			cuc.setLogedIn();
-		} catch(IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
-		
-		
+
 		if (cuc.getIsLogedIn() == true) {
-			result.add("true");
-			result.add(cuc);
-			return result;
+			result.put("isLogged", "true");
+			result.put("CRM_User", cuc);
+			result.put("CRM_user_master", cum);
+			result.put("CRM_user_information", cui);
 		} else {
-			result.add("false");
-			return result;
+			result.put("isTrue","false");
 		}
+
+		return result;
+
 	}
-	public static boolean checkUserSession(HttpServletRequest request) {
+
+	public static boolean getUserLoginSession(HttpServletRequest request) {
 		HttpSession _SESSION = request.getSession();
-		String _SESSION_ID = _SESSION.getId();
-		long _SESSION_START_TIME = _SESSION.getCreationTime();
-		long _SESSION_LAST_ACCESS_TIME = _SESSION.getLastAccessedTime();
-		Boolean _SESSION_IS_NEW = _SESSION.isNew();
-		if(_SESSION_IS_NEW == true || _SESSION.getAttribute("CLIENT") == null) {
-			 SessionProperties _SESSION_PROPERTIES = new SessionProperties(_SESSION_ID, _SESSION_START_TIME, _SESSION_LAST_ACCESS_TIME, _SESSION_IS_NEW);
-			_SESSION.setAttribute("SESSION", _SESSION_PROPERTIES);
-		} else {
-			CRMUser client = (CRMUser) _SESSION.getAttribute("CLIENT");
+		CRM_user client = (CRM_user) _SESSION.getAttribute("CLIENT");
+		if(client != null) {
 			if(client.getIsLogedIn() == true) {
 				return true;
 			}

@@ -4,6 +4,14 @@ public class CRM_company {
 	private Integer id = 0;
 	private Integer CRM_user_master_id = 0;
 	private String company_name = "";
+	
+	
+	public CRM_company() {}
+	public CRM_company(Integer id, Integer CrmUserMasterId, String companyName) {
+		this.id = id;
+		this.CRM_user_master_id = CrmUserMasterId;
+		this.company_name = companyName;
+	}
 
 	public String toString() {
 		return "CRM_Company{" + "ID=" + this.id + "," + "UserMasterID=" + this.CRM_user_master_id + "," + "CompanyName="

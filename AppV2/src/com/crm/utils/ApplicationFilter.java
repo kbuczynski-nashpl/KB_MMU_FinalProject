@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.crm.client.user.CRM_user;
+
 public class ApplicationFilter implements Filter {
 
 	private ArrayList<String> resources = new ArrayList<String>();
@@ -28,7 +30,7 @@ public class ApplicationFilter implements Filter {
 		System.out.println("IP " + ipAddress + ", Time " + new Date().toString());
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		HttpSession session = req.getSession(false);
+		HttpSession _SESSION = req.getSession();
 
 		String path = ((HttpServletRequest) request).getRequestURI();
 		String baseURL = path.substring(0, path.length() - ((HttpServletRequest) request).getRequestURI().length())
@@ -40,20 +42,24 @@ public class ApplicationFilter implements Filter {
 				return;
 			}
 		}
-		boolean loggedIn = session != null && session.getAttribute("CLIENT") != null;
+		boolean loggedIn = false;
+		if(_SESSION != null) {
+			if(_SESSION.getAttribute("CLIENT") != null) {
+				loggedIn = true;
+			}
+		}
 		
 		if (loggedIn) {
-			session.setAttribute("REDIRECT", path);
+			_SESSION.setAttribute("REDIRECT", path);
 			chain.doFilter(req, res);
 			return;
 		} else {
-			if(session == null) {
-				session = req.getSession();
+			if(_SESSION == null) {
+				_SESSION = req.getSession();
 			}
-			session.setAttribute("REDIRECT", path);				
+			_SESSION.setAttribute("REDIRECT", path);				
 			res.sendRedirect(baseURL + "login");
 		}
-
 	}
 
 	@Override

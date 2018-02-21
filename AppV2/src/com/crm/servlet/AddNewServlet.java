@@ -12,32 +12,48 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.crm.client.company.CRM_company;
 
 /**
  * Servlet implementation class AddNewServlet
  */
 public class AddNewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddNewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddNewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		response.setHeader("Pragma", "no-cache");
+		HttpSession _SESSION = request.getSession();
 		List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
-		for(String tmp: parameterNames) {
+		System.out.println(parameterNames);
+		for (String tmp : parameterNames) {
 			System.out.println(tmp);
 		}
-		if(request.getParameter("companyName") != null) {
+
+		String url = request.getRequestURL().toString();
+		String idStr = url.substring(url.lastIndexOf('/') + 1);
+		
+		if(idStr.equals("confirm")) {
+			
+			return;
+		}
+
+		if (request.getParameter("companyName") != null) {
 			HashMap<String, String> postVariables = new HashMap<String, String>();
 			postVariables.put("companyName", request.getParameter("companyName"));
 			postVariables.put("companyAddressLine1", request.getParameter("addressline1"));
@@ -50,27 +66,37 @@ public class AddNewServlet extends HttpServlet {
 			postVariables.put("companyEmailActive", request.getParameter("emailactive"));
 			postVariables.put("companyPhoneNumber", request.getParameter("phoneNonumber"));
 			postVariables.put("companyPhoneNoPrefix", request.getParameter("phoneNoprefix"));
+			
+			_SESSION.setAttribute("newCRMUser", postVariables);
+			
 			request.setAttribute("postVariables", postVariables);
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/addConfirm.jsp");
-			dispatcher.forward(request, response);
-			return;
-		} else if(request.getParameter("").equals(true)) {
-			request.setAttribute("responseValue", "200");
-			//TODO: PUT THIS INTO MYSQL!!!
-			return;
-		} else {
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/add.jsp");
+			RequestDispatcher dispatcher = this.getServletContext()
+					.getRequestDispatcher("/WEB-INF/views/addConfirm.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
+
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/add.jsp");
+		dispatcher.forward(request, response);
+		return;
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	private void createNewCRMEntry(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession _SESSION = request.getSession();
+		CRM_company newCompany = new CRM_company();
+		
+	}
+	
 
 }
