@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2018 at 10:38 AM
--- Server version: 10.2.12-MariaDB-10.2.12+maria~xenial
+-- Generation Time: Feb 21, 2018 at 08:03 PM
+-- Server version: 10.2.13-MariaDB-10.2.13+maria~xenial
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -37,7 +37,9 @@ CREATE TABLE `CRM_company` (
 --
 
 INSERT INTO `CRM_company` (`id`, `CRM_user_master_id`, `company_name`) VALUES
-(1, 1, 'Test Company 1');
+(1, 1, 'Test Company 1'),
+(2, 1, 'Test Company 2'),
+(3, 1, 'Test Company 3');
 
 -- --------------------------------------------------------
 
@@ -52,15 +54,16 @@ CREATE TABLE `CRM_company_address` (
   `company_address_line2` varchar(50) DEFAULT NULL,
   `company_address_postcode` varchar(10) NOT NULL,
   `company_address_city` varchar(20) NOT NULL,
-  `company_address_country` varchar(20) NOT NULL
+  `company_address_country` varchar(20) NOT NULL,
+  `company_address_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `CRM_company_address`
 --
 
-INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, `company_address_line2`, `company_address_postcode`, `company_address_city`, `company_address_country`) VALUES
-(1, 1, 'Test Address 1', NULL, 'OL7 0AA', 'Manchester', 'United Kingdom');
+INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, `company_address_line2`, `company_address_postcode`, `company_address_city`, `company_address_country`, `company_address_active`) VALUES
+(1, 1, 'Test Address 1', NULL, 'OL7 0AA', 'Manchester', 'United Kingdom', 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,8 @@ INSERT INTO `CRM_company_email_address` (`id`, `company_id`, `company_email_addr
 CREATE TABLE `CRM_company_notes` (
   `id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
-  `company_note` longtext NOT NULL,
+  `company_note_title` text NOT NULL,
+  `company_note` text NOT NULL,
   `company_note_by_id` int(11) NOT NULL,
   `company_note_by_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -101,8 +105,9 @@ CREATE TABLE `CRM_company_notes` (
 -- Dumping data for table `CRM_company_notes`
 --
 
-INSERT INTO `CRM_company_notes` (`id`, `company_id`, `company_note`, `company_note_by_id`, `company_note_by_date`) VALUES
-(1, 1, 'Note Test 1', 1, '2018-02-01');
+INSERT INTO `CRM_company_notes` (`id`, `company_id`, `company_note_title`, `company_note`, `company_note_by_id`, `company_note_by_date`) VALUES
+(1, 1, 'Test 1', 'Note Test 1', 1, '2018-02-01'),
+(2, 1, 'Longer String Test 2', 'This is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.\r\nThis is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.\r\nThis is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.', 1, '2018-02-12');
 
 -- --------------------------------------------------------
 
@@ -126,7 +131,11 @@ CREATE TABLE `CRM_company_personnel` (
 --
 
 INSERT INTO `CRM_company_personnel` (`id`, `company_id`, `company_personnel_surname`, `company_personnel_forname`, `company_personnel_email`, `company_personnel_phoneNo`, `company_personnel_phoneNo_prefix`, `company_personnel_position`) VALUES
-(1, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO');
+(1, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO'),
+(2, 1, 'Subject1', 'Test', 'testsubject1@gmail.com', 1234567, '+44', 'test subject'),
+(3, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST'),
+(4, 2, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST'),
+(5, 3, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST');
 
 -- --------------------------------------------------------
 
@@ -280,10 +289,15 @@ ALTER TABLE `CRM_user_master`
 --
 
 --
+-- AUTO_INCREMENT for table `CRM_company_notes`
+--
+ALTER TABLE `CRM_company_notes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `CRM_company_personnel`
 --
 ALTER TABLE `CRM_company_personnel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `CRM_user`
 --
