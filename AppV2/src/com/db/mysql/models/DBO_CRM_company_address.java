@@ -16,11 +16,7 @@ public class DBO_CRM_company_address extends MySQL{
 		ArrayList<HashMap<String,String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_address> companyAddresses = new ArrayList<CRM_company_address>();
 		for(HashMap<String, String> entries : resultFromMysql) {
-			CRM_company_address crmCompanyAddress = new CRM_company_address();
-			crmCompanyAddress.setCompany_id(Integer.parseInt(entries.get("company_id").toString()));
-			crmCompanyAddress.setCompany_address_city(entries.get("company_address_city").toString());
-			crmCompanyAddress.setCompany_address_country(entries.get("company_address_country").toString());
-			crmCompanyAddress.setCompany_address_line1(entries.get("company_address_line1").toString());
+			CRM_company_address crmCompanyAddress = new CRM_company_address(Integer.parseInt(entries.get("company_id").toString()), entries.get("company_address_line1").toString(), entries.get("company_address_postcode").toString(), entries.get("company_address_city").toString(),entries.get("company_address_country").toString(), false);
 			if(!StringUtils.isNullOrEmpty(entries.get("company_address_line2"))) {
 				crmCompanyAddress.setCompany_address_line2(entries.get("company_address_line2").toString());
 			}
@@ -30,11 +26,21 @@ public class DBO_CRM_company_address extends MySQL{
 				crmCompanyAddress.setCompany_address_active(false);
 
 			}
-			crmCompanyAddress.setCompany_address_postcode(entries.get("company_address_postcode").toString());
 			crmCompanyAddress.setId(Integer.parseInt(entries.get("id").toString()));
 			companyAddresses.add(crmCompanyAddress);
 		}
 		return companyAddresses;
+	}
+	
+	public void createNewCrmCompanyAddress(CRM_company_address cca) {
+		String queryString = "";
+		if(cca.getCompany_address_line2() != null) {
+			queryString = "INSERT INTO CRM_company_address (company_id, company_address_line1, company_address_line2, company_address_postcode, company_address_city, company_address_country, company_address_active) VALUES (" + cca.getCompany_id() + ", '" + cca.getCompany_address_line1() + "', '" + cca.getCompany_address_line2() + ", '" + cca.getCompany_address_postcode()+ "', '" + cca.getCompany_address_city() + "', '" + cca.getCompany_address_country() + "', '" + cca.getCompany_address_active() + "')";
+		} else {
+			queryString = "INSERT INTO CRM_company_address (company_id, company_address_line1, company_address_postcode, company_address_city, company_address_country, company_address_active) VALUES (" + cca.getCompany_id() + ", '" + cca.getCompany_address_line1() + ", '" + cca.getCompany_address_postcode()+ "', '" + cca.getCompany_address_city() + "', '" + cca.getCompany_address_country() + "', '" + cca.getCompany_address_active() + "')";
+		}
+		
+		query(queryString);
 	}
 
 }

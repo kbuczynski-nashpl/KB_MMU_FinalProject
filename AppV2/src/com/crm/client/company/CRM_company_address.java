@@ -9,6 +9,28 @@ public class CRM_company_address {
 	private String company_address_city = "";
 	private String company_address_country = "";
 	private Boolean company_address_active = false;
+	
+	public CRM_company_address() {}
+
+	public CRM_company_address(int id, int companyId, String companyAddressLine1, String companyAddressPostcode, String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
+		this.id = id;
+		this.company_id = companyId;
+		this.company_address_line1 = companyAddressLine1;
+		this.company_address_postcode = companyAddressPostcode;
+		this.company_address_city = companyAddressCity;
+		this.company_address_country = companyAddressCountry;
+		this.company_address_active = companyAddressIsActive;
+	}
+	
+	public CRM_company_address(int companyId,  String companyAddressLine1, String companyAddressPostcode, String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
+		this.company_id = companyId;
+		this.company_address_line1 = companyAddressLine1;
+		this.company_address_postcode = companyAddressPostcode;
+		this.company_address_city = companyAddressCity;
+		this.company_address_country = companyAddressCountry;
+		this.company_address_active = companyAddressIsActive;
+	}
+	
 
 	public int getId() {
 		return id;

@@ -92,7 +92,6 @@ public class DBO_CRM_company extends MySQL {
 	public void createNewCrmCompany(CRM_company cc) {
 		String queryString = "INSERT INTO CRM_company (CRM_user_master_id, company_name) VALUES ('" + cc.getCRM_user_master_id() + "', '" + cc.getCompany_name() +"')";
 		query(queryString);
-		
 	}
 
 	private void parseSearchQuery(ArrayList<HashMap<String, String>> result) {
