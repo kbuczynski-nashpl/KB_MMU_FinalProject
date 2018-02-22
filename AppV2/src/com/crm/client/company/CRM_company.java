@@ -7,9 +7,15 @@ public class CRM_company {
 	
 	
 	public CRM_company() {}
-	public CRM_company(Integer id, Integer CrmUserMasterId, String companyName) {
+	
+	public CRM_company(Integer id, Integer crmUserMasterId, String companyName) {
 		this.id = id;
-		this.CRM_user_master_id = CrmUserMasterId;
+		this.CRM_user_master_id = crmUserMasterId;
+		this.company_name = companyName;
+	}
+	
+	public CRM_company(Integer crmUserMasterId, String companyName) {
+		this.CRM_user_master_id = crmUserMasterId;
 		this.company_name = companyName;
 	}
 

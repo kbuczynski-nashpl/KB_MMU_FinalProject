@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.crm.client.company.CRM_company;
+import com.crm.client.user.CRM_user;
+import com.crm.utils.NewCRMCompanyUtils;
 
 /**
  * Servlet implementation class AddNewServlet
@@ -34,13 +36,13 @@ public class AddNewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		response.setHeader("Pragma", "no-cache");
 		HttpSession _SESSION = request.getSession();
 		List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
-		System.out.println(parameterNames);
 		for (String tmp : parameterNames) {
 			System.out.println(tmp);
 		}
@@ -49,7 +51,7 @@ public class AddNewServlet extends HttpServlet {
 		String idStr = url.substring(url.lastIndexOf('/') + 1);
 		
 		if(idStr.equals("confirm")) {
-			
+			NewCRMCompanyUtils.createNewCRMCompany((HashMap<String, String>) _SESSION.getAttribute("newCrmCompany"), (CRM_user) _SESSION.getAttribute("CLIENT"));
 			return;
 		}
 
@@ -67,7 +69,7 @@ public class AddNewServlet extends HttpServlet {
 			postVariables.put("companyPhoneNumber", request.getParameter("phoneNonumber"));
 			postVariables.put("companyPhoneNoPrefix", request.getParameter("phoneNoprefix"));
 			
-			_SESSION.setAttribute("newCRMUser", postVariables);
+			_SESSION.setAttribute("newCrmCompany", postVariables);
 			
 			request.setAttribute("postVariables", postVariables);
 			RequestDispatcher dispatcher = this.getServletContext()

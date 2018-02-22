@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2018 at 08:03 PM
+-- Generation Time: Feb 22, 2018 at 01:30 PM
 -- Server version: 10.2.13-MariaDB-10.2.13+maria~xenial
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -186,7 +186,7 @@ INSERT INTO `CRM_user` (`id`, `user_master_id`, `user_username`, `user_psw`, `us
 
 CREATE TABLE `CRM_user_information` (
   `id` int(11) NOT NULL,
-  `user_master_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `user_surname` varchar(30) NOT NULL,
   `user_forname` varchar(30) NOT NULL,
   `user_dob` date NOT NULL
@@ -196,7 +196,7 @@ CREATE TABLE `CRM_user_information` (
 -- Dumping data for table `CRM_user_information`
 --
 
-INSERT INTO `CRM_user_information` (`id`, `user_master_id`, `user_surname`, `user_forname`, `user_dob`) VALUES
+INSERT INTO `CRM_user_information` (`id`, `user_id`, `user_surname`, `user_forname`, `user_dob`) VALUES
 (1, 1, 'Buczynski', 'Krzysztof', '1995-07-20');
 
 -- --------------------------------------------------------
@@ -276,7 +276,7 @@ ALTER TABLE `CRM_user`
 --
 ALTER TABLE `CRM_user_information`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `client_id` (`user_master_id`);
+  ADD KEY `client_id` (`user_id`);
 
 --
 -- Indexes for table `CRM_user_master`
@@ -289,6 +289,21 @@ ALTER TABLE `CRM_user_master`
 --
 
 --
+-- AUTO_INCREMENT for table `CRM_company`
+--
+ALTER TABLE `CRM_company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `CRM_company_address`
+--
+ALTER TABLE `CRM_company_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `CRM_company_email_address`
+--
+ALTER TABLE `CRM_company_email_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `CRM_company_notes`
 --
 ALTER TABLE `CRM_company_notes`
@@ -298,6 +313,11 @@ ALTER TABLE `CRM_company_notes`
 --
 ALTER TABLE `CRM_company_personnel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `CRM_company_phoneNo`
+--
+ALTER TABLE `CRM_company_phoneNo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `CRM_user`
 --
@@ -364,7 +384,7 @@ ALTER TABLE `CRM_user`
 -- Constraints for table `CRM_user_information`
 --
 ALTER TABLE `CRM_user_information`
-  ADD CONSTRAINT `CRM_user_information_ibfk_1` FOREIGN KEY (`user_master_id`) REFERENCES `CRM_user_master` (`id`);
+  ADD CONSTRAINT `CRM_user_information_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `CRM_user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

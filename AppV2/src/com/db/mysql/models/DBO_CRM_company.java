@@ -17,11 +17,7 @@ public class DBO_CRM_company extends MySQL {
 	public CRM_company getById(int id) {
 		String queryString = "SELECT * FROM CRM_company WHERE id = '" + id + "'";
 		ArrayList<HashMap<String, String>> responseFromMysql = query(queryString);
-		CRM_company newCompany = new CRM_company();
-		newCompany.setId(Integer.parseInt(responseFromMysql.get(0).get("id").toString()));
-		newCompany
-				.setCRM_user_master_id(Integer.parseInt(responseFromMysql.get(0).get("CRM_user_master_id").toString()));
-		newCompany.setCompany_name(responseFromMysql.get(0).get("company_name").toString());
+		CRM_company newCompany = new CRM_company(Integer.parseInt(responseFromMysql.get(0).get("id").toString()), Integer.parseInt(responseFromMysql.get(0).get("CRM_user_master_id").toString()), responseFromMysql.get(0).get("company_name").toString());
 		return newCompany;
 	}
 
@@ -91,6 +87,13 @@ public class DBO_CRM_company extends MySQL {
 		}
 		return this.resultMap;
 	}
+	
+	
+	public void createNewCrmCompany(CRM_company cc) {
+		String queryString = "INSERT INTO CRM_company (CRM_user_master_id, company_name) VALUES ('" + cc.getCRM_user_master_id() + "', '" + cc.getCompany_name() +"')";
+		query(queryString);
+		
+	}
 
 	private void parseSearchQuery(ArrayList<HashMap<String, String>> result) {
 		for (HashMap<String, String> entries : result) {
@@ -98,6 +101,8 @@ public class DBO_CRM_company extends MySQL {
 				resultMap.put(Integer.parseInt(entries.get("company_id").toString()),this.getById(Integer.parseInt(entries.get("company_id").toString())));
 			}
 		}
-		
 	}
+	
+	
+	
 }
