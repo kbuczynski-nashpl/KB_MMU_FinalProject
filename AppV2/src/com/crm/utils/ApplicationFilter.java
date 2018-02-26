@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.crm.client.user.CRM_user;
-
 public class ApplicationFilter implements Filter {
 
 	private ArrayList<String> resources = new ArrayList<String>();

@@ -3,9 +3,7 @@ package com.crm.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.crm.client.user.CRM_user;
 import com.crm.client.user.CRM_user_information;
 import com.crm.client.user.CRM_user_master;
-import com.crm.servlet.sessionHandler.SessionProperties;
 import com.db.mysql.models.DBO_CRM_user;
 import com.db.mysql.models.DOB_CRM_user_information;
 import com.db.mysql.models.DOB_CRM_user_master;

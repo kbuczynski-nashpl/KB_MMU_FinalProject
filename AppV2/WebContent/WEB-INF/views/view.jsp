@@ -164,7 +164,7 @@
 													test="${crmEmailAddress.getCompany_email_active() == true}">
 													<span class="badge badge-success">TRUE</span>
 												</c:if></td>
-											<td>${crmEmailAddress.getCompany_email_Type()}</td>
+											<td>${crmEmailAddress.getCompany_email_type()}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

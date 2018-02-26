@@ -2,19 +2,16 @@ package com.crm.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.crm.client.company.CRM_company;
 import com.crm.client.user.CRM_user;
 import com.crm.utils.NewCRMCompanyUtils;
 
@@ -29,7 +26,6 @@ public class AddNewServlet extends HttpServlet {
 	 */
 	public AddNewServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -51,7 +47,11 @@ public class AddNewServlet extends HttpServlet {
 		String idStr = url.substring(url.lastIndexOf('/') + 1);
 		
 		if(idStr.equals("confirm")) {
-			NewCRMCompanyUtils.createNewCRMCompany((HashMap<String, String>) _SESSION.getAttribute("newCrmCompany"), (CRM_user) _SESSION.getAttribute("CLIENT"));
+			HashMap<String, String> result = NewCRMCompanyUtils.createNewCRMCompany((HashMap<String, String>) _SESSION.getAttribute("newCrmCompany"), (CRM_user) _SESSION.getAttribute("CLIENT"));
+			request.setAttribute("RESULT", result);
+			RequestDispatcher dispatcher = this.getServletContext()
+					.getRequestDispatcher("/WEB-INF/views/addSummary.jsp");
+			dispatcher.forward(request, response);
 			return;
 		}
 
@@ -90,15 +90,7 @@ public class AddNewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-	
-	private void createNewCRMEntry(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession _SESSION = request.getSession();
-		CRM_company newCompany = new CRM_company();
-		
-	}
-	
+	}	
 
 }

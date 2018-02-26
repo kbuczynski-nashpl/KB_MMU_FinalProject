@@ -153,6 +153,12 @@
 			addNewdataBuildUp();
 		});
 		
+		$(document).keypress(function (e) {
+		    if (e.which == 13) {
+		        displayPage("NEXT");
+		    }
+		});
+		
 	});
 	function displayPage(pageValue) {
 		let activeDiv = $(".active");

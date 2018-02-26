@@ -1,12 +1,10 @@
 package com.crm.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.crm.client.company.CRM_company;
 import com.crm.utils.userLoginUtils;
 import com.db.mysql.models.DBO_CRM_company;
-import com.db.mysql.models.DBO_CRM_company_email_address;
-import com.db.mysql.models.DBO_CRM_company_phoneNo;
 import com.mysql.jdbc.StringUtils;
 
 /**
@@ -29,7 +25,6 @@ public class SearchServlet extends HttpServlet {
      */
     public SearchServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -53,7 +48,6 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import java.sql.PreparedStatement;
+
 public class MySQL {
 
 	private final static String mysqlAddress = "localhost";
@@ -20,6 +22,7 @@ public class MySQL {
 	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
+	private static PreparedStatement ps = null;
 
 	private void createConnection() {
 		try {
@@ -41,7 +44,6 @@ public class MySQL {
 			rs = stmt.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			List<String> columnsList = new ArrayList<String>();
-			int tmpCounter = 0;
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 				columnsList.add(rsmd.getColumnName(i));
 			}
@@ -51,7 +53,6 @@ public class MySQL {
 					newEntry.put(col, rs.getString(col));
 				}
 				resultSet.add(newEntry);
-				tmpCounter++;
 			}
 		} catch (SQLException e) {
 			// handle any errors
@@ -63,6 +64,26 @@ public class MySQL {
 		}
 		return resultSet;
 
+	}
+	
+	public HashMap<String, String> update(String query) {
+		createConnection();
+		HashMap<String, String> response = new HashMap<String, String>();
+		Integer generatedId = 0;
+		try {
+			ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			rs.next();
+			generatedId = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			response.put("STATUS", "ERROR");
+		}
+		response.put("STATUS", "OK");
+		response.put("GEN_ID", generatedId.toString());
+		
+		return response;
 	}
 
 	public Connection getConnection() {

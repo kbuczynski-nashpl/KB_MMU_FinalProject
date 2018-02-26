@@ -3,7 +3,6 @@ package com.db.mysql.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.crm.client.company.CRM_company;
 import com.crm.client.user.CRM_user;
 import com.db.mysql.MySQL;
 

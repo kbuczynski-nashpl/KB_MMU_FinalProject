@@ -5,6 +5,19 @@ public class CRM_company_phoneNo {
 	private int company_id = 0;
 	private String company_phoneNo = "";
 	private String company_phoneNo_prefix = "";
+	
+	public CRM_company_phoneNo() {}
+	public CRM_company_phoneNo(int id, int companyId, String companyPhoneNo, String companyPhoneNoPrefix) {
+		this.id = id;
+		this.company_id = companyId;
+		this.company_phoneNo = companyPhoneNo;
+		this.company_phoneNo_prefix = companyPhoneNoPrefix;
+	}
+	public CRM_company_phoneNo(int companyId, String companyPhoneNo, String companyPhoneNoPrefix) {
+		this.company_id = companyId;
+		this.company_phoneNo = companyPhoneNo;
+		this.company_phoneNo_prefix = companyPhoneNoPrefix;
+	}
 
 	public int getId() {
 		return id;

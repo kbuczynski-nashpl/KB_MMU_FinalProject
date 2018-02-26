@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.crm.client.user.CRM_user_information;
-import com.crm.client.user.CRM_user_master;
 import com.db.mysql.MySQL;
 
 public class DOB_CRM_user_information extends MySQL{

@@ -34,11 +34,12 @@ public class DBO_CRM_company_email_address extends MySQL {
 		return companyEmailAddresses;
 	}
 
-	public void createNewCRMEmailAddress(CRM_company_email_address ccea) {
+	public HashMap<String, String> createNewCRMEmailAddress(CRM_company_email_address ccea) {
 		String queryString = "INSERT INTO CRM_company_email_address (company_id, company_email_address, company_email_active, company_email_type) VALUES ("
 				+ ccea.getCompany_id() + ", '" + ccea.getCompany_email_address() + "', '"
 				+ ccea.getCompany_email_activeToInt() + "', '" + ccea.getCompany_email_type() + "')";
-		query(queryString);
+		HashMap<String, String> response = update(queryString);
+		return response;
 	}
 
 }
