@@ -47,10 +47,12 @@ public class ViewCustomerServlet extends HttpServlet {
 			String idStr = url.substring(url.lastIndexOf('/') + 1);
 			id = Integer.parseInt(idStr);
 		} catch (NumberFormatException e) {
-			System.out.println("I AM HERE");
 			System.err.println(e.getMessage());
 			System.err.println(e.getStackTrace());
-			response.sendRedirect("404");
+			String path = ((HttpServletRequest) request).getRequestURI();
+			String baseURL = path.substring(0, path.length() - ((HttpServletRequest) request).getRequestURI().length())
+					+ ((HttpServletRequest) request).getContextPath() + "/";
+			response.sendRedirect(baseURL + "404");
 			return;
 		}
 		DBO_CRM_company dbo0 = new DBO_CRM_company();
@@ -66,7 +68,7 @@ public class ViewCustomerServlet extends HttpServlet {
 			ArrayList<CRM_company_notes> crmCompanyNotes = dbo3.getByCompanyId(id);
 			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = dbo4.getByCompanyId(id);
 			ArrayList<CRM_company_personnel> crmCompanyPersonnel = dbo5.getByCompanyId(id);
-						
+
 			request.setAttribute("crmCompany", crmCompany);
 			request.setAttribute("crmCompanyAddresses", crmCompanyAddresses);
 			request.setAttribute("crmCompanyEmailAddresses", crmCompanyEmailAddresses);
@@ -77,7 +79,7 @@ public class ViewCustomerServlet extends HttpServlet {
 			System.err.println(e.getCause());
 			System.err.println(e.getLocalizedMessage());
 			System.err.println(e.getStackTrace());
-			//response.sendRedirect("404");
+			// response.sendRedirect("404");
 			return;
 		}
 

@@ -61,8 +61,8 @@
 						<c:forEach items="${crmCompanyAddresses}" var="crmAddress">
 							<c:if test="${crmAddress.getCompany_address_active() == true}">
 								<div class="container row form-group col-12">
-									<label for=company_address1_label
-										" class="col-2 col-form-label">Address Line 1</label>
+									<label for="company_address1_label"
+										class="col-2 col-form-label">Address Line 1</label>
 									<div class="col-9">
 										<input class="form-control" type="text"
 											value="${crmAddress.getCompany_address_line1()}"

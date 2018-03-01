@@ -14,7 +14,7 @@
 	<div class="alert alert-success">
 		<p>New Company has been created</p>
 		<div class="container">
-			<a href="view/${RESULT.GEN_ID}" class="btn btn-primary form-control">Visit new company page</a>
+			<a href="view/${ID}" class="btn btn-primary form-control">Visit new company page</a>
 		</div>
 	</div>
 	</c:if>

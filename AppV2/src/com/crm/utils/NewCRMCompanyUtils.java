@@ -50,9 +50,10 @@ public class NewCRMCompanyUtils {
 		}
 		// CREATING THE CRM_company entry in Database
 		response = dbo0.createNewCrmCompany(cc);
+		cc.setId(Integer.parseInt(response.get("GEN_ID").toString()));
 
 		// CREATING CRM_company_address entry as a object
-		CRM_company_address cca = new CRM_company_address(Integer.parseInt(response.get("GEN_ID")),
+		CRM_company_address cca = new CRM_company_address(cc.getId(),
 				details.get("companyAddressLine1"), details.get("companyAddressPostcode"),
 				details.get("companyAddressCity"), details.get("companyAddressCountry"), true);
 		try {
@@ -70,7 +71,7 @@ public class NewCRMCompanyUtils {
 		}
 
 		// Creating a CRM_company_email_address entry as a object
-		CRM_company_email_address ccea = new CRM_company_email_address(Integer.parseInt(response.get("GEN_ID")),
+		CRM_company_email_address ccea = new CRM_company_email_address(cc.getId(),
 				details.get("companyEmailAddress"), details.get("companyEmailType"));
 		try {
 			objectStatus = validateObject(ccea, "NULL");
@@ -89,7 +90,7 @@ public class NewCRMCompanyUtils {
 		}
 
 		// Creating CRM_company_phoneNo entry as a object
-		CRM_company_phoneNo ccpn = new CRM_company_phoneNo(Integer.parseInt(response.get("GEN_ID")),
+		CRM_company_phoneNo ccpn = new CRM_company_phoneNo(cc.getId(),
 				details.get("companyPhoneNumber"), details.get("companyPhoneNoPrefix"));
 		try {
 			objectStatus = validateObject(ccpn, "NULL");
@@ -120,6 +121,7 @@ public class NewCRMCompanyUtils {
 		}
 
 		response.put("cc-name", cc.getCompany_name());
+		response.put("cc-id", cc.getId().toString());
 
 		return response;
 	}

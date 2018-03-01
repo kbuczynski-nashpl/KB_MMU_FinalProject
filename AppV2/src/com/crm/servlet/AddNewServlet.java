@@ -50,6 +50,7 @@ public class AddNewServlet extends HttpServlet {
 			HashMap<String, String> result = NewCRMCompanyUtils.createNewCRMCompany((HashMap<String, String>) _SESSION.getAttribute("newCrmCompany"), (CRM_user) _SESSION.getAttribute("CLIENT"));
 			request.setAttribute("STATUS", result.get("STATUS"));
 			request.setAttribute("MSG", result.get("VALUE"));
+			request.setAttribute("ID", result.get("cc-id"));
 			System.out.println(result);
 			RequestDispatcher dispatcher = this.getServletContext()
 					.getRequestDispatcher("/WEB-INF/views/addSummary.jsp");
