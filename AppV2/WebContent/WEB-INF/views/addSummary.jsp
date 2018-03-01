@@ -2,16 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container">
-	<c:if test="${RESULT.STATUS === 'OK'}">
-		<div class="alert alert-success">
-			<strong>SUCCESS!</strong> You successfully created new CRM entry for
-			${RESULT.cc-name}
+	<c:if test="${STATUS eq 'ERROR'}">
+	<div class="alert alert-danger">
+		<p>Upps! We could not create new company. We are missing some information</p>
+		<div class="container">
+			<label>Missing Inforamtion</label><input class="form-control" id="wrongInput" value="${MSG}" readonly/>
 		</div>
+	</div>
 	</c:if>
-	<c:if test="${RESULT.STATUS === 'ERROR'}">
-		<div class="alert alert-danger">
-			<strong>UPPS!</strong> You did not enter all needed information
-			please try again.
+	<c:if test="${STATUS eq 'OK'}">
+	<div class="alert alert-success">
+		<p>New Company has been created</p>
+		<div class="container">
+			<a href="view/${RESULT.GEN_ID}" class="btn btn-primary form-control">Visit new company page</a>
 		</div>
+	</div>
 	</c:if>
 </div>

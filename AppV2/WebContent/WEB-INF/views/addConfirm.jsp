@@ -75,7 +75,9 @@
 
 		function submit() {
 			data = {};
-			data.isModal = false;
+			data.isModal = true;
+			data.modalId = "#modalAddBody";
+			$("#modalAddBody").html("");
 			data.responseRequired = true;
 			let response = ajaxCall("add/confirm", data);
 			if (response === "200") {

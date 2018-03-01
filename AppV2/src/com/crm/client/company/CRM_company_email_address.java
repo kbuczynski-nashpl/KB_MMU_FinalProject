@@ -1,31 +1,26 @@
 package com.crm.client.company;
 
 public class CRM_company_email_address{
-	private int id = 0;
-	private int company_id = 0;
-	private String company_email_address = "";
+	private Integer id = 0;
+	private Integer company_id;
+	private String company_email_address;
+	private String company_email_type;
 	private Boolean company_email_active = false;
-	private String company_email_type = "";
+	
 	
 	public CRM_company_email_address() {}
-	public CRM_company_email_address(int id, int companyId, String companyEmailAddress, String companyEmailType, Boolean companyEmailIsActive) {
-		this.id = id;
-		this.company_id = companyId;
+	public CRM_company_email_address(int companyId, String companyEmailAddress, String companyEmailType, Boolean companyEmailIsActive) {
+		this.company_id = new Integer(companyId);
 		this.company_email_active = companyEmailIsActive;
-		this.company_email_type = companyEmailType;
+		this.company_email_type = new String(companyEmailType);
 	}
 	public CRM_company_email_address(int companyId, String companyEmailAddress, String companyEmailType) {
-		this.company_id = companyId;
-		this.company_email_address = companyEmailAddress;
-		this.company_email_type = companyEmailType;
+		this.company_id = new Integer(companyId);
+		this.company_email_address = new String(companyEmailAddress);
+		this.company_email_type = new String(companyEmailType);
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public int getCompany_id() {
 		return company_id;
 	}
@@ -58,12 +53,18 @@ public class CRM_company_email_address{
 		}
 	}
 	public String toString() {
-		String str = "ID: " + this.id + 
+		String str =
 				" Company ID: " + this.company_id + 
 				" Email Address: " + this.company_email_address + 
 				" Email Active: "  + this.company_email_active + 
 				" Email Type: " + this.company_email_type;
 		return str;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

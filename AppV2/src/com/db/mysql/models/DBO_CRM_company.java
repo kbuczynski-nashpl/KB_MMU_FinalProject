@@ -106,9 +106,12 @@ public class DBO_CRM_company extends MySQL {
 		}
 	}
 
-	public void removeById(Integer id) {
-		String queryString = "DELETE FROM 'CRM_company' WHERE 'id' = " + id;
-		//TODO: FINSHIN THIS DELETE!!
+	public HashMap<String, String> removeById(Integer id) {
+		String queryString = "DELETE FROM CRM_company WHERE id = " + id;
+		HashMap<String, String> result = update(queryString);
+		return result;
+		
+		
 		
 	}
 

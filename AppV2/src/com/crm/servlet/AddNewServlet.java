@@ -48,7 +48,9 @@ public class AddNewServlet extends HttpServlet {
 		
 		if(idStr.equals("confirm")) {
 			HashMap<String, String> result = NewCRMCompanyUtils.createNewCRMCompany((HashMap<String, String>) _SESSION.getAttribute("newCrmCompany"), (CRM_user) _SESSION.getAttribute("CLIENT"));
-			request.setAttribute("RESULT", result);
+			request.setAttribute("STATUS", result.get("STATUS"));
+			request.setAttribute("MSG", result.get("VALUE"));
+			System.out.println(result);
 			RequestDispatcher dispatcher = this.getServletContext()
 					.getRequestDispatcher("/WEB-INF/views/addSummary.jsp");
 			dispatcher.forward(request, response);

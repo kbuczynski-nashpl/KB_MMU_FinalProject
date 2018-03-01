@@ -60,5 +60,11 @@ public class DBO_CRM_company_address extends MySQL {
 		HashMap<String, String> response = update(queryString);
 		return response;
 	}
+	
+	public HashMap<String, String> removeByCompanyId(Integer id){
+		String queryString = "DELETE FROM CRM_company_address where company_id = " + id;
+		HashMap<String, String> result = update(queryString);
+		return result;
+	}
 
 }

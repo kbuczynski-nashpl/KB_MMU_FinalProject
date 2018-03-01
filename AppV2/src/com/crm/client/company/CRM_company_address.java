@@ -1,44 +1,25 @@
 package com.crm.client.company;
 
 public class CRM_company_address {
-	private int id = 0;
-	private int company_id = 0;
-	private String company_address_line1 = "";
-	private String company_address_line2 = "";
-	private String company_address_postcode = "";
-	private String company_address_city = "";
-	private String company_address_country = "";
+	private Integer id = 0;
+	private Integer company_id;
+	private String company_address_line1;
+	private String company_address_line2;
+	private String company_address_postcode;
+	private String company_address_city;
+	private String company_address_country;
 	private Boolean company_address_active = false;
 	
-	public CRM_company_address() {}
-
-	public CRM_company_address(int id, int companyId, String companyAddressLine1, String companyAddressPostcode, String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
-		this.id = id;
-		this.company_id = companyId;
-		this.company_address_line1 = companyAddressLine1;
-		this.company_address_postcode = companyAddressPostcode;
-		this.company_address_city = companyAddressCity;
-		this.company_address_country = companyAddressCountry;
-		this.company_address_active = companyAddressIsActive;
-	}
-	
+	public CRM_company_address() {}	
 	public CRM_company_address(int companyId,  String companyAddressLine1, String companyAddressPostcode, String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
-		this.company_id = companyId;
-		this.company_address_line1 = companyAddressLine1;
-		this.company_address_postcode = companyAddressPostcode;
-		this.company_address_city = companyAddressCity;
-		this.company_address_country = companyAddressCountry;
+		this.company_id = new Integer(companyId);
+		this.company_address_line1 = new String(companyAddressLine1);
+		this.company_address_postcode = new String(companyAddressPostcode);
+		this.company_address_city = new String(companyAddressCity);
+		this.company_address_country = new String(companyAddressCountry);
 		this.company_address_active = companyAddressIsActive;
 	}
-	
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getCompany_id() {
 		return company_id;
@@ -94,6 +75,12 @@ public class CRM_company_address {
 
 	public void setCompany_address_active(Boolean company_address_active) {
 		this.company_address_active = company_address_active;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 

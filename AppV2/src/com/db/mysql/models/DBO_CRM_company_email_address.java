@@ -24,11 +24,11 @@ public class DBO_CRM_company_email_address extends MySQL {
 
 			}
 			CRM_company_email_address crmCompanyEmailAddress = new CRM_company_email_address(
-					Integer.parseInt(entries.get("id").toString()),
 					Integer.parseInt(entries.get("company_id").toString()),
 					entries.get("company_email_address").toString(), entries.get("company_email_type").toString(),
 					isActive);
 			crmCompanyEmailAddress.setCompany_email_address(entries.get("company_email_address").toString());
+			crmCompanyEmailAddress.setId(Integer.parseInt(entries.get("id").toString()));
 			companyEmailAddresses.add(crmCompanyEmailAddress);
 		}
 		return companyEmailAddresses;
@@ -40,6 +40,12 @@ public class DBO_CRM_company_email_address extends MySQL {
 				+ ccea.getCompany_email_activeToInt() + "', '" + ccea.getCompany_email_type() + "')";
 		HashMap<String, String> response = update(queryString);
 		return response;
+	}
+	
+	public HashMap<String, String> removeByCompanyId(Integer id){
+		String queryString = "DELETE FROM CRM_company_email_address where company_id = " + id;
+		HashMap<String, String> result = update(queryString);
+		return result;
 	}
 
 }

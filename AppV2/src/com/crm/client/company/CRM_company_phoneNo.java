@@ -1,30 +1,17 @@
 package com.crm.client.company;
 
 public class CRM_company_phoneNo {
-	private int id = 0;
-	private int company_id = 0;
-	private String company_phoneNo = "";
-	private String company_phoneNo_prefix = "";
+	private Integer id = 0;
+	private Integer company_id;
+	private String company_phoneNo;
+	private String company_phoneNo_prefix;
 	
 	public CRM_company_phoneNo() {}
-	public CRM_company_phoneNo(int id, int companyId, String companyPhoneNo, String companyPhoneNoPrefix) {
-		this.id = id;
-		this.company_id = companyId;
-		this.company_phoneNo = companyPhoneNo;
-		this.company_phoneNo_prefix = companyPhoneNoPrefix;
-	}
+
 	public CRM_company_phoneNo(int companyId, String companyPhoneNo, String companyPhoneNoPrefix) {
-		this.company_id = companyId;
-		this.company_phoneNo = companyPhoneNo;
-		this.company_phoneNo_prefix = companyPhoneNoPrefix;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		this.company_id = new Integer(companyId);
+		this.company_phoneNo = new String(companyPhoneNo);
+		this.company_phoneNo_prefix = new String(companyPhoneNoPrefix);
 	}
 
 	public int getCompany_id() {
@@ -49,6 +36,14 @@ public class CRM_company_phoneNo {
 
 	public void setCompany_phoneNo_prefix(String company_phoneNo_prefix) {
 		this.company_phoneNo_prefix = company_phoneNo_prefix;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
