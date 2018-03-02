@@ -10,8 +10,8 @@
 <body>
 	<%@include file="nav.jsp"%>
 	<div class="page-header container-fluid">
-		<h1>${crmCompany.getCompany_name()}</h1>
-	</div>
+		<h1>${crmCompany.getCompany_name()} <a href="${pageContext.request.contextPath}/edit/main/${crmCompany.getId()}" class="btn btn-primary">Edit</a></h1> 
+	</div>	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-3">

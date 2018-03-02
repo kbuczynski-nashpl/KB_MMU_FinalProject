@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar fixed-top navbar-light bg-light"
 	style="position: fixed;">
-	<a class="navbar-brand" href="index">WebKB CRM</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/index">WebKB CRM</a>
 	<div class="container">
 		<input class="form-control mr-sm-2" type="text" placeholder="Search"
 			id="search_navBar">
@@ -75,6 +75,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="modalContentAddNewBox"
 			style="padding: 3%">
+			<div class="modal-header container" id="addModalHeader"></div>
 			<div class="modal-body container" id="modalAddBody" style="margin-top: 2%; margin-bottom: 5%;"></div>
 		</div>
 	</div>

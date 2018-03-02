@@ -8,12 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.crm.client.company.CRM_company;
 import com.crm.client.company.CRM_company_address;
 import com.crm.client.company.CRM_company_email_address;
 import com.crm.client.company.CRM_company_notes;
 import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.company.CRM_company_phoneNo;
+import com.crm.client.user.CRM_user;
 import com.db.mysql.models.DBO_CRM_company;
 import com.db.mysql.models.DBO_CRM_company_address;
 import com.db.mysql.models.DBO_CRM_company_email_address;
@@ -75,6 +78,7 @@ public class ViewCustomerServlet extends HttpServlet {
 			request.setAttribute("crmCompanyNotes", crmCompanyNotes);
 			request.setAttribute("crmPhoneNumbers", crmPhoneNumbers);
 			request.setAttribute("crmCompanyPersonnel", crmCompanyPersonnel);
+			lastFiveViewCompanies(request, (CRM_company) crmCompany);
 		} catch (Exception e) {
 			System.err.println(e.getCause());
 			System.err.println(e.getLocalizedMessage());
@@ -94,6 +98,29 @@ public class ViewCustomerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void lastFiveViewCompanies(HttpServletRequest request, CRM_company cc) {
+		HttpSession _SESSION = request.getSession();
+		ArrayList<CRM_company> last5cc= (ArrayList<CRM_company>) _SESSION.getAttribute("LAST5CUST");
+		if(last5cc == null || last5cc.size() < 1 || last5cc.isEmpty() ) {
+			last5cc = new ArrayList<CRM_company>();
+			last5cc.add(cc);
+		} else {
+			for(CRM_company tempcc : last5cc) {
+				if(tempcc.getId().equals(cc.getId())) {
+					_SESSION.setAttribute("LAST5CUST", last5cc);
+					return;
+				}
+			}
+			last5cc.add(0, cc);
+		}
+		if(last5cc.size() > 5) {
+			last5cc.remove(last5cc.size() - 1);
+		}
+		_SESSION.setAttribute("LAST5CUST", last5cc);
+		
 	}
 
 }

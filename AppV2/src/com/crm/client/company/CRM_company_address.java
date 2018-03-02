@@ -82,6 +82,14 @@ public class CRM_company_address {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String toString() {
+		if(this.company_address_line2 != null) {
+			return this.company_address_line1 + " " + this.company_address_line2 + " " + this.company_address_postcode + " " + this.company_address_city + " " + this.company_address_country;
+		} else {
+			return this.company_address_line1 + " " + this.company_address_postcode + " " + this.company_address_city + " " + this.company_address_country;
+		}
+	}
 
 
 }

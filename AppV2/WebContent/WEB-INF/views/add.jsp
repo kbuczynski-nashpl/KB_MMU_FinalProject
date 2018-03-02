@@ -37,7 +37,7 @@
 			<div class="form-group row">
 				<label class="col-3 col-form-label">Post Code: </label>
 				<div class="col-9">
-					<input class="form-control" type="text" placeholder="Post Code"
+					<input class="form-control" type="text" placeholder="Post Code" maxlength="10"
 						id="company-address-postcode-input" required>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 					<label class="col-3 col-form-label">Email Address: </label>
 					<div class="col-9">
 						<input class="form-control" type="email"
-							placeholder="Email Address" id="company-email-address-input"
+							 placeholder="Email Address" id="company-email-address-input"
 							required>
 					</div>
 				</div>
@@ -229,8 +229,19 @@
 			data.emailactive = $("#company-email-active-input").val();
 			data.phoneNonumber = $("#company-phone-number-input").val();
 			data.phoneNoprefix = $("#company-phone-prefix-input").val();
+			if(validateEmail(data.emailaddress) != true){
+				displayPage("3");
+				$("#company-email-address-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid email'});
+				$("#company-email-address-input").focus();
+				return;
+			}
 			addNewredirectToConfirmPost(url, data);
 	}
+	
+	function validateEmail(email) {
+		  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		  return re.test(email);
+		}
 	
 	function addNewredirectToConfirmPost(url, data) {
 		data.isModal = true;
@@ -238,6 +249,7 @@
 		$("#modalAddBody").html("");
 		ajaxCall("add", data);
 	}
+	
 </script>
 
 
