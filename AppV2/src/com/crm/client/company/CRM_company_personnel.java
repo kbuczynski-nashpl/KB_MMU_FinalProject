@@ -2,20 +2,42 @@ package com.crm.client.company;
 
 public class CRM_company_personnel {
 
-	private int id = 0;
-	private int company_id = 0;
-	private String company_personnel_surname = "";
-	private String company_personnel_forname = "";
-	private String company_personnel_email = "";
-	private String company_personnel_phoneNo = "";
-	private String company_personnel_phoneNo_prefix = "";
-	private String company_personnel_position = "";
+	private Integer id;
+	private Integer company_id;
+	private String company_personnel_surname;
+	private String company_personnel_forname;
+	private String company_personnel_email;
+	private String company_personnel_phoneNo;
+	private String company_personnel_phoneNo_prefix;
+	private String company_personnel_position;
+	
+	public CRM_company_personnel() {};
+	public CRM_company_personnel(Integer id, Integer companyId, String surname, String forname, String email, String phoneNo, String phoneNoPrefix, String position) {
+		this.id = new Integer(id);
+		this.company_id = new Integer(companyId);
+		this.company_personnel_surname = new String(surname);
+		this.company_personnel_forname = new String(forname);
+		this.company_personnel_email = new String(email);
+		this.company_personnel_phoneNo = new String(phoneNo);
+		this.company_personnel_phoneNo_prefix = new String(phoneNoPrefix);
+		this.company_personnel_position = new String(position);
+	}
+	public CRM_company_personnel(Integer companyId, String surname, String forname, String email, String phoneNo, String phoneNoPrefix, String position) {
+		this.company_id = new Integer(companyId);
+		this.company_personnel_surname = new String(surname);
+		this.company_personnel_forname = new String(forname);
+		this.company_personnel_email = new String(email);
+		this.company_personnel_phoneNo = new String(phoneNo);
+		this.company_personnel_phoneNo_prefix = new String(phoneNoPrefix);
+		this.company_personnel_position = new String(position);
+	}
+	
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

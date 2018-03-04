@@ -12,62 +12,49 @@
 	<div class="container">
 		<h1 class="page-header">${CC.getCompany_name()}</h1>
 	</div>
-	<div class="container form-control" style="padding: 2%;">
-		<div class="container" style="padding: 1%">
-			<label class="label">Company Active Email:</label>
-			<div class="col">
-				<select id="selAddress" name="emailAddress" class="form-control">
-					<c:forEach items="${CCEA}" var="email">
-						<c:if test="${email.getCompany_email_active() == true }">
-							<option value="${email.getId()}" selected>${email.getCompany_email_address()}</option>
-						</c:if>
-						<c:if test="${email.getCompany_email_active() == false }">
-							<option value="${email.getId()}">${email.getCompany_email_address()}</option>
-						</c:if>
-					</c:forEach>
-				</select>
+	<form action="${pageContext.request.contextPath}/edit/main/${CC.getId()}" method="post">
+		<div class="container form-control" style="padding: 2%;">
+			<div class="container" style="padding: 1%">
+				<label class="label">Company Active Email:</label>
+				<div class="col">
+					<select id="selAddress" name="emailAddress" class="form-control">
+						<c:forEach items="${CCEA}" var="email">
+							<c:if test="${email.getCompany_email_active() == true }">
+								<option value="${email.getId()}" selected>${email.getCompany_email_address()}</option>
+							</c:if>
+							<c:if test="${email.getCompany_email_active() == false }">
+								<option value="${email.getId()}">${email.getCompany_email_address()}</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="container" style="padding: 1%">
+				<label class="label">Company Active Email:</label>
+				<div class="col">
+					<select id="selEmailAddress" name="address" class="form-control">
+						<c:forEach items="${CCA}" var="address">
+							<c:if test="${address.getCompany_address_active() == true }">
+								<option value="${address.getId()}" selected>${address.toString()}</option>
+							</c:if>
+							<c:if test="${address.getCompany_address_active() == false }">
+								<option value="${address.getId()}">${address.toString()}</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
 		</div>
-		<div class="container" style="padding: 1%">
-			<label class="label">Company Active Email:</label>
-			<div class="col">
-				<select id="selEmailAddress" name="address" class="form-control">
-					<c:forEach items="${CCA}" var="address">
-						<c:if test="${address.getCompany_address_active() == true }">
-							<option value="${address.getId()}" selected>${address.toString()}</option>
-						</c:if>
-						<c:if test="${address.getCompany_address_active() == false }">
-							<option value="${address.getId()}" selected>${address.toString()}</option>
-						</c:if>
-					</c:forEach>
-				</select>
+		<div class="containercol-12" style="padding-top: 1%;">
+			<div class="float-right">
+				<input  class="btn btn-danger" id="btnSubmit" type="submit" value="Submit"/>
+				<input style="display:none;" value="true" name="type" readonly/>
+			</div>
+			<div class="float-left">
+				<a href="${pageContext.request.contextPath}/view/${CC.getId()}"
+					class="btn btn-primary">Return</a>
 			</div>
 		</div>
-	</div>
-	<div class="containercol-12" style="padding-top: 1%;">
-		<div class="float-right">
-		<button class="btn btn-danger" id="btnSubmit" type="button">Submit</button>
-		</div>
-		<div class="float-left">
-			<a href="${pageContext.request.contextPath}/view/${CC.getId()}" class="btn btn-primary">Return</a>
-		</div>
-	</div>
+	</form>
 </body>
 </html>
-
-<script>
-$(document).ready(function() {
-	$("#btnSubmit").on("click", function(){
-		submitMainEdit();
-	});
-})
-
-function submitMainEdit(){
-	let data = [];
-	data.companyId = ${CC.getId()};
-	data.emailAddress = $("#selEmailAddress").val();
-	data.address = $("#selselAddress").val();
-	data.type = "TRUE";
-	//TODO: SEND TO /edit/main/1 url
-}
-</script>

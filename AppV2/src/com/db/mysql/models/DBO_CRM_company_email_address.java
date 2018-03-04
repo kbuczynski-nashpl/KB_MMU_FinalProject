@@ -38,14 +38,26 @@ public class DBO_CRM_company_email_address extends MySQL {
 		String queryString = "INSERT INTO CRM_company_email_address (company_id, company_email_address, company_email_active, company_email_type) VALUES ("
 				+ ccea.getCompany_id() + ", '" + ccea.getCompany_email_address() + "', '"
 				+ ccea.getCompany_email_activeToInt() + "', '" + ccea.getCompany_email_type() + "')";
-		HashMap<String, String> response = update(queryString);
-		return response;
+		HashMap<String, String> resultFromMysql = update(queryString);
+		return resultFromMysql;
 	}
 	
 	public HashMap<String, String> removeByCompanyId(Integer id){
 		String queryString = "DELETE FROM CRM_company_email_address where company_id = " + id;
-		HashMap<String, String> result = update(queryString);
-		return result;
+		HashMap<String, String> resultFromMysql = update(queryString);
+		return resultFromMysql;
+	}
+	
+	public HashMap<String, String>updateActiveAddressState(Boolean status, Integer addressId){
+		String queryString = "";
+		if(status.equals(true)) {
+			queryString = "UPDATE CRM_company_email_address SET company_address_active = 1 where id = " + addressId;
+		} else {
+			queryString = "UPDATE CRM_company_email_address SET company_address_active = 0 where id = " + addressId;
+		}
+		HashMap<String, String> resultFromMysql = update(queryString);
+				
+		return resultFromMysql;
 	}
 
 }

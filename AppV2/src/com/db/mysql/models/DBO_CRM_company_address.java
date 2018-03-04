@@ -57,14 +57,27 @@ public class DBO_CRM_company_address extends MySQL {
 					+ cca.getCompany_address_postcode() + "', '" + cca.getCompany_address_city() + "', '"
 					+ cca.getCompany_address_country() + "', '" + activeValue + "')";
 		}
-		HashMap<String, String> response = update(queryString);
-		return response;
+		HashMap<String, String> resultFromMysql = update(queryString);
+		return resultFromMysql;
 	}
 	
 	public HashMap<String, String> removeByCompanyId(Integer id){
 		String queryString = "DELETE FROM CRM_company_address where company_id = " + id;
-		HashMap<String, String> result = update(queryString);
-		return result;
+		HashMap<String, String> resultFromMysql = update(queryString);
+		return resultFromMysql;
+	
+	}
+	
+	public HashMap<String, String>updateActiveAddressState(Boolean status, Integer addressId){
+		String queryString = "";
+		if(status.equals(true)) {
+			queryString = "UPDATE CRM_company_address SET company_address_active = 1 where id = " + addressId;
+		} else {
+			queryString = "UPDATE CRM_company_address SET company_address_active = 0 where id = " + addressId;
+		}
+		HashMap<String, String> resultFromMysql = update(queryString);
+				
+		return resultFromMysql;
 	}
 
 }

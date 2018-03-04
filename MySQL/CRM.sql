@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2018 at 01:30 PM
+-- Generation Time: Mar 04, 2018 at 08:49 PM
 -- Server version: 10.2.13-MariaDB-10.2.13+maria~xenial
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -39,7 +39,14 @@ CREATE TABLE `CRM_company` (
 INSERT INTO `CRM_company` (`id`, `CRM_user_master_id`, `company_name`) VALUES
 (1, 1, 'Test Company 1'),
 (2, 1, 'Test Company 2'),
-(3, 1, 'Test Company 3');
+(3, 1, 'Test Company 3'),
+(69, 1, 'Test Company 4'),
+(70, 1, 'Test Company 5'),
+(71, 1, 'Test Company 112'),
+(72, 1, 'TEST'),
+(73, 1, 'TEST'),
+(74, 1, 'TEST'),
+(75, 1, 'Test company sajfnda');
 
 -- --------------------------------------------------------
 
@@ -63,7 +70,15 @@ CREATE TABLE `CRM_company_address` (
 --
 
 INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, `company_address_line2`, `company_address_postcode`, `company_address_city`, `company_address_country`, `company_address_active`) VALUES
-(1, 1, 'Test Address 1', NULL, 'OL7 0AA', 'Manchester', 'United Kingdom', 1);
+(3, 1, 'TEST LINE1', 'TEST Line2', 'ol70aa', 'TEST CITY', 'TEST COUNTRY', 0),
+(11, 69, 'Line 1', 'Line 2', 'M12 2SE', 'Manchester', 'United Kingdom', 1),
+(12, 70, 'Line 1', 'Line 2', 'M12 3AR', 'Manchester', 'United', 1),
+(13, 71, 'Line1', '', 'OL12sd', 'sader', 'earfq', 1),
+(14, 72, 'TEST', 'TEST', '1TEs', 'TEST', 'TEST', 1),
+(15, 73, 'test', 'test', 'test', 'test', 'test', 1),
+(16, 74, 'TEST', '', 'tEST', 'teas', 'teasd', 1),
+(17, 75, 'Test Line 1', '', 'OL7 0AA', 'TEST', 'TEST', 1),
+(18, 1, 'TEST LINE11231', 'TEST Line2', 'ol70aa', 'TEST CITY', 'TEST COUNTRY', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +99,15 @@ CREATE TABLE `CRM_company_email_address` (
 --
 
 INSERT INTO `CRM_company_email_address` (`id`, `company_id`, `company_email_address`, `company_email_active`, `company_email_type`) VALUES
-(1, 1, 'nash25pl@gmail.com', 1, 'Private email address');
+(1, 1, 'nash25pl@gmail.com', 1, 'Private email address'),
+(7, 1, 'TEST@TEST.com', 0, 'TEST#'),
+(15, 69, 'test@outlook.com', 1, 'outlook private'),
+(16, 70, 'outlook@outlook.omc', 1, 'type'),
+(17, 71, 'sadaS@asad.com', 1, 'aerqs'),
+(18, 72, 'TEST@TEST.com', 1, 'TEST'),
+(19, 73, 'test@test.com', 1, 'test'),
+(20, 74, 'asde', 1, 'wqdas'),
+(21, 75, 'nash25pl', 1, 'teairjdf');
 
 -- --------------------------------------------------------
 
@@ -155,7 +178,15 @@ CREATE TABLE `CRM_company_phoneNo` (
 --
 
 INSERT INTO `CRM_company_phoneNo` (`id`, `company_id`, `company_phoneNo`, `company_phoneNo_prefix`) VALUES
-(1, 1, 7708873917, '+44');
+(1, 1, 7708873917, '+44'),
+(5, 1, 77088712, '+44'),
+(12, 69, 1234513, '+22'),
+(13, 70, 213456123, '+43'),
+(14, 71, 123141231, '+22'),
+(15, 72, 12313, '+12'),
+(16, 73, 12314123, '+22'),
+(17, 74, 123123, '21'),
+(18, 75, 317182731, '+22');
 
 -- --------------------------------------------------------
 
@@ -292,17 +323,17 @@ ALTER TABLE `CRM_user_master`
 -- AUTO_INCREMENT for table `CRM_company`
 --
 ALTER TABLE `CRM_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `CRM_company_address`
 --
 ALTER TABLE `CRM_company_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `CRM_company_email_address`
 --
 ALTER TABLE `CRM_company_email_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `CRM_company_notes`
 --
@@ -317,7 +348,7 @@ ALTER TABLE `CRM_company_personnel`
 -- AUTO_INCREMENT for table `CRM_company_phoneNo`
 --
 ALTER TABLE `CRM_company_phoneNo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `CRM_user`
 --
