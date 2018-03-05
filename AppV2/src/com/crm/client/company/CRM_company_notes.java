@@ -6,12 +6,41 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CRM_company_notes {
-	private int id = 0;
-	private int company_id = 0;
-	private String crm_company_note_title = "";
-	private String company_note = "";
-	private Integer company_note_by_id = 0;
-	private Date company_note_by_date = new Date();
+	private Integer id;
+	private Integer company_id;
+	private String company_note_title;
+	private String company_note;
+	private Integer company_note_by_id;
+	private Date company_note_by_date;
+
+	public CRM_company_notes() {
+	}
+
+	public CRM_company_notes(Integer id, Integer companyId, String noteTitle, String note, Integer userId,
+			String dateStamp) {
+		this.id = new Integer(id);
+		this.company_id = new Integer(companyId);
+		this.company_note_title = new String(noteTitle);
+		this.company_note = new String(note);
+		this.company_note_by_id = new Integer(userId);
+		try {
+			this.setCompany_note_by_date_fromString(dateStamp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public CRM_company_notes(Integer companyId, String noteTitle, String note, Integer userId, String dateStamp) {
+		this.company_id = new Integer(companyId);
+		this.company_note_title = new String(noteTitle);
+		this.company_note = new String(note);
+		this.company_note_by_id = new Integer(userId);
+		try {
+			this.setCompany_note_by_date_fromString(dateStamp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int getId() {
 		return id;
@@ -30,7 +59,7 @@ public class CRM_company_notes {
 	}
 
 	public String getCompany_note(int charAmount) {
-		if(charAmount == 0 || this.company_note.length() <= charAmount) {
+		if (charAmount == 0 || this.company_note.length() <= charAmount) {
 			return this.company_note;
 		} else {
 			return this.company_note.substring(0, charAmount) + "...";
@@ -52,8 +81,9 @@ public class CRM_company_notes {
 	public String getCompany_note_by_dateToString() {
 		DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return dataFormat.format(this.getCompany_note_by_date());
-		
+
 	}
+
 	public Date getCompany_note_by_date() {
 		return this.company_note_by_date;
 	}
@@ -63,16 +93,16 @@ public class CRM_company_notes {
 	}
 
 	public void setCompany_note_by_date_fromString(String string) throws ParseException {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.company_note_by_date = format.parse(string);
-		
+
 	}
 
-	public String getCrm_company_note_title() {
-		return crm_company_note_title;
+	public String getCompany_note_title() {
+		return company_note_title;
 	}
 
-	public void setCrm_company_note_title(String crm_company_note_title) {
-		this.crm_company_note_title = crm_company_note_title;
+	public void setCompany_note_title(String company_note_title) {
+		this.company_note_title = company_note_title;
 	}
 }

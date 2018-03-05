@@ -41,22 +41,46 @@ public class DBO_CRM_company_email_address extends MySQL {
 		HashMap<String, String> resultFromMysql = update(queryString);
 		return resultFromMysql;
 	}
-	
-	public HashMap<String, String> removeByCompanyId(Integer id){
+
+	public HashMap<String, String> removeByCompanyId(Integer id) {
 		String queryString = "DELETE FROM CRM_company_email_address where company_id = " + id;
 		HashMap<String, String> resultFromMysql = update(queryString);
 		return resultFromMysql;
 	}
-	
-	public HashMap<String, String>updateActiveAddressState(Boolean status, Integer addressId){
+
+	public HashMap<String, String> updateActiveAddressState(Boolean status, Integer addressId) {
 		String queryString = "";
-		if(status.equals(true)) {
-			queryString = "UPDATE CRM_company_email_address SET company_address_active = 1 where id = " + addressId;
+		if (status.equals(true)) {
+			queryString = "UPDATE CRM_company_email_address SET company_email_active = 1 where id = " + addressId;
 		} else {
-			queryString = "UPDATE CRM_company_email_address SET company_address_active = 0 where id = " + addressId;
+			queryString = "UPDATE CRM_company_email_address SET company_email_active = 0 where id = " + addressId;
 		}
 		HashMap<String, String> resultFromMysql = update(queryString);
-				
+
+		return resultFromMysql;
+	}
+
+	public CRM_company_email_address getById(Integer id) {
+		String queryString = "SELECT * FROM CRM_company_email_address where id = " + id;
+		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
+		if (resultFromMysql.size() > 0) {
+			CRM_company_email_address ccea = new CRM_company_email_address(
+					Integer.parseInt(resultFromMysql.get(0).get("id").toString()),
+					Integer.parseInt(resultFromMysql.get(0).get("company_id").toString()),
+					resultFromMysql.get(0).get("company_email_address").toString(),
+					resultFromMysql.get(0).get("company_email_type").toString());
+			return ccea;
+		} else {
+			CRM_company_email_address ccea = new CRM_company_email_address();
+			return ccea;
+		}
+	}
+
+	public HashMap<String, String> updateEmailEntry(HashMap<String, String> newValues, Integer id) {
+		String queryString = "UPDATE CRM_company_email_address SET company_email_address = "
+				+ "'" + newValues.get("emailAddress") + "', " + " company_email_type = '" + newValues.get("emailType")
+				+ "' WHERE id = " + id;
+		HashMap<String, String> resultFromMysql = update(queryString);
 		return resultFromMysql;
 	}
 

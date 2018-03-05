@@ -9,17 +9,23 @@ public class CRM_company_email_address{
 	
 	
 	public CRM_company_email_address() {}
-	public CRM_company_email_address(int companyId, String companyEmailAddress, String companyEmailType, Boolean companyEmailIsActive) {
+	public CRM_company_email_address(Integer companyId, String companyEmailAddress, String companyEmailType, Boolean companyEmailIsActive) {
 		this.company_id = new Integer(companyId);
 		this.company_email_active = companyEmailIsActive;
 		this.company_email_type = new String(companyEmailType);
 	}
-	public CRM_company_email_address(int companyId, String companyEmailAddress, String companyEmailType) {
+	public CRM_company_email_address(Integer companyId, String companyEmailAddress, String companyEmailType) {
 		this.company_id = new Integer(companyId);
 		this.company_email_address = new String(companyEmailAddress);
 		this.company_email_type = new String(companyEmailType);
 	}
 
+	public CRM_company_email_address(Integer id, Integer companyId, String companyEmailAddress, String companyEmailType) {
+		this.id = new Integer(id);
+		this.company_id = new Integer(companyId);
+		this.company_email_address = new String(companyEmailAddress);
+		this.company_email_type = new String(companyEmailType);
+	}
 
 	public int getCompany_id() {
 		return company_id;

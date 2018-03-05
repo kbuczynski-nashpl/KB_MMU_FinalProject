@@ -75,7 +75,9 @@ public class MySQL {
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
 			rs.next();
-			generatedId = rs.getInt(1);
+			if(rs.isBeforeFirst()) {
+				generatedId = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			response.put("STATUS", "ERROR");

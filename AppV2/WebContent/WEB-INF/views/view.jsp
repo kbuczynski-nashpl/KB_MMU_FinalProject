@@ -108,7 +108,10 @@
 					</div>
 					<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
 						aria-labelledby="v-pills-profile-tab">
-						<div class="form-group row">
+						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
+							<a href="${pageContext.request.contextPath}/new/personnel/" class="btn btn-primary" type="button">Add New</a>
+						</div>
+						<div class="form-group row container">
 							<table class="table">
 								<thead class="thead-inverse">
 									<tr>
@@ -143,6 +146,9 @@
 
 					<div class="tab-pane fade" id="v-pills-email" role="tabpanel"
 						aria-labelledby="v-pills-email-tab">
+						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
+							<a href="${pageContext.request.contextPath}/new/email/" class="btn btn-primary" type="button">Add New</a>
+						</div>
 						<div class="form-group row">
 							<table class="table">
 								<thead class="thead-inverse">
@@ -173,6 +179,9 @@
 					</div>
 					<div class="tab-pane fade" id="v-pills-notes" role="tabpanel"
 						aria-labelledby="v-pills-notes-tab">
+						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
+							<a href="${pageContext.request.contextPath}/new/note/" class="btn btn-primary" type="button">Add New</a>
+						</div>
 						<div class="form-group row">
 							<table class="table">
 								<thead class="thead-inverse">
@@ -190,7 +199,7 @@
 										<tr>
 											<td><a id="edit_note_${crmNote.getId()}"
 												href="${pageContext.request.contextPath}/edit/note/${crmNote.getId()}">${crmNoteInfo.count}</a></td>
-											<td>${crmNote.getCrm_company_note_title()}</td>
+											<td>${crmNote.getCompany_note_title()}</td>
 											<td>${crmNote.getCompany_note(25)}</td>
 											<td>${crmNote.getCompany_note_by_id()}</td>
 											<td>${crmNote.getCompany_note_by_dateToString()}</td>
