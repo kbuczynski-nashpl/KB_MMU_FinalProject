@@ -78,6 +78,14 @@
     <servlet-name>AddNewServlet</servlet-name>
     <url-pattern>/add/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>NewServlet</servlet-name>
+  	<servlet-class>com.crm.servlet.NewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NewServlet</servlet-name>
+  	<url-pattern>/new/*</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.js</url-pattern>

@@ -59,7 +59,10 @@ public class DBO_CRM_company extends MySQL {
 		String queryString = "SELECT * from CRM_company where company_name like \"%" + keyword + "%\"";
 		resultFromMysql = query(queryString);
 		if (resultFromMysql.size() > 0) {
-			this.parseSearchQuery(resultFromMysql);
+			for(HashMap<String, String> entries: resultFromMysql) {
+				resultMap.put(Integer.parseInt(entries.get("id").toString()),
+				this.getById(Integer.parseInt(entries.get("id").toString())));
+			}
 		}
 
 		// 2nd Search

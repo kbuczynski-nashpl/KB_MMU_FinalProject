@@ -55,9 +55,7 @@ public class DBO_CRM_company_email_address extends MySQL {
 		} else {
 			queryString = "UPDATE CRM_company_email_address SET company_email_active = 0 where id = " + addressId;
 		}
-		HashMap<String, String> resultFromMysql = update(queryString);
-
-		return resultFromMysql;
+		return update(queryString);
 	}
 
 	public CRM_company_email_address getById(Integer id) {
@@ -77,11 +75,10 @@ public class DBO_CRM_company_email_address extends MySQL {
 	}
 
 	public HashMap<String, String> updateEmailEntry(HashMap<String, String> newValues, Integer id) {
-		String queryString = "UPDATE CRM_company_email_address SET company_email_address = "
-				+ "'" + newValues.get("emailAddress") + "', " + " company_email_type = '" + newValues.get("emailType")
+		String queryString = "UPDATE CRM_company_email_address SET company_email_address = " + "'"
+				+ newValues.get("emailAddress") + "', " + " company_email_type = '" + newValues.get("emailType")
 				+ "' WHERE id = " + id;
-		HashMap<String, String> resultFromMysql = update(queryString);
-		return resultFromMysql;
+		return update(queryString);
 	}
 
 }

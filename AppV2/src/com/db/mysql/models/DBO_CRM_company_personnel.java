@@ -61,5 +61,24 @@ public class DBO_CRM_company_personnel extends MySQL {
 				" WHERE id = " + id;
 		return update(queryString);
 	}
+	
+	public HashMap<String, String> newCompanyPersonnel(CRM_company_personnel ccp){
+		String queryString = "INSERT INTO CRM_company_personnel "
+				+ "(company_id, "
+				+ "company_personnel_surname, "
+				+ "company_personnel_forname, "
+				+ "company_personnel_email, "
+				+ "company_personnel_phoneNo, "
+				+ "company_personnel_phoneNo_prefix, "
+				+ "company_personnel_position) "
+				+ "VALUES (" + ccp.getCompany_id() +", "
+				+ "'" + ccp.getCompany_personnel_surname() + "', "
+				+ "'" + ccp.getCompany_personnel_forname() + "', "
+				+ "'" + ccp.getCompany_personnel_email() + "', "
+				+ "'" + ccp.getCompany_personnel_phoneNo() + "', "
+				+ "'" + ccp.getCompany_personnel_phoneNo_prefix() + "', "
+				+ "'" + ccp.getCompany_personnel_position() + "')";
+		return update(queryString);
+	}
 
 }

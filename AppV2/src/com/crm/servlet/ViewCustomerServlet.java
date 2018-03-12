@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import com.crm.client.company.CRM_company_email_address;
 import com.crm.client.company.CRM_company_notes;
 import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.company.CRM_company_phoneNo;
-import com.crm.client.user.CRM_user;
 import com.db.mysql.models.DBO_CRM_company;
 import com.db.mysql.models.DBO_CRM_company_address;
 import com.db.mysql.models.DBO_CRM_company_email_address;
@@ -27,7 +25,6 @@ import com.db.mysql.models.DBO_CRM_company_phoneNo;
 /**
  * Servlet implementation class ViewCustomerServlet
  */
-@WebServlet("/ViewCustomerServlet")
 public class ViewCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

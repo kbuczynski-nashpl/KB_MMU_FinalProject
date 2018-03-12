@@ -40,7 +40,7 @@
 					<label class="col-form-label">Email: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="email"
+					<input class="form-control" name="email" type="email"
 						value="${CCP.getCompany_personnel_email()}" required/>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 					<label class="col-form-label">Phone Number: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="phoneNo"
+					<input class="form-control" name="phoneNo" type="number"
 						value="${CCP.getCompany_personnel_phoneNo()}" required/>
 				</div>
 			</div>

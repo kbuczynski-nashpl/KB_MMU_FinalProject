@@ -7,11 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="header.jsp" />
 </head>
-<body>
 	<%@include file="nav.jsp"%>
+<body>
 	<div class="page-header container-fluid">
-		<h1>${crmCompany.getCompany_name()} <a href="${pageContext.request.contextPath}/edit/main/${crmCompany.getId()}" class="btn btn-primary">Edit</a></h1> 
-	</div>	
+		<h1>${crmCompany.getCompany_name()}
+			<a
+				href="${pageContext.request.contextPath}/edit/main/${crmCompany.getId()}"
+				class="btn btn-primary">Edit</a>
+		</h1>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-3">
@@ -27,7 +31,11 @@
 						role="tab" aria-controls="v-pills-email" aria-selected="false">Emails</a>
 					<a class="nav-link" id="v-pills-notes-tab" data-toggle="pill"
 						href="#v-pills-notes" role="tab" aria-controls="v-pills-notes"
-						aria-selected="false">Notes</a>
+						aria-selected="false">Notes</a> <a class="nav-link"
+						id="v-pills-company-address-tab" data-toggle="pill"
+						href="#v-pills-company-addresses" role="tab"
+						aria-controls="v-pills-company-addresses" aria-selected="false">Company
+						Addresses</a>
 				</div>
 			</div>
 			<div class="col-9">
@@ -56,7 +64,11 @@
 							</div>
 						</div>
 						<div class="container">
-							<h3 class="page-header">Active Address:</h3>
+							<h3 class="page-header">
+								Active Address: <a
+									href="${pageContext.request.contextPath}/new/address/${crmCompany.getId()}"
+									class="btn btn-primary" type="button">Add New</a>
+							</h3>
 						</div>
 						<c:forEach items="${crmCompanyAddresses}" var="crmAddress">
 							<c:if test="${crmAddress.getCompany_address_active() == true}">
@@ -108,8 +120,11 @@
 					</div>
 					<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
 						aria-labelledby="v-pills-profile-tab">
-						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
-							<a href="${pageContext.request.contextPath}/new/personnel/" class="btn btn-primary" type="button">Add New</a>
+						<div class="container row"
+							style="margin-top: 2%; margin-bottom: 2%">
+							<a
+								href="${pageContext.request.contextPath}/new/personnel/${crmCompany.getId()}"
+								class="btn btn-primary" type="button">Add New</a>
 						</div>
 						<div class="form-group row container">
 							<table class="table">
@@ -146,8 +161,11 @@
 
 					<div class="tab-pane fade" id="v-pills-email" role="tabpanel"
 						aria-labelledby="v-pills-email-tab">
-						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
-							<a href="${pageContext.request.contextPath}/new/email/" class="btn btn-primary" type="button">Add New</a>
+						<div class="container row"
+							style="margin-top: 2%; margin-bottom: 2%">
+							<a
+								href="${pageContext.request.contextPath}/new/email/${crmCompany.getId()}"
+								class="btn btn-primary" type="button">Add New</a>
 						</div>
 						<div class="form-group row">
 							<table class="table">
@@ -179,8 +197,11 @@
 					</div>
 					<div class="tab-pane fade" id="v-pills-notes" role="tabpanel"
 						aria-labelledby="v-pills-notes-tab">
-						<div class="container row" style="margin-top: 2%; margin-bottom: 2%">
-							<a href="${pageContext.request.contextPath}/new/note/" class="btn btn-primary" type="button">Add New</a>
+						<div class="container row"
+							style="margin-top: 2%; margin-bottom: 2%">
+							<a
+								href="${pageContext.request.contextPath}/new/note/${crmCompany.getId()}"
+								class="btn btn-primary" type="button">Add New</a>
 						</div>
 						<div class="form-group row">
 							<table class="table">
@@ -203,6 +224,45 @@
 											<td>${crmNote.getCompany_note(25)}</td>
 											<td>${crmNote.getCompany_note_by_id()}</td>
 											<td>${crmNote.getCompany_note_by_dateToString()}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="v-pills-company-addresses" role="tabpanel"
+						aria-labelledby="v-pills-company-addresses-tab">
+						<div class="container row"
+							style="margin-top: 2%; margin-bottom: 2%">
+							<a
+								href="${pageContext.request.contextPath}/new/address/${crmCompany.getId()}"
+								class="btn btn-primary" type="button">Add New</a>
+						</div>
+						<div class="form-group row">
+							<table class="table">
+								<thead class="thead-inverse">
+									<tr>
+										<th>Id</th>
+										<th>Address Line 1</th>
+										<th>Address Line 2</th>
+										<th>Address Postcode</th>
+										<th>Address City</th>
+										<th>Address Country</th>
+										<th>Active</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${crmCompanyAddresses}" var="crmAddress"
+										varStatus="crmAddressInfo">
+										<tr>
+											<td><a id="edit_address_${crmAddress.getId()}"
+												href="${pageContext.request.contextPath}/edit/address/${crmAddress.getId()}">${crmAddressInfo.count}</a></td>
+											<td>${crmAddress.getCompany_address_line1()}</td>
+											<td>${crmAddress.getCompany_address_line2()}</td>
+											<td>${crmAddress.getCompany_address_postcode()}</td>
+											<td>${crmAddress.getCompany_address_city()}</td>
+											<td>${crmAddress.getCompany_address_country()}</td>
+											<td><c:if test="${crmAddress.getCompany_address_active() == true}"><span class="badge badge-success">TRUE</span></c:if></td>
 										</tr>
 									</c:forEach>
 								</tbody>

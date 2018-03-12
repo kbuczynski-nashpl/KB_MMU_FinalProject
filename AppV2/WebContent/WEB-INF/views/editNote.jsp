@@ -12,6 +12,19 @@
 	<div class="container">
 		<h1 class="page-header">${CCN.getCompany_note_title()}</h1>
 	</div>
+	<div class="container">
+	<%
+		String error_msg = (String) request.getAttribute("error");
+		String success_msg = (String) request.getAttribute("success");
+		if (error_msg != null){
+			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ error_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		}
+		if (success_msg != null){
+			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"+ success_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		}
+		request.getSession().removeAttribute("EDIT_RESPONSE");
+	%>	
+	</div>
 	<form
 		action="${pageContext.request.contextPath}/edit/note/${CCN.getId()}"
 		method="post">

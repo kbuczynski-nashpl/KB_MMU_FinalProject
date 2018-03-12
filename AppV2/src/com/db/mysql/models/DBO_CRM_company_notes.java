@@ -48,16 +48,30 @@ public class DBO_CRM_company_notes extends MySQL {
 				resultFromMysql.get(0).get("company_note_by_date").toString());
 		return ccn;
 	}
-	
-	public HashMap<String, String> updateNote(HashMap<String, String> newValues, Integer id){
-		String queryString = "UPDATE CRM_company_notes SET "
-				+ "company_note_title = '" + newValues.get("noteTitle") + "', "
-				+ "company_note = '" + newValues.get("note") + "', "
-				+ "company_note_by_id = '" + newValues.get("noteUserId") + "', "
-				+ "company_note_by_date = '" + newValues.get("noteDate")
+
+	public HashMap<String, String> updateNote(HashMap<String, String> newValues, Integer id) {
+		String queryString = "UPDATE CRM_company_notes SET " + "company_note_title = '" + newValues.get("noteTitle")
+				+ "', " + "company_note = '" + newValues.get("note") + "', " + "company_note_by_id = '"
+				+ newValues.get("noteUserId") + "', " + "company_note_by_date = '" + newValues.get("noteDate")
 				+ "' WHERE id = " + id;
-		
+
 		return update(queryString);
 	}
 	
+	public HashMap<String, String> newNote(CRM_company_notes ccn){
+		String queryString = "INSERT INTO CRM_company_notes "
+				+ "(company_id, "
+				+ "company_note_title, "
+				+ "company_note, "
+				+ "company_note_by_id, "
+				+ "company_note_by_date) "
+				+ "VALUES (" + ccn.getCompany_id() + ", "
+				+ "'" + ccn.getCompany_note_title() + "', "
+				+ "'" + ccn.getCompany_note(0) + "', "
+				+ "'" + ccn.getCompany_note_by_id() + "', "
+				+ "'" + ccn.getCompany_note_by_dateToString() + "')";
+		
+		return update(queryString);
+	}
+
 }

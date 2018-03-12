@@ -39,7 +39,6 @@ public class SearchServlet extends HttpServlet {
 		} catch (NullPointerException e) {
 			request.setAttribute("SEARCHRESULT", "NO KEYWORD TO SEARCH FOR");
 		}
-		
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/search.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -52,14 +51,14 @@ public class SearchServlet extends HttpServlet {
 	}
 	
 	private HashMap<Integer, CRM_company> search(String keyword) {
-		String type = "";
+		String type;
 		
 		if(StringUtils.isStrictlyNumeric(keyword) == true) {
-			type = "NUMBER";
+			type = new String("NUMBER");
 		} else if(userLoginUtils.validateEmail(keyword) != true) {
-			type = "EMAIL";
+			type = new String("EMAIL");
 		} else {
-			type = "ALL";
+			type = new String("ALL");
 		}
 		return this.gatherData(keyword, type);
 	}

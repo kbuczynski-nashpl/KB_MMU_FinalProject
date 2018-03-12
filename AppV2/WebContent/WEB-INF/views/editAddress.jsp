@@ -10,7 +10,7 @@
 <body>
 	<%@include file="nav.jsp"%>
 	<div class="container">
-		<h1 class="page-header">Email: ${CCEA.getCompany_email_address()}</h1>
+		<h1 class="page-header">New Address</h1>
 	</div>
 	<div class="container">
 	<%
@@ -19,34 +19,59 @@
 		if (error_msg != null){
 			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ error_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
 		}
-		
 		if (success_msg != null){
 			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"+ success_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
 		}
-		
-		request.getSession().removeAttribute("EDIT_RESPONSE");
+		 request.getSession().removeAttribute("EDIT_RESPONSE");
 	%>	
 	</div>
 	<form
-		action="${pageContext.request.contextPath}/edit/email/${CCEA.getId()}"
+		action="${pageContext.request.contextPath}/edit/address/${CC.getId()}"
 		method="post">
 		<div class="container form-control" style="padding: 2%;">
 			<div class="form-group row container col-12">
 				<div class="col-4">
-					<label class="col-form-label">Email Address: </label>
+					<label class="col-form-label">Address Line 1: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="emailAddress"
-						value="${CCEA.getCompany_email_address()}" required/>
+					<input class="form-control" name="addressLine1"
+						value="${CCA.getCompany_address_line1()}" required/>
 				</div>
 			</div>
 			<div class="form-group row container col-12">
 				<div class="col-4">
-					<label class="col-form-label">Email Address Type: </label>
+					<label class="col-form-label">Address Line 2: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="emailType"
-						value="${CCEA.getCompany_email_type()}" required/>
+					<input class="form-control" name="addressLine2"
+						value="${CCA.getCompany_address_line2()}"/>
+				</div>
+			</div>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Address Postcode: </label>
+				</div>
+				<div class="col-8">
+					<input class="form-control" name="addressPostcode" maxlength="10"
+						value="${CCA.getCompany_address_postcode()}" required/>
+				</div>
+			</div>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Address City: </label>
+				</div>
+				<div class="col-8">
+					<input class="form-control" name="addressCity"
+						value="${CCA.getCompany_address_city()}" required/>
+				</div>
+			</div>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Address Country: </label>
+				</div>
+				<div class="col-8">
+					<input class="form-control" name="addressCountry"
+						value="${CCA.getCompany_address_country()}" required/>
 				</div>
 			</div>
 		</div>

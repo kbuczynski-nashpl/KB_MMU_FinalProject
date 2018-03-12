@@ -49,10 +49,11 @@ $("#add_new_btn").on('click', function(e) {
 $("#search_navBar").on('keyup', function(e) {
 	if (e.keyCode == 13) {
 		let data = {};
+		let keyword = $("#search_navBar").val()
 		data.contentType = "application/html";
 		data.isModal = true;
 		data.modalId = "#modalSearchBody"; 
-		ajaxCall("search/", data);
+		ajaxCall("search/" + encodeURI(keyword), data);
 		$('#searchModal').modal('toggle');
 	}
 });

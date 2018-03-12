@@ -10,50 +10,56 @@
 <body>
 	<%@include file="nav.jsp"%>
 	<div class="container">
-		<h1 class="page-header">Email: ${CCEA.getCompany_email_address()}</h1>
+		<h1 class="page-header">New Note</h1>
 	</div>
 	<div class="container">
 	<%
 		String error_msg = (String) request.getAttribute("error");
 		String success_msg = (String) request.getAttribute("success");
-		if (error_msg != null){
+		if (error_msg != null)
 			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ error_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-		}
 		
-		if (success_msg != null){
+		if (success_msg != null)
 			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"+ success_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-		}
-		
-		request.getSession().removeAttribute("EDIT_RESPONSE");
+
 	%>	
 	</div>
 	<form
-		action="${pageContext.request.contextPath}/edit/email/${CCEA.getId()}"
+		action="${pageContext.request.contextPath}/new/postnote/${COMPANY_ID}"
 		method="post">
 		<div class="container form-control" style="padding: 2%;">
 			<div class="form-group row container col-12">
 				<div class="col-4">
-					<label class="col-form-label">Email Address: </label>
+					<label class="col-form-label">User Id: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="emailAddress"
-						value="${CCEA.getCompany_email_address()}" required/>
+					<input class="form-control" name="noteUserId"
+						value="${USER.getId()}" readonly />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
 				<div class="col-4">
-					<label class="col-form-label">Email Address Type: </label>
+					<label class="col-form-label">Note Title: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="emailType"
-						value="${CCEA.getCompany_email_type()}" required/>
+					<input class="form-control" name="noteTitle"
+						value="" required />
+				</div>
+			</div>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Note: </label>
+				</div>
+				<div class="col-8">
+					<textarea class="form-control" name="note"></textarea>
 				</div>
 			</div>
 		</div>
 		<div class="containercol-12" style="padding-top: 1%;">
 			<div class="float-right">
-				<input  class="btn btn-danger" id="btnSubmit" type="submit" value="Submit"/>
-				<input style="display:none;" value="true" name="type" readonly/>
+				<input class="btn btn-danger" id="btnSubmit" type="submit"
+					value="Submit" /> <input style="display: none;" value="true"
+					name="type" readonly />
 			</div>
 			<div class="float-left">
 				<a href="${pageContext.request.contextPath}/view/${CC.getId()}"

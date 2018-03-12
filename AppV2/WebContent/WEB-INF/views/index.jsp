@@ -5,11 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <jsp:include page="header.jsp" />
-<body>
+<%@include file="nav.jsp"%>
+<body class="container">
 	<div class="container">
-		<%@include file="nav.jsp"%>
-	</div>
-	<div class="container" style="margin-top: 65px">
 		<div class="row mt-5">
 			<div class="col-4">
 				<div class="container">

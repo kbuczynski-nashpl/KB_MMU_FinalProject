@@ -34,6 +34,8 @@ public class ApplicationFilter implements Filter {
 		String baseURL = path.substring(0, path.length() - ((HttpServletRequest) request).getRequestURI().length())
 				+ ((HttpServletRequest) request).getContextPath() + "/";
 		System.out.println("Validating for page: " + path);
+		
+		
 		for (String extension : this.resources) {
 			if (path.endsWith(extension)) {
 				chain.doFilter(request, response);
