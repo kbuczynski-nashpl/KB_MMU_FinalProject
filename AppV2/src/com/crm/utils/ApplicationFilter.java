@@ -3,6 +3,7 @@ package com.crm.utils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -34,8 +35,7 @@ public class ApplicationFilter implements Filter {
 		String baseURL = path.substring(0, path.length() - ((HttpServletRequest) request).getRequestURI().length())
 				+ ((HttpServletRequest) request).getContextPath() + "/";
 		System.out.println("Validating for page: " + path);
-		
-		
+
 		for (String extension : this.resources) {
 			if (path.endsWith(extension)) {
 				chain.doFilter(request, response);
@@ -43,21 +43,21 @@ public class ApplicationFilter implements Filter {
 			}
 		}
 		boolean loggedIn = false;
-		if(_SESSION != null) {
-			if(_SESSION.getAttribute("CLIENT") != null) {
+		if (_SESSION != null) {
+			if (_SESSION.getAttribute("CLIENT") != null) {
 				loggedIn = true;
 			}
 		}
-		
+
 		if (loggedIn) {
 			_SESSION.setAttribute("REDIRECT", path);
 			chain.doFilter(req, res);
 			return;
 		} else {
-			if(_SESSION == null) {
+			if (_SESSION == null) {
 				_SESSION = req.getSession();
 			}
-			_SESSION.setAttribute("REDIRECT", path);				
+			_SESSION.setAttribute("REDIRECT", path);
 			res.sendRedirect(baseURL + "login");
 		}
 	}

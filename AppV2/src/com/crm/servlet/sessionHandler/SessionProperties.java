@@ -5,7 +5,7 @@ public class SessionProperties {
 	private long SESSION_PROPERTIES_START_TIME = 0;
 	private long SESSION_LAST_ACCESS_TIME = 0;
 	private Boolean SESSION_IS_NEW = false;
-	
+
 	public SessionProperties(String id, long startTime, long lastAccessTime, Boolean isNew) {
 		this.SESSION_PROPERTIES_ID = id;
 		this.SESSION_PROPERTIES_START_TIME = startTime;

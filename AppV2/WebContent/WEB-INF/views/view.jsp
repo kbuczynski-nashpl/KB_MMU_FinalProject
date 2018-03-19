@@ -13,10 +13,17 @@
 		<h1>${crmCompany.getCompany_name()}
 			<a
 				href="${pageContext.request.contextPath}/edit/main/${crmCompany.getId()}"
-				class="btn btn-primary">Edit</a>
+				class="btn btn-primary col-1" type="button">Edit</a>
 		</h1>
 	</div>
 	<div class="container-fluid">
+	<%
+		String msg = (String) request.getAttribute("DELETE_MSG");
+		if (msg != null){
+			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		}
+		request.getSession().removeAttribute("DELETENOTIFICATION");
+	%>	
 		<div class="row">
 			<div class="col-3">
 				<div class="nav flex-column nav-pills" id="v-pills-tab"
@@ -65,9 +72,7 @@
 						</div>
 						<div class="container">
 							<h3 class="page-header">
-								Active Address: <a
-									href="${pageContext.request.contextPath}/new/address/${crmCompany.getId()}"
-									class="btn btn-primary" type="button">Add New</a>
+								Active Address:
 							</h3>
 						</div>
 						<c:forEach items="${crmCompanyAddresses}" var="crmAddress">
@@ -126,7 +131,7 @@
 								href="${pageContext.request.contextPath}/new/personnel/${crmCompany.getId()}"
 								class="btn btn-primary" type="button">Add New</a>
 						</div>
-						<div class="form-group row container">
+						<div class="form-group row container" style="width: 100%">
 							<table class="table">
 								<thead class="thead-inverse">
 									<tr>
@@ -137,6 +142,7 @@
 										<th>Phone No</th>
 										<th>Phone No Prefix</th>
 										<th>Company Postion</th>
+										<th>Remove</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -152,6 +158,7 @@
 											<td>${crmPersonnel.getCompany_personnel_phoneNo()}</td>
 											<td>${crmPersonnel.getCompany_personnel_phoneNo_prefix()}</td>
 											<td>${crmPersonnel.getCompany_personnel_position()}</td>
+											<td><a href="${pageContext.request.contextPath}/delete/personnel/${crmPersonnel.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -175,6 +182,7 @@
 										<th>Email Address</th>
 										<th>Active</th>
 										<th>Email Type</th>
+										<th>Remove</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -186,9 +194,10 @@
 											<td>${crmEmailAddress.getCompany_email_address()}</td>
 											<td><c:if
 													test="${crmEmailAddress.getCompany_email_active() == true}">
-													<span class="badge badge-success">TRUE</span>
+													<span class="badge badge-success form-control"><i class="fas fa-check"></i></span>
 												</c:if></td>
 											<td>${crmEmailAddress.getCompany_email_type()}</td>
+											<td><a href="${pageContext.request.contextPath}/delete/email/${crmEmailAddress.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -210,8 +219,12 @@
 										<th>Id</th>
 										<th>Note Title</th>
 										<th>Note</th>
+										<th>Assigned To: </th>
+										<th>Status</th>
+										<th>Due In: </th>
 										<th>Last Edited by</th>
 										<th>Last Edited time</th>
+										<th>Remove</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -222,8 +235,12 @@
 												href="${pageContext.request.contextPath}/edit/note/${crmNote.getId()}">${crmNoteInfo.count}</a></td>
 											<td>${crmNote.getCompany_note_title()}</td>
 											<td>${crmNote.getCompany_note(25)}</td>
-											<td>${crmNote.getCompany_note_by_id()}</td>
-											<td>${crmNote.getCompany_note_by_dateToString()}</td>
+											<td><label class="badge badge-info form-control">${crmNote.getCompany_note_assignedToName().getFullName()}</label></td>
+											<td><label class="badge badge-secondary form-control">${crmNote.getCompany_note_status()}</label></td>
+											<td><label class="badge badge-light form-control">${crmNote.getCompany_note_dueinToString()}</label></td>
+											<td><label class="badge badge-primary form-control">${crmNote.getLastEditedBy().getFullName()}</label></td>
+											<td><label class="badge badge-light form-control">${crmNote.getCompany_note_by_dateToString()}</label></td>
+											<td><a href="${pageContext.request.contextPath}/delete/note/${crmNote.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -249,6 +266,7 @@
 										<th>Address City</th>
 										<th>Address Country</th>
 										<th>Active</th>
+										<th>Remove</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -262,7 +280,8 @@
 											<td>${crmAddress.getCompany_address_postcode()}</td>
 											<td>${crmAddress.getCompany_address_city()}</td>
 											<td>${crmAddress.getCompany_address_country()}</td>
-											<td><c:if test="${crmAddress.getCompany_address_active() == true}"><span class="badge badge-success">TRUE</span></c:if></td>
+											<td><c:if test="${crmAddress.getCompany_address_active() == true}"><span class="badge badge-success form-control"><i class="fas fa-check"></i></span></c:if></td>
+											<td><a href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

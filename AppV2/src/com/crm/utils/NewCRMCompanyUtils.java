@@ -15,14 +15,16 @@ import com.db.mysql.models.DBO_CRM_company_email_address;
 import com.db.mysql.models.DBO_CRM_company_phoneNo;
 
 /**
- * NewCRMCompanyUtils is a class which focuses on creating new entry in Database system when user wants to add new CRM company into a system.
- * It validates all the values and clean up database in case something goes wrong or value gets missing
+ * NewCRMCompanyUtils is a class which focuses on creating new entry in Database
+ * system when user wants to add new CRM company into a system. It validates all
+ * the values and clean up database in case something goes wrong or value gets
+ * missing
  * 
  * @author kbuczynski
  * @version 1.0
  */
 public class NewCRMCompanyUtils {
-	
+
 	private static DBO_CRM_company dbo0 = new DBO_CRM_company();
 	private static DBO_CRM_company_address dbo1 = new DBO_CRM_company_address();
 	private static DBO_CRM_company_email_address dbo2 = new DBO_CRM_company_email_address();
@@ -31,7 +33,8 @@ public class NewCRMCompanyUtils {
 	private static HashMap<String, String> objectStatus = new HashMap<String, String>();
 
 	/**
-	 * A main function of this class. It was designed to create objects and database entries when user adds new company into the system
+	 * A main function of this class. It was designed to create objects and database
+	 * entries when user adds new company into the system
 	 * 
 	 * @param details
 	 * @param crm_user
@@ -53,9 +56,9 @@ public class NewCRMCompanyUtils {
 		cc.setId(Integer.parseInt(response.get("GEN_ID").toString()));
 
 		// CREATING CRM_company_address entry as a object
-		CRM_company_address cca = new CRM_company_address(cc.getId(),
-				details.get("companyAddressLine1"), details.get("companyAddressPostcode"),
-				details.get("companyAddressCity"), details.get("companyAddressCountry"), true);
+		CRM_company_address cca = new CRM_company_address(cc.getId(), details.get("companyAddressLine1"),
+				details.get("companyAddressPostcode"), details.get("companyAddressCity"),
+				details.get("companyAddressCountry"), true);
 		try {
 			objectStatus = validateObject(cca, "getCompany_address_line2");
 			if (checkObjectStatus() == true) {
@@ -71,8 +74,8 @@ public class NewCRMCompanyUtils {
 		}
 
 		// Creating a CRM_company_email_address entry as a object
-		CRM_company_email_address ccea = new CRM_company_email_address(cc.getId(),
-				details.get("companyEmailAddress"), details.get("companyEmailType"));
+		CRM_company_email_address ccea = new CRM_company_email_address(cc.getId(), details.get("companyEmailAddress"),
+				details.get("companyEmailType"));
 		try {
 			objectStatus = validateObject(ccea, "NULL");
 			if (checkObjectStatus() == true) {
@@ -90,8 +93,8 @@ public class NewCRMCompanyUtils {
 		}
 
 		// Creating CRM_company_phoneNo entry as a object
-		CRM_company_phoneNo ccpn = new CRM_company_phoneNo(cc.getId(),
-				details.get("companyPhoneNumber"), details.get("companyPhoneNoPrefix"));
+		CRM_company_phoneNo ccpn = new CRM_company_phoneNo(cc.getId(), details.get("companyPhoneNumber"),
+				details.get("companyPhoneNoPrefix"));
 		try {
 			objectStatus = validateObject(ccpn, "NULL");
 			if (checkObjectStatus() == true) {

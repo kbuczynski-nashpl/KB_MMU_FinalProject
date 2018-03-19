@@ -79,12 +79,28 @@
     <url-pattern>/add/*</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>NewServlet</servlet-name>
-  	<servlet-class>com.crm.servlet.NewServlet</servlet-class>
+    <servlet-name>NewServlet</servlet-name>
+    <servlet-class>com.crm.servlet.NewServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>NewServlet</servlet-name>
-  	<url-pattern>/new/*</url-pattern>
+    <servlet-name>NewServlet</servlet-name>
+    <url-pattern>/new/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteCompanyElement</servlet-name>
+    <servlet-class>com.crm.servlet.DeleteCompanyElement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCompanyElement</servlet-name>
+    <url-pattern>/delete/*</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>UserSettings</servlet-name>
+    <servlet-class>com.crm.servlet.UserSettings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserSettings</servlet-name>
+    <url-pattern>/settings/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>

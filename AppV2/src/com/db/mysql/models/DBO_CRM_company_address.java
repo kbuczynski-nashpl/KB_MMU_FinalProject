@@ -2,6 +2,7 @@ package com.db.mysql.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.crm.client.company.CRM_company_address;
 import com.db.mysql.MySQL;
 import com.mysql.jdbc.StringUtils;
@@ -100,6 +101,11 @@ public class DBO_CRM_company_address extends MySQL {
 		}
 		crmCompanyAddress.setId(Integer.parseInt(resultFromMysql.get(0).get("id").toString()));
 		return crmCompanyAddress;
+	}
+
+	public HashMap<String, String> removeAddressById(Integer id) {
+		String queryString = "DELETE FROM CRM_company_address where id = " + id;
+		return update(queryString);
 	}
 
 	public HashMap<String, String> updateAddress(HashMap<String, String> newValues, Integer id) {

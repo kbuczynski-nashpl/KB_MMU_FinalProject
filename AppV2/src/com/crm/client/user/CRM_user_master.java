@@ -4,8 +4,10 @@ public class CRM_user_master {
 
 	private Integer id = 0;
 	private String user_company_name = "";
-	
-	public CRM_user_master() {}
+
+	public CRM_user_master() {
+	}
+
 	public CRM_user_master(Integer id, String userCompanyName) {
 		this.id = id;
 		this.user_company_name = userCompanyName;

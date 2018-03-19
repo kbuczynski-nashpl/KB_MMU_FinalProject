@@ -2,18 +2,18 @@ package com.crm.client.company;
 
 public class CRM_company {
 	private Integer id;
-	private Integer CRM_user_master_id ;
+	private Integer CRM_user_master_id;
 	private String company_name;
-	
-	
-	public CRM_company() {}
-	
+
+	public CRM_company() {
+	}
+
 	public CRM_company(Integer id, Integer crmUserMasterId, String companyName) {
 		this.id = new Integer(id);
 		this.CRM_user_master_id = new Integer(crmUserMasterId);
 		this.company_name = new String(companyName);
 	}
-	
+
 	public CRM_company(Integer crmUserMasterId, String companyName) {
 		this.CRM_user_master_id = new Integer(crmUserMasterId);
 		this.company_name = new String(companyName);

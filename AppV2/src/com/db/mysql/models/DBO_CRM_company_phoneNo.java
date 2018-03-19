@@ -24,8 +24,7 @@ public class DBO_CRM_company_phoneNo extends MySQL {
 		ArrayList<CRM_company_phoneNo> companyPhones = new ArrayList<CRM_company_phoneNo>();
 		for (HashMap<String, String> entries : resultFromMysql) {
 			CRM_company_phoneNo companyPhoneNumber = new CRM_company_phoneNo(
-					Integer.parseInt(entries.get("company_id").toString()), 
-					entries.get("company_phoneNo").toString(),
+					Integer.parseInt(entries.get("company_id").toString()), entries.get("company_phoneNo").toString(),
 					entries.get("company_phoneNo_prefix").toString());
 			companyPhoneNumber.setId(Integer.parseInt(entries.get("id").toString()));
 			companyPhones.add(companyPhoneNumber);
@@ -40,8 +39,8 @@ public class DBO_CRM_company_phoneNo extends MySQL {
 		HashMap<String, String> response = update(queryString);
 		return response;
 	}
-	
-	public HashMap<String, String> removeByCompanyId(Integer id){
+
+	public HashMap<String, String> removeByCompanyId(Integer id) {
 		String queryString = "DELETE FROM CRM_company_phoneNo where company_id = " + id;
 		HashMap<String, String> result = update(queryString);
 		return result;

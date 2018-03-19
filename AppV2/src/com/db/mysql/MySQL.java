@@ -2,6 +2,7 @@ package com.db.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -9,8 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import java.sql.PreparedStatement;
 
 public class MySQL {
 
@@ -65,7 +64,7 @@ public class MySQL {
 		return resultSet;
 
 	}
-	
+
 	public HashMap<String, String> update(String query) {
 		createConnection();
 		HashMap<String, String> response = new HashMap<String, String>();
@@ -75,7 +74,7 @@ public class MySQL {
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
 			rs.next();
-			if(rs.isBeforeFirst()) {
+			if (rs.isBeforeFirst()) {
 				generatedId = rs.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -84,7 +83,7 @@ public class MySQL {
 		}
 		response.put("STATUS", "OK");
 		response.put("GEN_ID", generatedId.toString());
-		
+
 		return response;
 	}
 

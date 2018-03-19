@@ -5,8 +5,9 @@ public class CRM_company_phoneNo {
 	private Integer company_id;
 	private String company_phoneNo;
 	private String company_phoneNo_prefix;
-	
-	public CRM_company_phoneNo() {}
+
+	public CRM_company_phoneNo() {
+	}
 
 	public CRM_company_phoneNo(int companyId, String companyPhoneNo, String companyPhoneNoPrefix) {
 		this.company_id = new Integer(companyId);

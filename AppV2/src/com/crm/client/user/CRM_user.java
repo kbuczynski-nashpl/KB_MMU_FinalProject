@@ -4,14 +4,16 @@ import com.crm.utils.userLoginUtils;
 
 public class CRM_user {
 
-	private Integer id = 0;
-	private Integer user_master_id = 0;
-	private String user_username = "";
-	private String user_email = "";
-	private String user_psw = "";
+	private Integer id;
+	private Integer user_master_id ;
+	private String user_username;
+	private String user_email;
+	private String user_psw;
 	private Boolean isLoggedIn = false;
-	
-	public CRM_user() {}
+
+	public CRM_user() {
+	}
+
 	public CRM_user(Integer id, Integer masterId, String username, String psw, String email) {
 		this.id = id;
 		this.user_master_id = masterId;
@@ -19,7 +21,6 @@ public class CRM_user {
 		this.user_psw = psw;
 		this.user_email = email;
 	}
-	
 
 	public String getUser_email() {
 		return user_email;
@@ -53,8 +54,8 @@ public class CRM_user {
 		return this.isLoggedIn;
 	}
 
-	public void setLogedIn() {
-		if (userLoginUtils.validateLogin(this.user_psw, this.user_username) == true) {
+	public void setLogedIn(String psw, String usrName) {
+		if (userLoginUtils.validateLogin(psw, usrName) == true) {
 			this.isLoggedIn = true;
 		} else {
 			this.isLoggedIn = false;

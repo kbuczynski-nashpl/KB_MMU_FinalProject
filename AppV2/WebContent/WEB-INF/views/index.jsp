@@ -12,10 +12,10 @@
 			<div class="col-4">
 				<div class="container">
 					<c:forEach items="${LAST5CUST}" var="crmCompany">
-						<div class="card text-center" style="width: 18rem;">
-							<div class="card-body">
+						<div class="card text-center" style="width: 18rem; margin-top: 1%; height: 5rem">
+							<div class="card-body" style="padding: 1%">
 								<h5 class="card-title">${crmCompany.getCompany_name()}</h5>
-								<a href="view/${crmCompany.getId()}" class="btn btn-primary">Visit</a>
+								<a href="view/${crmCompany.getId()}" type="button" class="badge badge-primary form-control">Visit</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -23,8 +23,19 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<div class="conatiner">10 Most recent recent Companies Notes
-					(IMPORT JSP)</div>
+				<div class="conatiner">
+					<c:forEach items="${LAST5NOTES}" var="crmNotes">
+					<div class="card text-center" style="width: 18rem; margin-top: 1%; height: 5rem">
+							<div class="card-body" style="padding: 1%">
+								<h5 class="card-title">${crmNotes.getCompany_note_title()}</h5>
+								<div class="container">
+									<labe class="badge badge-light">Assigned To: ${crmNotes.getCompany_note_assignedToName().getFullName()}</label>
+								</div>
+								<a href="view/${crmNotes.getCompany_id()}" type="button" class="badge badge-primary form-control">Visit</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div class="col-4">
 				<div class="container">Actions due in for the user (IMPORT

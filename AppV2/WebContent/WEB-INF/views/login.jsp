@@ -9,7 +9,7 @@
 	<%
 		String login_msg = (String) request.getAttribute("error");
 		if (login_msg != null)
-			out.println("<font color=red size=4px>" + login_msg + "</font>");
+			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ login_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
 	%>	
 <div class = "container">
 	<div class="wrapper">

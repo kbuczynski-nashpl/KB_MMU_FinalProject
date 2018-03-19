@@ -9,9 +9,12 @@ public class CRM_company_address {
 	private String company_address_city;
 	private String company_address_country;
 	private Boolean company_address_active = false;
-	
-	public CRM_company_address() {}	
-	public CRM_company_address(int companyId,  String companyAddressLine1, String companyAddressPostcode, String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
+
+	public CRM_company_address() {
+	}
+
+	public CRM_company_address(int companyId, String companyAddressLine1, String companyAddressPostcode,
+			String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
 		this.company_id = new Integer(companyId);
 		this.company_address_line1 = new String(companyAddressLine1);
 		this.company_address_postcode = new String(companyAddressPostcode);
@@ -19,7 +22,6 @@ public class CRM_company_address {
 		this.company_address_country = new String(companyAddressCountry);
 		this.company_address_active = companyAddressIsActive;
 	}
-
 
 	public int getCompany_id() {
 		return company_id;
@@ -76,20 +78,23 @@ public class CRM_company_address {
 	public void setCompany_address_active(Boolean company_address_active) {
 		this.company_address_active = company_address_active;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String toString() {
-		if(this.company_address_line2 != null) {
-			return this.company_address_line1 + " " + this.company_address_line2 + " " + this.company_address_postcode + " " + this.company_address_city + " " + this.company_address_country;
+		if (this.company_address_line2 != null) {
+			return this.company_address_line1 + " " + this.company_address_line2 + " " + this.company_address_postcode
+					+ " " + this.company_address_city + " " + this.company_address_country;
 		} else {
-			return this.company_address_line1 + " " + this.company_address_postcode + " " + this.company_address_city + " " + this.company_address_country;
+			return this.company_address_line1 + " " + this.company_address_postcode + " " + this.company_address_city
+					+ " " + this.company_address_country;
 		}
 	}
-
 
 }

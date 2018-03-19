@@ -2,27 +2,35 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar fixed-top navbar-light bg-light container-fluid">
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/index">WebKB
+	<button class="navbar-toggler float-right" type="button"
+		data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon" style="padding: 1%;"></span>
+	</button>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/index" style="margin: 1%;">WebKB
 		CRM</a>
-	<div class="container" style="padding: 1%">
+	<div class="container col-8" style="padding: 1%">
 		<input class="form-control container" type="text" placeholder="Search"
 			id="search_navBar">
 	</div>
-	<button class="navbar-toggler float-right" type="button" data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon" style="padding: 1%"></span>
-	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/index">Home <span
+			<li class="nav-item"><a class="nav-link"
+				href="${pageContext.request.contextPath}/index"><i class="fas fa-home"></i> Home <span
 					class="sr-only">(current)</span>
 			</a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="${pageContext.request.contextPath}/usersettings"><i class="fas fa-cogs"></i> User Settings <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			 <a class="nav-link" href="${pageContext.request.contextPath}/about"><i class="fas fa-question-circle"></i> Information <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only">(current)</span></a>
+			</li>
 		</ul>
 	</div>
-	
 </nav>
 
 <!-- Modal Search Box -->
@@ -54,14 +62,16 @@
 	<a id="add_new_btn" href="#"> Add New</a>
 </div>
 <style>
-body{
+body {
 	padding-top: 1%;
 }
-@media all and (max-width: 1024px){
-	body{
+
+@media all and (max-width: 1024px) {
+	body {
 		padding-top: 11%;
 	}
 }
+
 #Add {
 	height: 0px;
 	width: 85px;

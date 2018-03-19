@@ -51,32 +51,27 @@ public class DBO_CRM_company_personnel extends MySQL {
 	}
 
 	public HashMap<String, String> updateRecordById(HashMap<String, String> newValues, Integer id) {
-		String queryString = "UPDATE CRM_company_personnel SET "+
-				"company_personnel_surname = '" + newValues.get("surname") + "'" +  
-				" ,company_personnel_forname = '" + newValues.get("forname") + "'" +
-				" ,company_personnel_email = '" + newValues.get("email") + "'" +
-				" ,company_personnel_phoneNo = '" + newValues.get("phoneNo") + "'" + 
-				" ,company_personnel_phoneNo_prefix = '" + newValues.get("phoneNoPrefix") + "'" +
-				" ,company_personnel_position = '" + newValues.get("position") + "'" +  
-				" WHERE id = " + id;
+		String queryString = "UPDATE CRM_company_personnel SET " + "company_personnel_surname = '"
+				+ newValues.get("surname") + "'" + " ,company_personnel_forname = '" + newValues.get("forname") + "'"
+				+ " ,company_personnel_email = '" + newValues.get("email") + "'" + " ,company_personnel_phoneNo = '"
+				+ newValues.get("phoneNo") + "'" + " ,company_personnel_phoneNo_prefix = '"
+				+ newValues.get("phoneNoPrefix") + "'" + " ,company_personnel_position = '" + newValues.get("position")
+				+ "'" + " WHERE id = " + id;
 		return update(queryString);
 	}
-	
-	public HashMap<String, String> newCompanyPersonnel(CRM_company_personnel ccp){
-		String queryString = "INSERT INTO CRM_company_personnel "
-				+ "(company_id, "
-				+ "company_personnel_surname, "
-				+ "company_personnel_forname, "
-				+ "company_personnel_email, "
-				+ "company_personnel_phoneNo, "
-				+ "company_personnel_phoneNo_prefix, "
-				+ "company_personnel_position) "
-				+ "VALUES (" + ccp.getCompany_id() +", "
-				+ "'" + ccp.getCompany_personnel_surname() + "', "
-				+ "'" + ccp.getCompany_personnel_forname() + "', "
-				+ "'" + ccp.getCompany_personnel_email() + "', "
-				+ "'" + ccp.getCompany_personnel_phoneNo() + "', "
-				+ "'" + ccp.getCompany_personnel_phoneNo_prefix() + "', "
+
+	public HashMap<String, String> removePersonnelById(Integer id) {
+		String queryString = "DELETE FROM CRM_company_personnel where id = " + id;
+		return update(queryString);
+	}
+
+	public HashMap<String, String> newCompanyPersonnel(CRM_company_personnel ccp) {
+		String queryString = "INSERT INTO CRM_company_personnel " + "(company_id, " + "company_personnel_surname, "
+				+ "company_personnel_forname, " + "company_personnel_email, " + "company_personnel_phoneNo, "
+				+ "company_personnel_phoneNo_prefix, " + "company_personnel_position) " + "VALUES ("
+				+ ccp.getCompany_id() + ", " + "'" + ccp.getCompany_personnel_surname() + "', " + "'"
+				+ ccp.getCompany_personnel_forname() + "', " + "'" + ccp.getCompany_personnel_email() + "', " + "'"
+				+ ccp.getCompany_personnel_phoneNo() + "', " + "'" + ccp.getCompany_personnel_phoneNo_prefix() + "', "
 				+ "'" + ccp.getCompany_personnel_position() + "')";
 		return update(queryString);
 	}

@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="container" style="padding: 1%">
-				<label class="label">Company Active Email:</label>
+				<label class="label">Company Active Address:</label>
 				<div class="col">
 					<select id="selEmailAddress" name="address" class="form-control">
 						<c:forEach items="${CCA}" var="address">

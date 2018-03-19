@@ -14,6 +14,11 @@ public class DBO_CRM_user extends MySQL {
 	public CRM_user getUserByUserName(String userName) {
 		String queryString = "SELECT * FROM CRM_user WHERE user_username = " + "'" + userName + "'";
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
+		
+		if(resultFromMysql.isEmpty()) {
+			return null;
+		}
+		
 		CRM_user cuc = new CRM_user();
 		for (HashMap<String, String> entries : resultFromMysql) {
 			cuc = new CRM_user(Integer.parseInt(entries.get("id").toString()),
@@ -21,5 +26,15 @@ public class DBO_CRM_user extends MySQL {
 					entries.get("user_psw").toString(), entries.get("user_email").toString());
 		}
 		return cuc;
+	}
+
+	public ArrayList<Integer> getAllForCompany(Integer companyId) {
+		String queryString = "SELECT ID FROM CRM_user WHERE user_master_id = " + companyId;
+		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for (HashMap<String, String> entries : resultFromMysql) {
+			result.add(Integer.parseInt(entries.get("id").toString()));
+		}
+		return result;
 	}
 }

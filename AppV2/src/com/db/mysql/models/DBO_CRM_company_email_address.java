@@ -74,6 +74,11 @@ public class DBO_CRM_company_email_address extends MySQL {
 		}
 	}
 
+	public HashMap<String, String> removeEmailById(Integer id) {
+		String queryString = "DELETE FROM CRM_company_email_address where id = " + id;
+		return update(queryString);
+	}
+
 	public HashMap<String, String> updateEmailEntry(HashMap<String, String> newValues, Integer id) {
 		String queryString = "UPDATE CRM_company_email_address SET company_email_address = " + "'"
 				+ newValues.get("emailAddress") + "', " + " company_email_type = '" + newValues.get("emailType")

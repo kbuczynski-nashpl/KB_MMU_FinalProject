@@ -10,9 +10,12 @@ public class CRM_company_personnel {
 	private String company_personnel_phoneNo;
 	private String company_personnel_phoneNo_prefix;
 	private String company_personnel_position;
-	
-	public CRM_company_personnel() {};
-	public CRM_company_personnel(Integer id, Integer companyId, String surname, String forname, String email, String phoneNo, String phoneNoPrefix, String position) {
+
+	public CRM_company_personnel() {
+	};
+
+	public CRM_company_personnel(Integer id, Integer companyId, String surname, String forname, String email,
+			String phoneNo, String phoneNoPrefix, String position) {
 		this.id = new Integer(id);
 		this.company_id = new Integer(companyId);
 		this.company_personnel_surname = new String(surname);
@@ -22,7 +25,9 @@ public class CRM_company_personnel {
 		this.company_personnel_phoneNo_prefix = new String(phoneNoPrefix);
 		this.company_personnel_position = new String(position);
 	}
-	public CRM_company_personnel(Integer companyId, String surname, String forname, String email, String phoneNo, String phoneNoPrefix, String position) {
+
+	public CRM_company_personnel(Integer companyId, String surname, String forname, String email, String phoneNo,
+			String phoneNoPrefix, String position) {
 		this.company_id = new Integer(companyId);
 		this.company_personnel_surname = new String(surname);
 		this.company_personnel_forname = new String(forname);
@@ -31,7 +36,6 @@ public class CRM_company_personnel {
 		this.company_personnel_phoneNo_prefix = new String(phoneNoPrefix);
 		this.company_personnel_position = new String(position);
 	}
-	
 
 	public Integer getId() {
 		return id;

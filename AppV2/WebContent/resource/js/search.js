@@ -57,3 +57,14 @@ $("#search_navBar").on('keyup', function(e) {
 		$('#searchModal').modal('toggle');
 	}
 });
+
+
+$(document).ready( function () {
+    $('.table').DataTable({
+    	"searching": false,
+    	"autoWidth": true,
+    	  "lengthChange": false
+
+    });
+    $('.table').addClass("hover");
+} );

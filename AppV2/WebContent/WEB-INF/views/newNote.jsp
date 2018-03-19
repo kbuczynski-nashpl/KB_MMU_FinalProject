@@ -13,16 +13,21 @@
 		<h1 class="page-header">New Note</h1>
 	</div>
 	<div class="container">
-	<%
-		String error_msg = (String) request.getAttribute("error");
-		String success_msg = (String) request.getAttribute("success");
-		if (error_msg != null)
-			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ error_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-		
-		if (success_msg != null)
-			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"+ success_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		<%
+			String error_msg = (String) request.getAttribute("error");
+			String success_msg = (String) request.getAttribute("success");
+			if (error_msg != null)
+				out.println(
+						"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"
+								+ error_msg
+								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
 
-	%>	
+			if (success_msg != null)
+				out.println(
+						"<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"
+								+ success_msg
+								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		%>
 	</div>
 	<form
 		action="${pageContext.request.contextPath}/new/postnote/${COMPANY_ID}"
@@ -42,19 +47,50 @@
 					<label class="col-form-label">Note Title: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="noteTitle"
-						value="" required />
+					<input class="form-control" name="noteTitle" value="" required />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
 				<div class="col-4">
-					<label class="col-form-label">Note: </label>
+					<label class="col-form-label"> Status: </label>
 				</div>
 				<div class="col-8">
-					<textarea class="form-control" name="note"></textarea>
+					<select class="form-control" name="noteStatus">
+						<c:forEach items="${NOTE_STATUS}" var="status">
+							<option value="${status}">${status}</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
+		<div class="form-group row container col-12">
+			<div class="col-4">
+				<label class="col-form-label">Assigned To: </label>
+			</div>
+			<div class="col-8">
+				<select class="form-control" name="noteAssigne">
+					<c:forEach items="${USER_INFO}" var="assigne">
+						<option value="${assigne.getId()}">${assigne.getUser_surname()} ${assigne.getUser_forname()}</option>
+					</c:forEach>
+				</select>
+			</div>
 		</div>
+		<div class="form-group row container col-12">
+			<div class="col-4">
+				<label class="col-form-label">Due In: </label>
+			</div>
+			<div class="col-8">
+				<input class="form-control" name="noteDuein" value="" type="datetime-local" required />
+			</div>
+		</div>
+		<div class="form-group row container col-12">
+			<div class="col-4">
+				<label class="col-form-label">Note: </label>
+			</div>
+			<div class="col-8">
+				<textarea class="form-control" name="note"></textarea>
+			</div>
+		</div>
+	</div>
 		<div class="containercol-12" style="padding-top: 1%;">
 			<div class="float-right">
 				<input class="btn btn-danger" id="btnSubmit" type="submit"
@@ -62,7 +98,7 @@
 					name="type" readonly />
 			</div>
 			<div class="float-left">
-				<a href="${pageContext.request.contextPath}/view/${CC.getId()}"
+				<a href="${pageContext.request.contextPath}/view/${COMPANY_ID}"
 					class="btn btn-primary">Return</a>
 			</div>
 		</div>

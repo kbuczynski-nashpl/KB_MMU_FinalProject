@@ -21,6 +21,7 @@ public class DBO_CRM_company extends MySQL {
 				responseFromMysql.get(0).get("company_name").toString());
 		return newCompany;
 	}
+	
 
 	public ArrayList<HashMap<String, String>> getByName(String name) {
 		String queryString = "SELECT * FROM CRM_company WHERE name = '" + name + "'";
@@ -59,9 +60,9 @@ public class DBO_CRM_company extends MySQL {
 		String queryString = "SELECT * from CRM_company where company_name like \"%" + keyword + "%\"";
 		resultFromMysql = query(queryString);
 		if (resultFromMysql.size() > 0) {
-			for(HashMap<String, String> entries: resultFromMysql) {
+			for (HashMap<String, String> entries : resultFromMysql) {
 				resultMap.put(Integer.parseInt(entries.get("id").toString()),
-				this.getById(Integer.parseInt(entries.get("id").toString())));
+						this.getById(Integer.parseInt(entries.get("id").toString())));
 			}
 		}
 
@@ -113,9 +114,7 @@ public class DBO_CRM_company extends MySQL {
 		String queryString = "DELETE FROM CRM_company WHERE id = " + id;
 		HashMap<String, String> result = update(queryString);
 		return result;
-		
-		
-		
+
 	}
 
 }

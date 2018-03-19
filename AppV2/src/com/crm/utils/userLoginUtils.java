@@ -44,11 +44,22 @@ public class userLoginUtils {
 	public static boolean validateLogin(String psw, String userName) {
 		DBO_CRM_user dbo = new DBO_CRM_user();
 		CRM_user cuc = dbo.getUserByUserName(userName);
-			String entryPsw = cuc.getUser_psw();
-			String entryUsrName = cuc.getUser_username();
-			if (entryPsw.equals(psw) && entryUsrName.equals(userName)) {
-				return true;
-			}
+
+		if (cuc == null) {
+			return false;
+		}
+
+		String entryPsw = cuc.getUser_psw();
+		String entryUsrName = cuc.getUser_username();
+
+		if (entryPsw.equals("") || entryUsrName.equals("")) {
+			return false;
+		}
+
+		if ((entryPsw.equals(HashPsw(psw))) && (entryUsrName.equals(userName))) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -70,13 +81,21 @@ public class userLoginUtils {
 		}
 	}
 
-	public static HashMap<String, Object> logIn(String usrname, String psw){
+	public static HashMap<String, Object> logIn(String usrname, String psw) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		DBO_CRM_user dob0 = new DBO_CRM_user();
 		DOB_CRM_user_master dob1 = new DOB_CRM_user_master();
 		DOB_CRM_user_information dob2 = new DOB_CRM_user_information();
 		CRM_user cuc = dob0.getUserByUserName(usrname);
+
+		if (cuc == null) {
+			result.put("isLogged", "false");
+			return result;
+		}
+
 		CRM_user_master cum = dob1.getById(cuc.getId());
 		CRM_user_information cui = new CRM_user_information();
+
 		try {
 			cui = dob2.getByUserId(cuc.getId());
 		} catch (NumberFormatException e1) {
@@ -84,11 +103,9 @@ public class userLoginUtils {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
-		HashMap<String, Object> result = new HashMap<String, Object>();
-				
+
 		try {
-			cuc.setLogedIn();
+			cuc.setLogedIn(psw, usrname);
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
@@ -100,7 +117,7 @@ public class userLoginUtils {
 			result.put("CRM_user_master", cum);
 			result.put("CRM_user_information", cui);
 		} else {
-			result.put("isTrue","false");
+			result.put("isLogged", "false");
 		}
 
 		return result;
@@ -110,8 +127,8 @@ public class userLoginUtils {
 	public static boolean getUserLoginSession(HttpServletRequest request) {
 		HttpSession _SESSION = request.getSession();
 		CRM_user client = (CRM_user) _SESSION.getAttribute("CLIENT");
-		if(client != null) {
-			if(client.getIsLogedIn() == true) {
+		if (client != null) {
+			if (client.getIsLogedIn() == true) {
 				return true;
 			}
 		}
