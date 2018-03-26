@@ -54,7 +54,8 @@ public class MySQL {
 				resultSet.add(newEntry);
 			}
 		} catch (SQLException e) {
-			// handle any errors
+			// handle any error
+			// TODO: Add error handler from applicationErrorHanlderys
 			System.out.println("SQLException: " + e.getMessage());
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
