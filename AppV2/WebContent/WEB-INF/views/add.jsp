@@ -51,8 +51,11 @@
 			<div class="form-group row">
 				<label class="col-3 col-form-label">Country: </label>
 				<div class="col-9">
-					<input class="form-control" type="text" placeholder="Country"
-						id="company-address-country-input" required>
+					<select class="form-control" id="company-address-country-input">
+						<c:forEach items="${COUNTRY}" var="country">
+							<option>${country}</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 		</div>
@@ -153,9 +156,12 @@
 			addNewdataBuildUp();
 		});
 		
-		$(document).keypress(function (e) {
-		    if (e.which == 13) {
+		$(document).keydown(function (e) {
+		    if (e.which == 39) {
 		        displayPage("NEXT");
+		    }
+		    if (e.which == 37){
+		    	displayPage("PREVIOUS");
 		    }
 		});
 		
@@ -223,19 +229,87 @@
 			data.addressline2 = $("#company-address-line2-input").val();
 			data.addresspostcode = $("#company-address-postcode-input").val();
 			data.addresscity = $("#company-address-city-input").val();
-			data.addresscountry = $("#company-address-country-input").val();
+			data.addresscountry = $("#company-address-country-input").find(":selected").text();
 			data.emailaddress = $("#company-email-address-input").val();
 			data.emailtype = $("#company-email-type-input").val();
 			data.emailactive = $("#company-email-active-input").val();
 			data.phoneNonumber = $("#company-phone-number-input").val();
 			data.phoneNoprefix = $("#company-phone-prefix-input").val();
+			
+			if(validateEntry(data.companyName) != true){
+				displayPage("1");
+				$("#company-name-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid Company Name'});
+				$("#company-name-input").focus();
+				return;
+			}
+			
+			if(validateEntry(data.addressline1) != true){
+				displayPage("2");
+				$("#company-address-line1-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid Company Address Line'});
+				$("#company-address-line1-input").focus();
+				return;
+			}
+			
+			if(validateEntry(data.addresspostcode) != true){
+				displayPage("2");
+				$("#company-address-postcode-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid Company Address Postcode'});
+				$("#company-address-postcode-input").focus();
+				return;
+			}
+			
+			if(validateEntry(data.addresscity) != true){
+				displayPage("2");
+				$("#company-address-city-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid Company Address City'});
+				$("#company-address-city-input").focus();
+				return;
+			}
+			
+			if(validateEntry(data.addresscountry) != true){
+				displayPage("2");
+				$("#company-address-country-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid Company Country'});
+				$("#company-address-country-input").focus();
+				return;
+			}
+			
 			if(validateEmail(data.emailaddress) != true){
 				displayPage("3");
 				$("#company-email-address-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid email'});
 				$("#company-email-address-input").focus();
 				return;
 			}
+			
+			if(validateEmail(data.emailaddresstyep) != true){
+				displayPage("3");
+				$("#company-email-type-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid email type'});
+				$("#company-email-type-input").focus();
+				return;
+			}
+			
+			if(validateEmail(data.phoneNonumber) != true){
+				displayPage("4");
+				$("#company-phone-number-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid phone number'});
+				$("#company-phone-number-input").focus();
+				return;
+			}
+			
+			if(validateEmail(data.phoneNoprefix) != true){
+				displayPage("4");
+				$("#company-phone-prefix-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid phone number'});
+				$("#company-phone-prefix-input").focus();
+				return;
+			}
+			
+			
+			
 			addNewredirectToConfirmPost(url, data);
+	}
+	
+	function validateEntry(entry){
+		if(entry == null || entry == undefined || entry === ""){
+			return false;
+		} else {
+			return true;	
+		}
 	}
 	
 	function validateEmail(email) {

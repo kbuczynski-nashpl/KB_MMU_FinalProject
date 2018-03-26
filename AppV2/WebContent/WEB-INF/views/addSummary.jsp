@@ -4,7 +4,7 @@
 <div class="container">
 	<c:if test="${STATUS eq 'ERROR'}">
 	<div class="alert alert-danger">
-		<p>Upps! We could not create new company. We are missing some information</p>
+		<p>Upps! We could not create new company. We are missing some information. Please try again !</p>
 		<div class="container">
 			<label>Missing Inforamtion</label><input class="form-control" id="wrongInput" value="${MSG}" readonly/>
 		</div>

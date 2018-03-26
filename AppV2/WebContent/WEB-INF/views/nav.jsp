@@ -59,7 +59,7 @@
 </div>
 
 <div id="Add">
-	<a id="add_new_btn" href="#"> Add New</a>
+	<a id="add_new_btn" href="#"> Add New Company </a>
 </div>
 <style>
 body {
@@ -74,16 +74,16 @@ body {
 
 #Add {
 	height: 0px;
-	width: 85px;
+	width: 105px;
 	position: fixed;
-	right: 0;
-	top: 75%;
+	left: 2%;
+	top: 95%;
 	z-index: 1000;
 	border-radius: 25px;
 	transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
 }
 
 #Add a {
@@ -91,7 +91,7 @@ body {
 	background: #000;
 	height: 52px;
 	padding-top: 10px;
-	width: 155px;
+	width: 170px;
 	text-align: center;
 	border-radius: 25px 25px 0px 0px;
 	color: #fff;

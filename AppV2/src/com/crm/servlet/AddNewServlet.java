@@ -83,7 +83,7 @@ public class AddNewServlet extends HttpServlet {
 
 			return;
 		}
-
+		request.setAttribute("COUNTRY", ApplicationUtils.countires);
 		ApplicationUtils.openJSP(request, response, "/WEB-INF/views/add.jsp");
 		return;
 

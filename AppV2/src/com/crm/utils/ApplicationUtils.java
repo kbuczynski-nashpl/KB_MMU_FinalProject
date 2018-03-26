@@ -1,6 +1,10 @@
 package com.crm.utils;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,6 +75,16 @@ public final class ApplicationUtils {
 	public static String[] urlSplit(HttpServletRequest request) {
 		String url = request.getRequestURL().toString();
 		return url.split("/");
+	}
+	
+	public static String getDate(Integer plusDays, String format) {
+		Date currentDate = new Date();
+		DateFormat dataFormat = new SimpleDateFormat(format);
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(currentDate); 
+		cal.add(Calendar.DATE, plusDays);
+		currentDate = cal.getTime();
+		return dataFormat.format(currentDate);
 	}
 
 }

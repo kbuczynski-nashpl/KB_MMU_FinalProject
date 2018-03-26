@@ -1,21 +1,21 @@
-function ajaxCall(path, data){
+function ajaxCall(path, data) {
 	let url = window.location.origin + "/AppV2/" + path;
 	$.ajax({
-		type: "POST",
+		type : "POST",
 		url : url,
 		contentType : data.contentType,
-		data: data,
-		async: true,
-		success: function(returnData){
-			if(data.isModal === true){
+		data : data,
+		async : true,
+		success : function(returnData) {
+			if (data.isModal === true) {
 				$(data.modalId).html(returnData);
 			}
-			if(data.responseRequired === true){
+			if (data.responseRequired === true) {
 				return returnData.responseValue;
 			}
 		}
 	})
-	
+
 }
 
 function toggleNav() {
@@ -37,14 +37,13 @@ $(".modal").on("hidden.bs.modal", function() {
 });
 
 $("#add_new_btn").on('click', function(e) {
-		let data = {};
-		data.contentType = "application/html";
-		data.isModal = true;
-		data.modalId = "#modalAddBody"; 
-		ajaxCall("add", data);
-		$('#addModal').modal('show');
+	let data = {};
+	data.contentType = "application/html";
+	data.isModal = true;
+	data.modalId = "#modalAddBody";
+	ajaxCall("add", data);
+	$('#addModal').modal('show');
 });
-
 
 $("#search_navBar").on('keyup', function(e) {
 	if (e.keyCode == 13) {
@@ -52,19 +51,19 @@ $("#search_navBar").on('keyup', function(e) {
 		let keyword = $("#search_navBar").val()
 		data.contentType = "application/html";
 		data.isModal = true;
-		data.modalId = "#modalSearchBody"; 
+		data.modalId = "#modalSearchBody";
 		ajaxCall("search/" + encodeURI(keyword), data);
 		$('#searchModal').modal('toggle');
 	}
 });
 
+$(document).ready(function() {
+	$('.table').DataTable({
+		"searching" : false,
+		"autoWidth" : true,
+		"lengthChange" : false
 
-$(document).ready( function () {
-    $('.table').DataTable({
-    	"searching": false,
-    	"autoWidth": true,
-    	  "lengthChange": false
-
-    });
-    $('.table').addClass("hover");
-} );
+	});
+	$('.table').addClass("hover");
+	$('[data-toggle="tooltip"]').tooltip();
+});

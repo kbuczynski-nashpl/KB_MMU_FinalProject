@@ -35,7 +35,8 @@ public class ViewCustomerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = 0;
 		HttpSession _SESSION = request.getSession();
-		String baseURI = ApplicationUtils.getPathURI(request);
+		String baseURI = ApplicationUtils.getBasePathOfURI(request);
+		System.out.println(baseURI);
 
 		if (_SESSION.getAttribute("DELETENOTIFICATION") != null
 				&& _SESSION.getAttribute("DELETENOTIFICATION").equals("OK")) {

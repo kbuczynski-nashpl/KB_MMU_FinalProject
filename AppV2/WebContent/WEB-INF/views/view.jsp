@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="header.jsp" />
 </head>
-	<%@include file="nav.jsp"%>
+<%@include file="nav.jsp"%>
 <body>
 	<div class="page-header container-fluid">
 		<h1>${crmCompany.getCompany_name()}
@@ -16,16 +16,19 @@
 				class="btn btn-primary col-1" type="button">Edit</a>
 		</h1>
 	</div>
-	<div class="container-fluid">
-	<%
-		String msg = (String) request.getAttribute("DELETE_MSG");
-		if (msg != null){
-			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-		}
-		request.getSession().removeAttribute("DELETENOTIFICATION");
-	%>	
+	<div class="">
+		<%
+			String msg = (String) request.getAttribute("DELETE_MSG");
+			if (msg != null) {
+				out.println(
+						"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"
+								+ msg
+								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+			}
+			request.getSession().removeAttribute("DELETENOTIFICATION");
+		%>
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2">
 				<div class="nav flex-column nav-pills" id="v-pills-tab"
 					role="tablist" aria-orientation="vertical">
 					<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
@@ -45,7 +48,7 @@
 						Addresses</a>
 				</div>
 			</div>
-			<div class="col-9">
+			<div class="col-10">
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="v-pills-home"
 						role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -71,9 +74,7 @@
 							</div>
 						</div>
 						<div class="container">
-							<h3 class="page-header">
-								Active Address:
-							</h3>
+							<h3 class="page-header">Active Address:</h3>
 						</div>
 						<c:forEach items="${crmCompanyAddresses}" var="crmAddress">
 							<c:if test="${crmAddress.getCompany_address_active() == true}">
@@ -158,7 +159,10 @@
 											<td>${crmPersonnel.getCompany_personnel_phoneNo()}</td>
 											<td>${crmPersonnel.getCompany_personnel_phoneNo_prefix()}</td>
 											<td>${crmPersonnel.getCompany_personnel_position()}</td>
-											<td><a href="${pageContext.request.contextPath}/delete/personnel/${crmPersonnel.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
+											<td><a
+												href="${pageContext.request.contextPath}/delete/personnel/${crmPersonnel.getId()}"
+												type="button" class="btn btn-primary form-control"><i
+													class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -194,10 +198,14 @@
 											<td>${crmEmailAddress.getCompany_email_address()}</td>
 											<td><c:if
 													test="${crmEmailAddress.getCompany_email_active() == true}">
-													<span class="badge badge-success form-control"><i class="fas fa-check"></i></span>
+													<span class="badge badge-success form-control"><i
+														class="fas fa-check"></i></span>
 												</c:if></td>
 											<td>${crmEmailAddress.getCompany_email_type()}</td>
-											<td><a href="${pageContext.request.contextPath}/delete/email/${crmEmailAddress.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
+											<td><a
+												href="${pageContext.request.contextPath}/delete/email/${crmEmailAddress.getId()}"
+												type="button" class="btn btn-primary form-control"><i
+													class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -219,9 +227,9 @@
 										<th>Id</th>
 										<th>Note Title</th>
 										<th>Note</th>
-										<th>Assigned To: </th>
+										<th>Assigned To:</th>
 										<th>Status</th>
-										<th>Due In: </th>
+										<th>Due In:</th>
 										<th>Last Edited by</th>
 										<th>Last Edited time</th>
 										<th>Remove</th>
@@ -234,21 +242,25 @@
 											<td><a id="edit_note_${crmNote.getId()}"
 												href="${pageContext.request.contextPath}/edit/note/${crmNote.getId()}">${crmNoteInfo.count}</a></td>
 											<td>${crmNote.getCompany_note_title()}</td>
-											<td>${crmNote.getCompany_note(25)}</td>
+											<td style="word-wrap: break-word;"><span data-toggle="tooltip" data-placement="top"
+												title="${crmNote.getCompany_note(0)}">${crmNote.getCompany_note(10)}</span></td>
 											<td><label class="badge badge-info form-control">${crmNote.getCompany_note_assignedToName().getFullName()}</label></td>
 											<td><label class="badge badge-secondary form-control">${crmNote.getCompany_note_status()}</label></td>
 											<td><label class="badge badge-light form-control">${crmNote.getCompany_note_dueinToString()}</label></td>
 											<td><label class="badge badge-primary form-control">${crmNote.getLastEditedBy().getFullName()}</label></td>
 											<td><label class="badge badge-light form-control">${crmNote.getCompany_note_by_dateToString()}</label></td>
-											<td><a href="${pageContext.request.contextPath}/delete/note/${crmNote.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
+											<td><a
+												href="${pageContext.request.contextPath}/delete/note/${crmNote.getId()}"
+												type="button" class="btn btn-primary form-control"><i
+													class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="v-pills-company-addresses" role="tabpanel"
-						aria-labelledby="v-pills-company-addresses-tab">
+					<div class="tab-pane fade" id="v-pills-company-addresses"
+						role="tabpanel" aria-labelledby="v-pills-company-addresses-tab">
 						<div class="container row"
 							style="margin-top: 2%; margin-bottom: 2%">
 							<a
@@ -280,8 +292,15 @@
 											<td>${crmAddress.getCompany_address_postcode()}</td>
 											<td>${crmAddress.getCompany_address_city()}</td>
 											<td>${crmAddress.getCompany_address_country()}</td>
-											<td><c:if test="${crmAddress.getCompany_address_active() == true}"><span class="badge badge-success form-control"><i class="fas fa-check"></i></span></c:if></td>
-											<td><a href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}" type="button" class="btn btn-primary form-control"><i class="fas fa-trash-alt"></i></a></td>
+											<td><c:if
+													test="${crmAddress.getCompany_address_active() == true}">
+													<span class="badge badge-success form-control"><i
+														class="fas fa-check"></i></span>
+												</c:if></td>
+											<td><a
+												href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}"
+												type="button" class="btn btn-primary form-control"><i
+													class="fas fa-trash-alt"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

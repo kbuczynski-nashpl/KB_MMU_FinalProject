@@ -194,6 +194,7 @@ public class EditServlet extends HttpServlet {
 
 				newValues.put("noteTitle", request.getParameter("noteTitle"));
 				newValues.put("note", request.getParameter("note"));
+				//TODO: ADD NEW EDIT OPTIONS /STATUS /DUEIN /UserAssigned 
 				newValues.put("noteUserId", request.getParameter("noteUserId"));
 				newValues.put("noteDate", dataFormat.format(currentDate));
 
