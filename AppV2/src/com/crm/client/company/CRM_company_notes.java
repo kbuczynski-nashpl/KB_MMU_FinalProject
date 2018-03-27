@@ -116,6 +116,10 @@ public class CRM_company_notes {
 		return dataFormat.format(this.getCompany_note_duein());
 
 	}
+	public String getCompany_note_dueinToStringToFrom() {
+		String dueInDate = this.getCompany_note_dueinToString();
+		return dueInDate.replace(" ", "T");
+	}
 
 	public Date getCompany_note_by_date() {
 		return this.company_note_by_date;

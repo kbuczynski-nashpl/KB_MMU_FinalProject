@@ -1,10 +1,7 @@
 package com.crm.servlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -19,6 +16,7 @@ import com.crm.client.company.CRM_company_email_address;
 import com.crm.client.company.CRM_company_notes;
 import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.user.CRM_user;
+import com.crm.client.user.CRM_user_information;
 import com.crm.utils.ApplicationErrorLoging;
 import com.crm.utils.ApplicationUtils;
 import com.db.mysql.models.DBO_CRM_company;
@@ -26,6 +24,8 @@ import com.db.mysql.models.DBO_CRM_company_address;
 import com.db.mysql.models.DBO_CRM_company_email_address;
 import com.db.mysql.models.DBO_CRM_company_notes;
 import com.db.mysql.models.DBO_CRM_company_personnel;
+import com.db.mysql.models.DBO_CRM_user;
+import com.db.mysql.models.DOB_CRM_user_information;
 
 /**
  * A Servlet which handles the edit request. It either process the data and
@@ -79,6 +79,7 @@ public class EditServlet extends HttpServlet {
 
 		switch (type) {
 		case "main":
+			//TODO: /EDIT ANME NEEDS TO BE ADDED
 			cc = dbo0.getById(id);
 
 			ArrayList<CRM_company_email_address> companyEmailAddressList = dbo1.getByCompanyId(id);
@@ -189,14 +190,13 @@ public class EditServlet extends HttpServlet {
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
 
-				Date currentDate = new Date();
-				DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
 				newValues.put("noteTitle", request.getParameter("noteTitle"));
 				newValues.put("note", request.getParameter("note"));
-				//TODO: ADD NEW EDIT OPTIONS /STATUS /DUEIN /UserAssigned 
+				newValues.put("noteStatus", request.getParameter("noteStatus"));
+				newValues.put("noteAssigne", request.getParameter("noteAssigne"));
+				newValues.put("noteDuein", request.getParameter("noteDuein"));
 				newValues.put("noteUserId", request.getParameter("noteUserId"));
-				newValues.put("noteDate", dataFormat.format(currentDate));
+				newValues.put("noteDate", ApplicationUtils.getDate(0, "yyyy-MM-dd HH:mm"));
 
 				result = processNoteEditRequest(newValues, dbo4);
 
@@ -208,6 +208,9 @@ public class EditServlet extends HttpServlet {
 			request.setAttribute("USER", (CRM_user) _SESSION.getAttribute("CLIENT"));
 			request.setAttribute("CC", cc);
 			request.setAttribute("CCN", ccn);
+			request.setAttribute("USER_INFO", this.getUserInfo(((CRM_user) _SESSION.getAttribute("CLIENT")).getUser_master_id()));
+			request.setAttribute("NOTE_STATUS", ApplicationUtils.note_status);
+
 
 			if (_SESSION.getAttribute("EDIT_RESPONSE") != null) {
 				if (((HashMap<String, String>) _SESSION.getAttribute("EDIT_RESPONSE")).get("STATUS").equals("ERROR")) {
@@ -381,6 +384,12 @@ public class EditServlet extends HttpServlet {
 	private HashMap<String, String> processPersonelEditRequest(HashMap<String, String> newValues,
 			DBO_CRM_company_personnel dbo3, Integer id) {
 		return dbo3.updateRecordById(newValues, id);
+	}
+	
+	private ArrayList<CRM_user_information> getUserInfo(Integer companyId) {
+		DBO_CRM_user dbocu = new DBO_CRM_user();
+		DOB_CRM_user_information dboui = new DOB_CRM_user_information();
+		return dboui.getByIdFromList(dbocu.getAllForCompany(companyId));
 	}
 
 }

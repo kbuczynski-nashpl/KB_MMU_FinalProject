@@ -36,7 +36,7 @@ $(".modal").on("hidden.bs.modal", function() {
 	$(".modal-body").html("");
 });
 
-$("#add_new_btn").on('click', function(e) {
+$(".add_new_btn").on('click', function(e) {
 	let data = {};
 	data.contentType = "application/html";
 	data.isModal = true;

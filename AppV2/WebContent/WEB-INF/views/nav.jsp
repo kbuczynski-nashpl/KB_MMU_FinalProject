@@ -8,8 +8,8 @@
 		aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon" style="padding: 1%;"></span>
 	</button>
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/index" style="margin: 1%;">WebKB
-		CRM</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/index"
+		style="margin: 1%;">WebKB CRM</a>
 	<div class="container col-8" style="padding: 1%">
 		<input class="form-control container" type="text" placeholder="Search"
 			id="search_navBar">
@@ -17,17 +17,22 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/index"><i class="fas fa-home"></i> Home <span
-					class="sr-only">(current)</span>
+				href="${pageContext.request.contextPath}/index"><i
+					class="fas fa-home"></i> Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item">
-				<a class="nav-link" href="${pageContext.request.contextPath}/usersettings"><i class="fas fa-cogs"></i> User Settings <span class="sr-only">(current)</span></a>
+			<li><a class="nav-link add_new_btn" id="add_new_btn_nav" href="#"><i
+					class="fas fa-address-card"></i> Add New Company </a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="${pageContext.request.contextPath}/usersettings"><i
+					class="fas fa-cogs"></i> User Settings <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
-			 <a class="nav-link" href="${pageContext.request.contextPath}/about"><i class="fas fa-question-circle"></i> Information <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only">(current)</span></a>
+			<li class="nav-item"><a class="nav-link"
+				href="${pageContext.request.contextPath}/about"><i
+					class="fas fa-question-circle"></i> Information <span
+					class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="${pageContext.request.contextPath}/logout"><i
+					class="fas fa-sign-out-alt"></i> Logout <span class="sr-only">(current)</span></a>
 			</li>
 		</ul>
 	</div>
@@ -59,7 +64,8 @@
 </div>
 
 <div id="Add">
-	<a id="add_new_btn" href="#"> Add New Company </a>
+	<a id="add_new_btn_side" class="add_new_btn" href="#"><i class="fas fa-address-card"></i>
+		Add New </a>
 </div>
 <style>
 body {
@@ -76,25 +82,25 @@ body {
 	height: 0px;
 	width: 105px;
 	position: fixed;
-	left: 2%;
-	top: 95%;
+	left: 94%;
+	top: 28%;
 	z-index: 1000;
 	border-radius: 25px;
 	transform: rotate(-90deg);
-	-webkit-transform: rotate(0deg);
-	-moz-transform: rotate(0deg);
-	-o-transform: rotate(0deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
 }
 
 #Add a {
 	display: block;
-	background: #000;
-	height: 52px;
+	background: #f8f9fa;
+	height: 33px;
 	padding-top: 10px;
 	width: 170px;
 	text-align: center;
 	border-radius: 25px 25px 0px 0px;
-	color: #fff;
+	color: #000;
 	font-family: Arial, sans-serif;
 	font-size: 17px;
 	font-weight: bold;
@@ -102,6 +108,6 @@ body {
 }
 
 #Add a:hover {
-	background: #00495d;
+	background: #b7d9e2;
 }
 </style>

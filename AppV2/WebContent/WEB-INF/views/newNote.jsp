@@ -62,35 +62,37 @@
 					</select>
 				</div>
 			</div>
-		<div class="form-group row container col-12">
-			<div class="col-4">
-				<label class="col-form-label">Assigned To: </label>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Assigned To: </label>
+				</div>
+				<div class="col-8">
+					<select class="form-control" name="noteAssigne">
+						<c:forEach items="${USER_INFO}" var="assigne">
+							<option value="${assigne.getId()}">${assigne.getUser_surname()}
+								${assigne.getUser_forname()}</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
-			<div class="col-8">
-				<select class="form-control" name="noteAssigne">
-					<c:forEach items="${USER_INFO}" var="assigne">
-						<option value="${assigne.getId()}">${assigne.getUser_surname()} ${assigne.getUser_forname()}</option>
-					</c:forEach>
-				</select>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Due In: </label>
+				</div>
+				<div class="col-8">
+					<input class="form-control" name="noteDuein" value=""
+						type="datetime-local" required />
+				</div>
+			</div>
+			<div class="form-group row container col-12">
+				<div class="col-4">
+					<label class="col-form-label">Note: </label>
+				</div>
+				<div class="col-8">
+					<textarea class="form-control" name="note"></textarea>
+				</div>
 			</div>
 		</div>
-		<div class="form-group row container col-12">
-			<div class="col-4">
-				<label class="col-form-label">Due In: </label>
-			</div>
-			<div class="col-8">
-				<input class="form-control" name="noteDuein" value="" type="datetime-local" required />
-			</div>
-		</div>
-		<div class="form-group row container col-12">
-			<div class="col-4">
-				<label class="col-form-label">Note: </label>
-			</div>
-			<div class="col-8">
-				<textarea class="form-control" name="note"></textarea>
-			</div>
-		</div>
-	</div>
 		<div class="containercol-12" style="padding-top: 1%;">
 			<div class="float-right">
 				<input class="btn btn-danger" id="btnSubmit" type="submit"

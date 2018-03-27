@@ -43,7 +43,6 @@ public class DBO_CRM_company_notes extends MySQL {
 				+ " ORDER BY company_note_by_date DESC LIMIT 5";
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_notes> companyNotes = new ArrayList<CRM_company_notes>();
-		DBO_CRM_company dbo0 = new DBO_CRM_company();
 		for (HashMap<String, String> entries : resultFromMysql) {
 			String companyNoteString = entries.get("company_note").toString();
 			companyNoteString = companyNoteString.replaceAll("\r", "").replaceAll("\n", "");
@@ -79,8 +78,9 @@ public class DBO_CRM_company_notes extends MySQL {
 		String queryString = "UPDATE CRM_company_notes SET " + "company_note_title = '" + newValues.get("noteTitle")
 				+ "', " + "company_note = '" + newValues.get("note") + "', " + "company_note_by_id = '"
 				+ newValues.get("noteUserId") + "', " + "company_note_by_date = '" + newValues.get("noteDate") + "', "
-				+ "company_note_assigned_user = '" + newValues.get("noteAssigne") + "', " + "', "
-				+ "company_note_status = '" + newValues.get("noteStatus") + "', " + "WHERE id = " + id;
+				+ "company_note_assigned_user = '" + newValues.get("noteAssigne") + "', " + "company_note_status = '"
+				+ newValues.get("noteStatus") + "', " + "company_note_duein = '" + newValues.get("noteDuein") + "' "
+				+ "WHERE id = " + id;
 		return update(queryString);
 	}
 

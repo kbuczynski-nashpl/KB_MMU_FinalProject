@@ -1,10 +1,7 @@
 package com.crm.servlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -133,13 +130,10 @@ public class NewServlet extends HttpServlet {
 
 			postData = new HashMap<String, String>();
 
-			Date currentDate = new Date();
-			DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
 			postData.put("noteTitle", request.getParameter("noteTitle"));
 			postData.put("note", request.getParameter("note"));
 			postData.put("noteUserId", request.getParameter("noteUserId"));
-			postData.put("noteDate", dataFormat.format(currentDate));
+			postData.put("noteDate", ApplicationUtils.getDate(0, "yyyy-MM-dd HH:mm"));
 			postData.put("noteStatus", request.getParameter("noteStatus"));
 			postData.put("noteAssigne", request.getParameter("noteAssigne"));
 			postData.put("noteDuein", request.getParameter("noteDuein"));
