@@ -27,6 +27,12 @@
 	</div>
 	<form action="${pageContext.request.contextPath}/edit/main/${CC.getId()}" method="post">
 		<div class="container form-control" style="padding: 2%;">
+		<div class="container" style="padding: 1%">
+				<label class="label">Company Name</label>
+				<div class="col">
+					<input type="text" class="form-control" name="companyName" value="${CC.getCompany_name()}"/>
+				</div>
+			</div>
 			<div class="container" style="padding: 1%">
 				<label class="label">Company Active Email:</label>
 				<div class="col">

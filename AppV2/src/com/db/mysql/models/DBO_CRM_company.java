@@ -16,10 +16,10 @@ public class DBO_CRM_company extends MySQL {
 	public CRM_company getById(int id) {
 		String queryString = "SELECT * FROM CRM_company WHERE id = '" + id + "'";
 		ArrayList<HashMap<String, String>> responseFromMysql = query(queryString);
-		CRM_company newCompany = new CRM_company(Integer.parseInt(responseFromMysql.get(0).get("id").toString()),
+		
+		return new CRM_company(Integer.parseInt(responseFromMysql.get(0).get("id").toString()),
 				Integer.parseInt(responseFromMysql.get(0).get("CRM_user_master_id").toString()),
 				responseFromMysql.get(0).get("company_name").toString());
-		return newCompany;
 	}
 	
 
@@ -97,8 +97,7 @@ public class DBO_CRM_company extends MySQL {
 	public HashMap<String, String> createNewCrmCompany(CRM_company cc) {
 		String queryString = "INSERT INTO CRM_company (CRM_user_master_id, company_name) VALUES ('"
 				+ cc.getCRM_user_master_id() + "', '" + cc.getCompany_name() + "')";
-		HashMap<String, String> response = update(queryString);
-		return response;
+		return update(queryString);
 	}
 
 	private void parseSearchQuery(ArrayList<HashMap<String, String>> result) {
@@ -112,9 +111,13 @@ public class DBO_CRM_company extends MySQL {
 
 	public HashMap<String, String> removeById(Integer id) {
 		String queryString = "DELETE FROM CRM_company WHERE id = " + id;
-		HashMap<String, String> result = update(queryString);
-		return result;
-
+		return update(queryString);
+	}
+	
+	public HashMap<String,String> updateCompanyName(String companyName, Integer companyId){
+		String queryString = "UPDATE CRM_company SET company_name =  '" + companyName +"' "
+				+ "WHERE id = " + companyId;
+		return update(queryString);
 	}
 
 }

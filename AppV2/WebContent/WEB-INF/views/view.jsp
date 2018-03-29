@@ -28,7 +28,7 @@
 			request.getSession().removeAttribute("DELETENOTIFICATION");
 		%>
 		<div class="row">
-			<div class="col-2">
+			<div class="col-3">
 				<div class="nav flex-column nav-pills" id="v-pills-tab"
 					role="tablist" aria-orientation="vertical">
 					<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
@@ -48,7 +48,7 @@
 						Addresses</a>
 				</div>
 			</div>
-			<div class="col-10">
+			<div class="col-9">
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="v-pills-home"
 						role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -242,7 +242,8 @@
 											<td><a id="edit_note_${crmNote.getId()}"
 												href="${pageContext.request.contextPath}/edit/note/${crmNote.getId()}">${crmNoteInfo.count}</a></td>
 											<td>${crmNote.getCompany_note_title()}</td>
-											<td style="word-wrap: break-word;"><span data-toggle="tooltip" data-placement="top"
+											<td style="word-wrap: break-word;"><span
+												data-toggle="tooltip" data-placement="top"
 												title="${crmNote.getCompany_note(0)}">${crmNote.getCompany_note(10)}</span></td>
 											<td><label class="badge badge-info form-control">${crmNote.getCompany_note_assignedToName().getFullName()}</label></td>
 											<td><label class="badge badge-secondary form-control">${crmNote.getCompany_note_status()}</label></td>
@@ -278,7 +279,7 @@
 										<th>Address City</th>
 										<th>Address Country</th>
 										<th>Active</th>
-										<th>Remove</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -287,20 +288,33 @@
 										<tr>
 											<td><a id="edit_address_${crmAddress.getId()}"
 												href="${pageContext.request.contextPath}/edit/address/${crmAddress.getId()}">${crmAddressInfo.count}</a></td>
-											<td>${crmAddress.getCompany_address_line1()}</td>
-											<td>${crmAddress.getCompany_address_line2()}</td>
-											<td>${crmAddress.getCompany_address_postcode()}</td>
-											<td>${crmAddress.getCompany_address_city()}</td>
-											<td>${crmAddress.getCompany_address_country()}</td>
+											<td id="td-${crmAddress.getId()}-line1">${crmAddress.getCompany_address_line1()}</td>
+											<td id="td-${crmAddress.getId()}-line2">${crmAddress.getCompany_address_line2()}</td>
+											<td id="td-${crmAddress.getId()}-postcode">${crmAddress.getCompany_address_postcode()}</td>
+											<td id="td-${crmAddress.getId()}-city">${crmAddress.getCompany_address_city()}</td>
+											<td id="td-${crmAddress.getId()}-country">${crmAddress.getCompany_address_country()}</td>
 											<td><c:if
 													test="${crmAddress.getCompany_address_active() == true}">
 													<span class="badge badge-success form-control"><i
 														class="fas fa-check"></i></span>
 												</c:if></td>
-											<td><a
-												href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}"
-												type="button" class="btn btn-primary form-control"><i
-													class="fas fa-trash-alt"></i></a></td>
+											<td>
+												<div class="dropdown">
+													<button class="btn btn-warning dropdown-toggle"
+														type="button" id="dropdownMenuButton"
+														data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false">Action</button>
+													<div class="dropdown-menu button-group-dropdown"
+														aria-labelledby="dropdownMenuButton">
+														<a
+															href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}"
+															type="button" class="btn btn-primary col-12 form-control button-dropdown-item"><i
+															class="fas fa-trash-alt"></i></a> <a type="button" id="btn-copyAddress" addressId="${crmAddress.getId()}" href="#"
+															class="btn btn-info col-12 form-control button-dropdown-item">Copy</a>
+													</div>
+												</div>
+
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>

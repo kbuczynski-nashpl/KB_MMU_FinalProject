@@ -36,6 +36,24 @@ $(".modal").on("hidden.bs.modal", function() {
 	$(".modal-body").html("");
 });
 
+$("#btn-copyAddress").on('click', function(e){
+	let addressID =	0;
+	$('#btn-copyAddress[addressId]').each(function(){
+	     addressID = $(this).attr("addressId");
+	});
+	let address = {};
+	address.line1 = $("#td-"+addressID+"-line1").html();
+	address.line2 = $("#td-"+addressID+"-line2").html();
+	address.postcode = $("#td-"+addressID+"-postcode").html();
+	address.city = $("#td-"+addressID+"-city").html();
+	address.country  = $("#td-"+addressID+"-country").html();
+	let stringAddress =  Object.values(address);
+	let dummy = $('<input>').val(stringAddress.toString()).select()
+	document.execCommand('copy');
+	//TODO: CALL BS_ALERT.js msg
+	
+});
+
 $(".add_new_btn").on('click', function(e) {
 	let data = {};
 	data.contentType = "application/html";
@@ -65,5 +83,8 @@ $(document).ready(function() {
 
 	});
 	$('.table').addClass("hover");
+	
 	$('[data-toggle="tooltip"]').tooltip();
+	
+	
 });

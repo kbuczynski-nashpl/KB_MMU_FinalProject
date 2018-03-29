@@ -79,7 +79,6 @@ public class EditServlet extends HttpServlet {
 
 		switch (type) {
 		case "main":
-			//TODO: /EDIT ANME NEEDS TO BE ADDED
 			cc = dbo0.getById(id);
 
 			ArrayList<CRM_company_email_address> companyEmailAddressList = dbo1.getByCompanyId(id);
@@ -87,12 +86,12 @@ public class EditServlet extends HttpServlet {
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> postValues = new HashMap<String, String>();
-
+				postValues.put("companyName", request.getParameter("companyName"));
 				postValues.put("address", request.getParameter("address").toString());
 				postValues.put("emailAddress", request.getParameter("emailAddress").toString());
 				postValues.put("companyId", id.toString());
 
-				result = processMainEditRequest(postValues, dbo1, dbo2, companyEmailAddressList, companyAddressList);
+				result = processMainEditRequest(postValues,dbo0, dbo1, dbo2, companyEmailAddressList, companyAddressList);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -316,7 +315,9 @@ public class EditServlet extends HttpServlet {
 	 */
 
 	private HashMap<String, String> processMainEditRequest(HashMap<String, String> postValues,
-			DBO_CRM_company_email_address dbo1, DBO_CRM_company_address dbo2,
+			DBO_CRM_company dbo0,
+			DBO_CRM_company_email_address dbo1, 
+			DBO_CRM_company_address dbo2,
 			ArrayList<CRM_company_email_address> companyEmailAddressList,
 			ArrayList<CRM_company_address> companyAddressList) {
 
@@ -360,11 +361,16 @@ public class EditServlet extends HttpServlet {
 			result.add(dbo1.updateActiveAddressState(false, currentActiveEmailAddress.getId()));
 			result.add(dbo1.updateActiveAddressState(true, Integer.parseInt(postValues.get("emailAddress"))));
 		}
+		
+		// update CRM company name
+		result.add(dbo0.updateCompanyName(postValues.get("companyName").toString(), id));
+		
 		for (HashMap<String, String> tmp : result) {
 			if (tmp.get("STATUS").equals("ERROR")) {
 				return tmp;
 			}
 		}
+		
 		if (result.size() < 1) {
 			return null;
 		}

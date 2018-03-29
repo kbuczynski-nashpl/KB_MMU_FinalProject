@@ -13,3 +13,17 @@ body{
     margin: 40px 0 20px;
     border-bottom: 1px solid #eee;
 }
+.button-box {
+  text-align:center;
+  margin-top:20px;
+ }
+ 
+ .button-group-dropdown{
+ 	padding: 5%;
+ }
+ 
+ .button-dropdown-item{
+ 	height: 30px;
+ 	padding : 2%;
+ 	margin : 2%;
+ }
