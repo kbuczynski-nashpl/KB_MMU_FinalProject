@@ -230,7 +230,7 @@ public class EditServlet extends HttpServlet {
 				HashMap<String, String> newValues = new HashMap<String, String>();
 
 				newValues.put("addressLine1", request.getParameter("addressLine1"));
-				newValues.put("addressPostCode", request.getParameter("addressPostCode"));
+				newValues.put("addressPostcode", request.getParameter("addressPostcode"));
 				newValues.put("addressCity", request.getParameter("addressCity"));
 				newValues.put("addressCountry", request.getParameter("addressCountry"));
 

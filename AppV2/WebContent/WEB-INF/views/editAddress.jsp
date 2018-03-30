@@ -16,17 +16,17 @@
 	<%
 		String error_msg = (String) request.getAttribute("error");
 		String success_msg = (String) request.getAttribute("success");
-		if (error_msg != null){
-			out.println("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"+ error_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		if (error_msg != null) {
+			out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg +"',true); };</script>");
 		}
-		if (success_msg != null){
-			out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"+ success_msg + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+		if (success_msg != null) {
+					out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg +"',true); };</script>");
 		}
 		 request.getSession().removeAttribute("EDIT_RESPONSE");
 	%>	
 	</div>
 	<form
-		action="${pageContext.request.contextPath}/edit/address/${CC.getId()}"
+		action="${pageContext.request.contextPath}/edit/address/${CCA.getId()}"
 		method="post">
 		<div class="container form-control" style="padding: 2%;">
 			<div class="form-group row container col-12">

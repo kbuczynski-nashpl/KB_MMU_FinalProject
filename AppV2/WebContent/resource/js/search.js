@@ -48,10 +48,17 @@ $("#btn-copyAddress").on('click', function(e){
 	address.city = $("#td-"+addressID+"-city").html();
 	address.country  = $("#td-"+addressID+"-country").html();
 	let stringAddress =  Object.values(address);
-	let dummy = $('<input>').val(stringAddress.toString()).select()
-	document.execCommand('copy');
-	//TODO: CALL BS_ALERT.js msg
-	
+	let textArea = $("<textarea>").appendTo('body').html(stringAddress.toString()).select();  
+	try {
+	  var successful = document.execCommand('copy');
+	  var msg = successful ? 'successful' : 'unsuccessful';
+	  console.log('Copying text command was ' + msg);
+	} catch (err) {
+	  console.log('Oops, unable to copy');
+	}
+	$(textArea).remove();
+
+	createNewAlert("INFO", "Copied address into clipboard", true);
 });
 
 $(".add_new_btn").on('click', function(e) {

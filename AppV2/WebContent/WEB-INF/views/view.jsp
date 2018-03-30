@@ -310,7 +310,7 @@
 															href="${pageContext.request.contextPath}/delete/address/${crmAddress.getId()}"
 															type="button" class="btn btn-primary col-12 form-control button-dropdown-item"><i
 															class="fas fa-trash-alt"></i></a> <a type="button" id="btn-copyAddress" addressId="${crmAddress.getId()}" href="#"
-															class="btn btn-info col-12 form-control button-dropdown-item">Copy</a>
+															class="btn btn-info col-12 form-control button-dropdown-item"><i class="fas fa-copy"></i> Copy</a>
 													</div>
 												</div>
 

@@ -13,6 +13,19 @@
 		<h1 class="page-header">${CCP.getCompany_personnel_surname()}
 			${CCP.getCompany_personnel_forname()}</h1>
 	</div>
+	<div class="container">
+	<%
+		String error_msg = (String) request.getAttribute("error");
+		String success_msg = (String) request.getAttribute("success");
+		if (error_msg != null) {
+			out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg +"',true); };</script>");
+		}
+		if (success_msg != null) {
+					out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg +"',true); };</script>");
+		}
+		request.getSession().removeAttribute("EDIT_RESPONSE");
+	%>	
+	</div>
 	<form
 		action="${pageContext.request.contextPath}/edit/personnel/${CCP.getId()}"
 		method="post">

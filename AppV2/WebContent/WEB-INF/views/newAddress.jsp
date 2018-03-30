@@ -21,18 +21,12 @@
 		<%
 			String error_msg = (String) request.getAttribute("error");
 			String success_msg = (String) request.getAttribute("success");
-			if (error_msg != null)
-				out.println(
-						"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"
-								+ error_msg
-								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-
-			if (success_msg != null)
-				out.println(
-						"<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Success: </strong>"
-								+ success_msg
-								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
-		%>
+			if (error_msg != null) {
+				out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg +"',true); };</script>");
+			}
+			if (success_msg != null) {
+						out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg +"',true); };</script>");
+			}%>
 	</div>
 	<form
 		action="${pageContext.request.contextPath}/new/postaddress/${COMPANY_ID}"

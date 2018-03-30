@@ -94,13 +94,21 @@
     <servlet-name>DeleteCompanyElement</servlet-name>
     <url-pattern>/delete/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>UserSettings</servlet-name>
     <servlet-class>com.crm.servlet.UserSettings</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserSettings</servlet-name>
     <url-pattern>/settings/*</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AboutServlet</servlet-name>
+    <servlet-class>com.crm.servlet.AboutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AboutServlet</servlet-name>
+    <url-pattern>/about</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>

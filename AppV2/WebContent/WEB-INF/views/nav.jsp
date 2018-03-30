@@ -44,6 +44,9 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="modalContentSearchBox"
 			style="padding: 3%">
+			<div><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>
 			<div class="modal-body" id="modalSearchBody"
 				style="margin-top: 2%; margin-bottom: 5%"></div>
 		</div>
@@ -56,6 +59,9 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="modalContentAddNewBox"
 			style="padding: 3%">
+			<div><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>
 			<div class="modal-header container" id="addModalHeader"></div>
 			<div class="modal-body container" id="modalAddBody"
 				style="margin-top: 2%; margin-bottom: 5%;"></div>
@@ -83,7 +89,7 @@ body {
 	width: 105px;
 	position: fixed;
 	left: 94%;
-	top: 28%;
+	top: 30%;
 	z-index: 1000;
 	border-radius: 25px;
 	transform: rotate(-90deg);
