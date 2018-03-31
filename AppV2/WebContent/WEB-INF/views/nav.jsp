@@ -23,7 +23,7 @@
 			<li><a class="nav-link add_new_btn" id="add_new_btn_nav" href="#"><i
 					class="fas fa-address-card"></i> Add New Company </a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${pageContext.request.contextPath}/usersettings"><i
+				href="${pageContext.request.contextPath}/settings"><i
 					class="fas fa-cogs"></i> User Settings <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item"><a class="nav-link"

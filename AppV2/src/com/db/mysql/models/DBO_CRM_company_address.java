@@ -12,7 +12,7 @@ public class DBO_CRM_company_address extends MySQL {
 		super();
 	}
 
-	public ArrayList<CRM_company_address> getByCompanyId(int id) {
+	public static ArrayList<CRM_company_address> getByCompanyId(int id) {
 		String queryString = "SELECT * from CRM_company_address where company_id =" + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_address> companyAddresses = new ArrayList<CRM_company_address>();
@@ -37,7 +37,7 @@ public class DBO_CRM_company_address extends MySQL {
 		return companyAddresses;
 	}
 
-	public HashMap<String, String> createNewCrmCompanyAddress(CRM_company_address cca) {
+	public static HashMap<String, String> createNewCrmCompanyAddress(CRM_company_address cca) {
 		String queryString = "";
 		int activeValue = 0;
 		if (cca.getCompany_address_active() == true) {
@@ -62,14 +62,14 @@ public class DBO_CRM_company_address extends MySQL {
 		return resultFromMysql;
 	}
 
-	public HashMap<String, String> removeByCompanyId(Integer id) {
+	public static HashMap<String, String> removeByCompanyId(Integer id) {
 		String queryString = "DELETE FROM CRM_company_address where company_id = " + id;
 		HashMap<String, String> resultFromMysql = update(queryString);
 		return resultFromMysql;
 
 	}
 
-	public HashMap<String, String> updateActiveAddressState(Boolean status, Integer addressId) {
+	public static HashMap<String, String> updateActiveAddressState(Boolean status, Integer addressId) {
 		String queryString = "";
 		if (status.equals(true)) {
 			queryString = "UPDATE CRM_company_address SET company_address_active = 1 where id = " + addressId;
@@ -81,7 +81,7 @@ public class DBO_CRM_company_address extends MySQL {
 		return resultFromMysql;
 	}
 
-	public CRM_company_address getById(Integer id) {
+	public static CRM_company_address getById(Integer id) {
 		String queryString = "SELECT * from CRM_company_address where id =" + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		CRM_company_address crmCompanyAddress = new CRM_company_address(
@@ -103,12 +103,12 @@ public class DBO_CRM_company_address extends MySQL {
 		return crmCompanyAddress;
 	}
 
-	public HashMap<String, String> removeAddressById(Integer id) {
+	public static HashMap<String, String> removeAddressById(Integer id) {
 		String queryString = "DELETE FROM CRM_company_address where id = " + id;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> updateAddress(HashMap<String, String> newValues, Integer id) {
+	public static HashMap<String, String> updateAddress(HashMap<String, String> newValues, Integer id) {
 		String queryString;
 		if (newValues.get("addressLine2") != null) {
 			queryString = "UPDATE CRM_company_address SET " + "company_address_line1 = '"

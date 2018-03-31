@@ -2,6 +2,7 @@ package com.crm.utils;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +11,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.crm.client.user.CRM_user;
+import com.crm.client.user.CRM_user_information;
+import com.crm.client.user.CRM_user_master;
+import com.db.mysql.models.DBO_CRM_user;
+import com.db.mysql.models.DBO_CRM_user_information;
+import com.db.mysql.models.DBO_CRM_user_master;
 
 public final class ApplicationUtils {
 	public final static String[] note_status = { "IN REVIEW", "OPEN", "REQUIRE RESPONSE", "CLOSED" };
@@ -85,6 +94,41 @@ public final class ApplicationUtils {
 		cal.add(Calendar.DATE, plusDays);
 		currentDate = cal.getTime();
 		return dataFormat.format(currentDate);
+	}
+	
+	public static void updateUserSessionInformation(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession _SESSION = request.getSession();
+		String baseURI = ApplicationUtils.getBasePathOfURI(request);
+		CRM_user cu = ((CRM_user) _SESSION.getAttribute("CLIENT"));
+		CRM_user_information cui = ((CRM_user_information) _SESSION.getAttribute("CLIENT_INFO"));
+		CRM_user_master cum = ((CRM_user_master) _SESSION.getAttribute("CLIENT_MASTER_INFO"));
+		
+		try {
+			cu = DBO_CRM_user.getUserById(cu.getId());
+			cui = DBO_CRM_user_information.getByUserId(cu.getId());
+			cum = DBO_CRM_user_master.getById(cu.getUser_master_id());
+		} catch (NumberFormatException e) {
+			ApplicationErrorLoging.log("ApplicationUtils.java", e);
+			try {
+				response.sendRedirect(baseURI + "404");
+			} catch (IOException e1) {
+				ApplicationErrorLoging.log("ApplicationUtils.java", e1);
+			}
+			return;
+		} catch (ParseException e) {
+			ApplicationErrorLoging.log("ApplicationUtils.java", e);
+			try {
+				response.sendRedirect(baseURI + "404");
+			} catch (IOException e1) {
+				ApplicationErrorLoging.log("ApplicationUtils.java", e);
+			}
+			return;
+		}
+		
+		_SESSION.setAttribute("CLIENT", cu);
+		_SESSION.setAttribute("CLIENT_MASTER_INFO", cum);
+		_SESSION.setAttribute("CLIENT_INFO", cui);
+		return;
 	}
 
 }

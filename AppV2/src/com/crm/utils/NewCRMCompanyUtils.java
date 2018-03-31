@@ -25,10 +25,6 @@ import com.db.mysql.models.DBO_CRM_company_phoneNo;
  */
 public class NewCRMCompanyUtils {
 
-	private static DBO_CRM_company dbo0 = new DBO_CRM_company();
-	private static DBO_CRM_company_address dbo1 = new DBO_CRM_company_address();
-	private static DBO_CRM_company_email_address dbo2 = new DBO_CRM_company_email_address();
-	private static DBO_CRM_company_phoneNo dbo3 = new DBO_CRM_company_phoneNo();
 	private static HashMap<String, String> response = new HashMap<String, String>();
 	private static HashMap<String, String> objectStatus = new HashMap<String, String>();
 
@@ -52,7 +48,7 @@ public class NewCRMCompanyUtils {
 			e.printStackTrace();
 		}
 		// CREATING THE CRM_company entry in Database
-		response = dbo0.createNewCrmCompany(cc);
+		response = DBO_CRM_company.createNewCrmCompany(cc);
 		cc.setId(Integer.parseInt(response.get("GEN_ID").toString()));
 
 		// CREATING CRM_company_address entry as a object
@@ -106,19 +102,19 @@ public class NewCRMCompanyUtils {
 		}
 
 		// Create CRM_company_address entry in Database
-		response = dbo1.createNewCrmCompanyAddress(cca);
+		response = DBO_CRM_company_address.createNewCrmCompanyAddress(cca);
 		if (response.get("STATUS").equals("ERROR")) {
 			return response;
 		}
 
 		// Create CRM_company_email_address entry in Database
-		response = dbo2.createNewCRMEmailAddress(ccea);
+		response = DBO_CRM_company_email_address.createNewCRMEmailAddress(ccea);
 		if (response.get("STATUS").equals("ERROR")) {
 			return response;
 		}
 
 		// Create CRM_company_phoneNo entry in Database
-		response = dbo3.createNewCrmCompanyPhoneNo(ccpn);
+		response = DBO_CRM_company_phoneNo.createNewCrmCompanyPhoneNo(ccpn);
 		if (response.get("STATUS").equals("ERROR")) {
 			return response;
 		}
@@ -159,17 +155,17 @@ public class NewCRMCompanyUtils {
 	}
 
 	private static void cleanUpDatabase(Integer companyId) {
-		if (dbo0.getById(companyId).getCompany_name() != null) {
-			dbo0.removeById(companyId);
+		if (DBO_CRM_company.getById(companyId).getCompany_name() != null) {
+			DBO_CRM_company.removeById(companyId);
 		}
-		if (dbo1.getByCompanyId(companyId).isEmpty() != true) {
-			dbo1.removeByCompanyId(companyId);
+		if (DBO_CRM_company_address.getByCompanyId(companyId).isEmpty() != true) {
+			DBO_CRM_company_address.removeByCompanyId(companyId);
 		}
-		if (dbo2.getByCompanyId(companyId).isEmpty() != true) {
-			dbo2.removeByCompanyId(companyId);
+		if (DBO_CRM_company_email_address.getByCompanyId(companyId).isEmpty() != true) {
+			DBO_CRM_company_email_address.removeByCompanyId(companyId);
 		}
-		if (dbo3.getByCompanyId(companyId).isEmpty() != true) {
-			dbo3.removeByCompanyId(companyId);
+		if (DBO_CRM_company_phoneNo.getByCompanyId(companyId).isEmpty() != true) {
+			DBO_CRM_company_phoneNo.removeByCompanyId(companyId);
 		}
 	}
 }

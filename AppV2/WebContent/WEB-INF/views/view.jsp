@@ -20,10 +20,7 @@
 		<%
 			String msg = (String) request.getAttribute("DELETE_MSG");
 			if (msg != null) {
-				out.println(
-						"<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"><strong>Error: </strong>"
-								+ msg
-								+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>");
+				out.println("<script>window.onload = function() { createNewAlert('INFO','" + msg +"',true); };</script>");
 			}
 			request.getSession().removeAttribute("DELETENOTIFICATION");
 		%>

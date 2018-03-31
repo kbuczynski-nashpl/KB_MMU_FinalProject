@@ -25,7 +25,7 @@ import com.db.mysql.models.DBO_CRM_company_email_address;
 import com.db.mysql.models.DBO_CRM_company_notes;
 import com.db.mysql.models.DBO_CRM_company_personnel;
 import com.db.mysql.models.DBO_CRM_user;
-import com.db.mysql.models.DOB_CRM_user_information;
+import com.db.mysql.models.DBO_CRM_user_information;
 
 /**
  * A Servlet which handles the edit request. It either process the data and
@@ -67,11 +67,6 @@ public class EditServlet extends HttpServlet {
 			return;
 		}
 
-		DBO_CRM_company dbo0 = new DBO_CRM_company();
-		DBO_CRM_company_email_address dbo1 = new DBO_CRM_company_email_address();
-		DBO_CRM_company_address dbo2 = new DBO_CRM_company_address();
-		DBO_CRM_company_personnel dbo3 = new DBO_CRM_company_personnel();
-		DBO_CRM_company_notes dbo4 = new DBO_CRM_company_notes();
 
 		CRM_company cc = new CRM_company();
 
@@ -79,10 +74,10 @@ public class EditServlet extends HttpServlet {
 
 		switch (type) {
 		case "main":
-			cc = dbo0.getById(id);
+			cc = DBO_CRM_company.getById(id);
 
-			ArrayList<CRM_company_email_address> companyEmailAddressList = dbo1.getByCompanyId(id);
-			ArrayList<CRM_company_address> companyAddressList = dbo2.getByCompanyId(id);
+			ArrayList<CRM_company_email_address> companyEmailAddressList = DBO_CRM_company_email_address.getByCompanyId(id);
+			ArrayList<CRM_company_address> companyAddressList = DBO_CRM_company_address.getByCompanyId(id);
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> postValues = new HashMap<String, String>();
@@ -91,7 +86,7 @@ public class EditServlet extends HttpServlet {
 				postValues.put("emailAddress", request.getParameter("emailAddress").toString());
 				postValues.put("companyId", id.toString());
 
-				result = processMainEditRequest(postValues,dbo0, dbo1, dbo2, companyEmailAddressList, companyAddressList);
+				result = processMainEditRequest(postValues, companyEmailAddressList, companyAddressList);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -114,9 +109,9 @@ public class EditServlet extends HttpServlet {
 			ApplicationUtils.openJSP(request, response, "/WEB-INF/views/editMain.jsp");
 			break;
 		case "personnel":
-			CRM_company_personnel ccp = dbo3.getById(id);
+			CRM_company_personnel ccp = DBO_CRM_company_personnel.getById(id);
 
-			cc = dbo0.getById(ccp.getCompany_id());
+			cc = DBO_CRM_company.getById(ccp.getCompany_id());
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -128,7 +123,7 @@ public class EditServlet extends HttpServlet {
 				newValues.put("phoneNoPrefix", request.getParameter("phoneNoPrefix"));
 				newValues.put("position", request.getParameter("position"));
 
-				result = processPersonelEditRequest(newValues, dbo3, id);
+				result = processPersonelEditRequest(newValues, id);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -150,9 +145,9 @@ public class EditServlet extends HttpServlet {
 			break;
 
 		case "email":
-			CRM_company_email_address ccea = dbo1.getById(id);
+			CRM_company_email_address ccea = DBO_CRM_company_email_address.getById(id);
 
-			cc = dbo0.getById(ccea.getCompany_id());
+			cc = DBO_CRM_company.getById(ccea.getCompany_id());
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -160,7 +155,7 @@ public class EditServlet extends HttpServlet {
 				newValues.put("emailAddress", request.getParameter("emailAddress"));
 				newValues.put("emailType", request.getParameter("emailType"));
 
-				result = processEmailEditRequest(newValues, dbo1);
+				result = processEmailEditRequest(newValues);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -182,9 +177,9 @@ public class EditServlet extends HttpServlet {
 			ApplicationUtils.openJSP(request, response, "/WEB-INF/views/editEmail.jsp");
 			break;
 		case "note":
-			CRM_company_notes ccn = dbo4.getById(id);
+			CRM_company_notes ccn = DBO_CRM_company_notes.getById(id);
 
-			cc = dbo0.getById(ccn.getCompany_id());
+			cc = DBO_CRM_company.getById(ccn.getCompany_id());
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -197,7 +192,7 @@ public class EditServlet extends HttpServlet {
 				newValues.put("noteUserId", request.getParameter("noteUserId"));
 				newValues.put("noteDate", ApplicationUtils.getDate(0, "yyyy-MM-dd HH:mm"));
 
-				result = processNoteEditRequest(newValues, dbo4);
+				result = processNoteEditRequest(newValues);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -222,9 +217,9 @@ public class EditServlet extends HttpServlet {
 			ApplicationUtils.openJSP(request, response, "/WEB-INF/views/editNote.jsp");
 			break;
 		case "address":
-			CRM_company_address cca = dbo2.getById(id);
+			CRM_company_address cca = DBO_CRM_company_address.getById(id);
 
-			cc = dbo0.getById(cca.getCompany_id());
+			cc = DBO_CRM_company.getById(cca.getCompany_id());
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -238,7 +233,7 @@ public class EditServlet extends HttpServlet {
 					newValues.put("addressLine2", request.getParameter("addressLine2"));
 				}
 
-				result = proccessAddressEditRequest(newValues, dbo2);
+				result = proccessAddressEditRequest(newValues);
 
 				_SESSION.setAttribute("EDIT_RESPONSE", result);
 
@@ -268,14 +263,12 @@ public class EditServlet extends HttpServlet {
 
 	}
 
-	private HashMap<String, String> proccessAddressEditRequest(HashMap<String, String> newValues,
-			DBO_CRM_company_address dbo2) {
-		return dbo2.updateAddress(newValues, id);
+	private HashMap<String, String> proccessAddressEditRequest(HashMap<String, String> newValues) {
+		return DBO_CRM_company_address.updateAddress(newValues, id);
 	}
 
-	private HashMap<String, String> processNoteEditRequest(HashMap<String, String> newValues,
-			DBO_CRM_company_notes dbo4) {
-		return dbo4.updateNote(newValues, id);
+	private HashMap<String, String> processNoteEditRequest(HashMap<String, String> newValues) {
+		return DBO_CRM_company_notes.updateNote(newValues, id);
 	}
 
 	/**
@@ -287,9 +280,8 @@ public class EditServlet extends HttpServlet {
 	 * @param id
 	 * @return
 	 */
-	private HashMap<String, String> processEmailEditRequest(HashMap<String, String> newValues,
-			DBO_CRM_company_email_address dbo1) {
-		return dbo1.updateEmailEntry(newValues, id);
+	private HashMap<String, String> processEmailEditRequest(HashMap<String, String> newValues) {
+		return DBO_CRM_company_email_address.updateEmailEntry(newValues, id);
 	}
 
 	/**
@@ -315,9 +307,6 @@ public class EditServlet extends HttpServlet {
 	 */
 
 	private HashMap<String, String> processMainEditRequest(HashMap<String, String> postValues,
-			DBO_CRM_company dbo0,
-			DBO_CRM_company_email_address dbo1, 
-			DBO_CRM_company_address dbo2,
 			ArrayList<CRM_company_email_address> companyEmailAddressList,
 			ArrayList<CRM_company_address> companyAddressList) {
 
@@ -332,14 +321,14 @@ public class EditServlet extends HttpServlet {
 
 		// If current active is null then set new one in db
 		if (currentActiveAddress == null) {
-			result.add(dbo2.updateActiveAddressState(true, Integer.parseInt(postValues.get("address"))));
+			result.add(DBO_CRM_company_address.updateActiveAddressState(true, Integer.parseInt(postValues.get("address"))));
 		}
 
 		// check if current active is not the same as new update new one
 		if (!currentActiveAddress.getId().equals(Integer.parseInt(postValues.get("address")))) {
 			currentActiveAddress.setCompany_address_active(false);
-			result.add(dbo2.updateActiveAddressState(false, currentActiveAddress.getId()));
-			result.add(dbo2.updateActiveAddressState(true, Integer.parseInt(postValues.get("address"))));
+			result.add(DBO_CRM_company_address.updateActiveAddressState(false, currentActiveAddress.getId()));
+			result.add(DBO_CRM_company_address.updateActiveAddressState(true, Integer.parseInt(postValues.get("address"))));
 		}
 
 		// Find current active email address
@@ -352,18 +341,18 @@ public class EditServlet extends HttpServlet {
 
 		// If current active is null then set new one in db
 		if (currentActiveEmailAddress == null) {
-			result.add(dbo1.updateActiveAddressState(true, Integer.parseInt(postValues.get("emailAddress"))));
+			result.add(DBO_CRM_company_email_address.updateActiveAddressState(true, Integer.parseInt(postValues.get("emailAddress"))));
 		}
 
 		// check if current active is not the same as new update new one
 		if (!currentActiveEmailAddress.getId().equals(Integer.parseInt(postValues.get("emailAddress")))) {
 			currentActiveEmailAddress.setCompany_email_active(false);
-			result.add(dbo1.updateActiveAddressState(false, currentActiveEmailAddress.getId()));
-			result.add(dbo1.updateActiveAddressState(true, Integer.parseInt(postValues.get("emailAddress"))));
+			result.add(DBO_CRM_company_email_address.updateActiveAddressState(false, currentActiveEmailAddress.getId()));
+			result.add(DBO_CRM_company_email_address.updateActiveAddressState(true, Integer.parseInt(postValues.get("emailAddress"))));
 		}
 		
 		// update CRM company name
-		result.add(dbo0.updateCompanyName(postValues.get("companyName").toString(), id));
+		result.add(DBO_CRM_company.updateCompanyName(postValues.get("companyName").toString(), id));
 		
 		for (HashMap<String, String> tmp : result) {
 			if (tmp.get("STATUS").equals("ERROR")) {
@@ -388,14 +377,12 @@ public class EditServlet extends HttpServlet {
 	 * @return
 	 */
 	private HashMap<String, String> processPersonelEditRequest(HashMap<String, String> newValues,
-			DBO_CRM_company_personnel dbo3, Integer id) {
-		return dbo3.updateRecordById(newValues, id);
+			 Integer id) {
+		return DBO_CRM_company_personnel.updateRecordById(newValues, id);
 	}
 	
 	private ArrayList<CRM_user_information> getUserInfo(Integer companyId) {
-		DBO_CRM_user dbocu = new DBO_CRM_user();
-		DOB_CRM_user_information dboui = new DOB_CRM_user_information();
-		return dboui.getByIdFromList(dbocu.getAllForCompany(companyId));
+		return DBO_CRM_user_information.getByIdFromList(DBO_CRM_user.getAllForCompany(companyId));
 	}
 
 }

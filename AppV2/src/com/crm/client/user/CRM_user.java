@@ -1,6 +1,6 @@
 package com.crm.client.user;
 
-import com.crm.utils.userLoginUtils;
+import com.crm.utils.LoginUtils;
 
 public class CRM_user {
 
@@ -43,7 +43,7 @@ public class CRM_user {
 	}
 
 	public void setUser_email(String clientEmail) {
-		if (userLoginUtils.validateEmail(clientEmail) == true) {
+		if (LoginUtils.validateEmail(clientEmail) == true) {
 			this.user_email = clientEmail;
 		} else {
 			this.user_email = null;
@@ -55,7 +55,7 @@ public class CRM_user {
 	}
 
 	public void setLogedIn(String psw, String usrName) {
-		if (userLoginUtils.validateLogin(psw, usrName) == true) {
+		if (LoginUtils.validateLogin(psw, usrName) == true) {
 			this.isLoggedIn = true;
 		} else {
 			this.isLoggedIn = false;

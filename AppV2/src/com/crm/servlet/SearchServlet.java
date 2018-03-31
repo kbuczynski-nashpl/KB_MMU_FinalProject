@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.crm.client.company.CRM_company;
 import com.crm.utils.ApplicationErrorLoging;
 import com.crm.utils.ApplicationUtils;
-import com.crm.utils.userLoginUtils;
+import com.crm.utils.LoginUtils;
 import com.db.mysql.models.DBO_CRM_company;
 import com.mysql.jdbc.StringUtils;
 
@@ -58,7 +58,7 @@ public class SearchServlet extends HttpServlet {
 
 		if (StringUtils.isStrictlyNumeric(keyword) == true) {
 			type = new String("NUMBER");
-		} else if (userLoginUtils.validateEmail(keyword) != true) {
+		} else if (LoginUtils.validateEmail(keyword) != true) {
 			type = new String("EMAIL");
 		} else {
 			type = new String("ALL");
@@ -75,19 +75,18 @@ public class SearchServlet extends HttpServlet {
 	 * @return HashMap with result set.
 	 */
 	private HashMap<Integer, CRM_company> gatherData(String keyword, String type) {
-		DBO_CRM_company dbo0 = new DBO_CRM_company();
 		switch (type) {
 		case "NUMBER":
 			keyword = this.cleanTelNumber(keyword);
 			int number = Integer.parseInt(keyword.trim());
-			return dbo0.getCompanyByPhoneNumber(number);
+			return DBO_CRM_company.getCompanyByPhoneNumber(number);
 		case "EMAIL":
 			keyword = keyword.toLowerCase();
-			return dbo0.getCompanyByEmailAddress(keyword);
+			return DBO_CRM_company.getCompanyByEmailAddress(keyword);
 		case "ALL":
-			return dbo0.searchForCompany(keyword);
+			return DBO_CRM_company.searchForCompany(keyword);
 		default:
-			return dbo0.searchForCompany(keyword);
+			return DBO_CRM_company.searchForCompany(keyword);
 		}
 	}
 

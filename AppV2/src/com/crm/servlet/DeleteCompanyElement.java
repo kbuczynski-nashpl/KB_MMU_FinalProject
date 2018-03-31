@@ -83,17 +83,13 @@ public class DeleteCompanyElement extends HttpServlet {
 	private HashMap<String, String> deleteHandler() {
 		switch (type) {
 		case "note":
-			DBO_CRM_company_notes ccn = new DBO_CRM_company_notes();
-			return ccn.removeNoteById(id);
+			return DBO_CRM_company_notes.removeNoteById(id);
 		case "address":
-			DBO_CRM_company_address cca = new DBO_CRM_company_address();
-			return cca.removeAddressById(id);
+			return DBO_CRM_company_address.removeAddressById(id);
 		case "personnel":
-			DBO_CRM_company_personnel ccp = new DBO_CRM_company_personnel();
-			return ccp.removePersonnelById(id);
+			return DBO_CRM_company_personnel.removePersonnelById(id);
 		case "email":
-			DBO_CRM_company_email_address ccea = new DBO_CRM_company_email_address();
-			return ccea.removeEmailById(id);
+			return DBO_CRM_company_email_address.removeEmailById(id);
 		default:
 			HashMap<String, String> result = new HashMap<String, String>();
 			result.put("STATUS", "OK");

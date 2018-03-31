@@ -95,11 +95,11 @@
     <url-pattern>/delete/*</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>UserSettings</servlet-name>
-    <servlet-class>com.crm.servlet.UserSettings</servlet-class>
+    <servlet-name>UserSettingsServlet</servlet-name>
+    <servlet-class>com.crm.servlet.UserSettingsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserSettings</servlet-name>
+    <servlet-name>UserSettingsServlet</servlet-name>
     <url-pattern>/settings/*</url-pattern>
   </servlet-mapping>
     <servlet>

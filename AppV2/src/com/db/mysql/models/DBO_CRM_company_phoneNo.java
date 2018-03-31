@@ -18,7 +18,7 @@ public class DBO_CRM_company_phoneNo extends MySQL {
 		super();
 	}
 
-	public ArrayList<CRM_company_phoneNo> getByCompanyId(int id) {
+	public static ArrayList<CRM_company_phoneNo> getByCompanyId(int id) {
 		String queryString = "SELECT * from CRM_company_phoneNo where company_id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_phoneNo> companyPhones = new ArrayList<CRM_company_phoneNo>();
@@ -32,7 +32,7 @@ public class DBO_CRM_company_phoneNo extends MySQL {
 		return companyPhones;
 	}
 
-	public HashMap<String, String> createNewCrmCompanyPhoneNo(CRM_company_phoneNo ccpn) {
+	public static HashMap<String, String> createNewCrmCompanyPhoneNo(CRM_company_phoneNo ccpn) {
 		String queryString = "INSERT INTO CRM_company_phoneNo (company_id, company_phoneNo, company_phoneNo_prefix) VALUES ("
 				+ ccpn.getCompany_id() + ",'" + ccpn.getCompany_phoneNo() + "','" + ccpn.getCompany_phoneNo_prefix()
 				+ "')";
@@ -40,7 +40,7 @@ public class DBO_CRM_company_phoneNo extends MySQL {
 		return response;
 	}
 
-	public HashMap<String, String> removeByCompanyId(Integer id) {
+	public static HashMap<String, String> removeByCompanyId(Integer id) {
 		String queryString = "DELETE FROM CRM_company_phoneNo where company_id = " + id;
 		HashMap<String, String> result = update(queryString);
 		return result;

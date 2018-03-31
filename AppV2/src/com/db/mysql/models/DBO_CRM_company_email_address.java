@@ -11,7 +11,7 @@ public class DBO_CRM_company_email_address extends MySQL {
 		super();
 	}
 
-	public ArrayList<CRM_company_email_address> getByCompanyId(int id) {
+	public static ArrayList<CRM_company_email_address> getByCompanyId(int id) {
 		String queryString = "SELECT * from CRM_company_email_address where company_id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_email_address> companyEmailAddresses = new ArrayList<CRM_company_email_address>();
@@ -34,7 +34,7 @@ public class DBO_CRM_company_email_address extends MySQL {
 		return companyEmailAddresses;
 	}
 
-	public HashMap<String, String> createNewCRMEmailAddress(CRM_company_email_address ccea) {
+	public static HashMap<String, String> createNewCRMEmailAddress(CRM_company_email_address ccea) {
 		String queryString = "INSERT INTO CRM_company_email_address (company_id, company_email_address, company_email_active, company_email_type) VALUES ("
 				+ ccea.getCompany_id() + ", '" + ccea.getCompany_email_address() + "', '"
 				+ ccea.getCompany_email_activeToInt() + "', '" + ccea.getCompany_email_type() + "')";
@@ -42,13 +42,13 @@ public class DBO_CRM_company_email_address extends MySQL {
 		return resultFromMysql;
 	}
 
-	public HashMap<String, String> removeByCompanyId(Integer id) {
+	public static HashMap<String, String> removeByCompanyId(Integer id) {
 		String queryString = "DELETE FROM CRM_company_email_address where company_id = " + id;
 		HashMap<String, String> resultFromMysql = update(queryString);
 		return resultFromMysql;
 	}
 
-	public HashMap<String, String> updateActiveAddressState(Boolean status, Integer addressId) {
+	public static HashMap<String, String> updateActiveAddressState(Boolean status, Integer addressId) {
 		String queryString = "";
 		if (status.equals(true)) {
 			queryString = "UPDATE CRM_company_email_address SET company_email_active = 1 where id = " + addressId;
@@ -58,7 +58,7 @@ public class DBO_CRM_company_email_address extends MySQL {
 		return update(queryString);
 	}
 
-	public CRM_company_email_address getById(Integer id) {
+	public static CRM_company_email_address getById(Integer id) {
 		String queryString = "SELECT * FROM CRM_company_email_address where id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		if (resultFromMysql.size() > 0) {
@@ -74,12 +74,12 @@ public class DBO_CRM_company_email_address extends MySQL {
 		}
 	}
 
-	public HashMap<String, String> removeEmailById(Integer id) {
+	public static HashMap<String, String> removeEmailById(Integer id) {
 		String queryString = "DELETE FROM CRM_company_email_address where id = " + id;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> updateEmailEntry(HashMap<String, String> newValues, Integer id) {
+	public static HashMap<String, String> updateEmailEntry(HashMap<String, String> newValues, Integer id) {
 		String queryString = "UPDATE CRM_company_email_address SET company_email_address = " + "'"
 				+ newValues.get("emailAddress") + "', " + " company_email_type = '" + newValues.get("emailType")
 				+ "' WHERE id = " + id;

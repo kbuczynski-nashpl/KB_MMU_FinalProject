@@ -7,12 +7,12 @@ import java.util.HashMap;
 import com.crm.client.user.CRM_user_information;
 import com.db.mysql.MySQL;
 
-public class DOB_CRM_user_information extends MySQL {
-	public DOB_CRM_user_information() {
+public class DBO_CRM_user_information extends MySQL {
+	public DBO_CRM_user_information() {
 		super();
 	}
 
-	public CRM_user_information getByUserId(Integer id) throws NumberFormatException, ParseException {
+	public static CRM_user_information getByUserId(Integer id) throws NumberFormatException, ParseException {
 		String queryString = "SELECT * FROM CRM_user_information WHERE user_id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		CRM_user_information cui = new CRM_user_information();
@@ -24,7 +24,7 @@ public class DOB_CRM_user_information extends MySQL {
 		return cui;
 	}
 	
-	public ArrayList<CRM_user_information> getByIdFromList(ArrayList<Integer> ids) {
+	public static ArrayList<CRM_user_information> getByIdFromList(ArrayList<Integer> ids) {
 		String queryString = "SELECT id, user_surname, user_forname FROM CRM_user_information WHERE id = ";
 		ArrayList<CRM_user_information> result = new ArrayList<CRM_user_information>();
 		ArrayList<HashMap<String, String>> resultFromMysql = new ArrayList<HashMap<String, String>>();
@@ -38,6 +38,15 @@ public class DOB_CRM_user_information extends MySQL {
 			result.add(cui);
 		}
 		return result;
+	}
+
+	public static HashMap<String, String> updateInformation(HashMap<String, String> postValues, Integer id) {
+		String queryString = "UPDATE CRM_user_information SET "
+				+ "user_surname = '" + postValues.get("userSurname") + "',"
+				+ " user_forname = '" + postValues.get("userForname") + "',"
+				+ " user_dob = '" + postValues.get("userDOB") + "'"
+				+ " WHERE user_id = " + id;
+		return update(queryString);
 	}
 
 }

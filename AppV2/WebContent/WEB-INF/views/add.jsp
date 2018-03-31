@@ -278,21 +278,21 @@
 				return;
 			}
 			
-			if(validateEmail(data.emailaddresstyep) != true){
+			if(validateEntry(data.emailtype) != true){
 				displayPage("3");
 				$("#company-email-type-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid email type'});
 				$("#company-email-type-input").focus();
 				return;
 			}
 			
-			if(validateEmail(data.phoneNonumber) != true){
+			if(validateEntry(data.phoneNonumber) != true){
 				displayPage("4");
 				$("#company-phone-number-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid phone number'});
 				$("#company-phone-number-input").focus();
 				return;
 			}
 			
-			if(validateEmail(data.phoneNoprefix) != true){
+			if(validateEntry(data.phoneNoprefix) != true){
 				displayPage("4");
 				$("#company-phone-prefix-input").css("border", "1px solid red").tooltip({'trigger':'focus', 'title': 'Please enter a valid phone number'});
 				$("#company-phone-prefix-input").focus();

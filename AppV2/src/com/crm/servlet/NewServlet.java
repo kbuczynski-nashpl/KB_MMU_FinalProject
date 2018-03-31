@@ -23,7 +23,7 @@ import com.db.mysql.models.DBO_CRM_company_email_address;
 import com.db.mysql.models.DBO_CRM_company_notes;
 import com.db.mysql.models.DBO_CRM_company_personnel;
 import com.db.mysql.models.DBO_CRM_user;
-import com.db.mysql.models.DOB_CRM_user_information;
+import com.db.mysql.models.DBO_CRM_user_information;
 
 /**
  * A servlet is responsible to process request and add new CRM company component
@@ -194,8 +194,7 @@ public class NewServlet extends HttpServlet {
 			cca.setCompany_address_line2(postData.get("addressLine2"));
 		}
 
-		DBO_CRM_company_address dbo0 = new DBO_CRM_company_address();
-		return dbo0.createNewCrmCompanyAddress(cca);
+		return DBO_CRM_company_address.createNewCrmCompanyAddress(cca);
 	}
 
 	private HashMap<String, String> postNote(HashMap<String, String> postData) {
@@ -203,29 +202,24 @@ public class NewServlet extends HttpServlet {
 				Integer.parseInt(postData.get("noteUserId").toString()), postData.get("noteDate"),
 				Integer.parseInt(postData.get("noteAssigne").toString()), postData.get("noteStatus"),
 				postData.get("noteDuein"));
-		DBO_CRM_company_notes dbo0 = new DBO_CRM_company_notes();
-		return dbo0.newNote(ccn);
+		return DBO_CRM_company_notes.newNote(ccn);
 	}
 
 	private HashMap<String, String> postEmail(HashMap<String, String> postData) {
 		CRM_company_email_address ccea = new CRM_company_email_address(id, postData.get("emailAddress"),
 				postData.get("emailType"));
-		DBO_CRM_company_email_address dbo0 = new DBO_CRM_company_email_address();
-		return dbo0.createNewCRMEmailAddress(ccea);
+		return DBO_CRM_company_email_address.createNewCRMEmailAddress(ccea);
 	}
 
 	private HashMap<String, String> postPersonel(HashMap<String, String> postData) {
 		CRM_company_personnel ccp = new CRM_company_personnel(id, postData.get("surname"), postData.get("forname"),
 				postData.get("email"), postData.get("phoneNo"), postData.get("phoneNoPrefix"),
 				postData.get("position"));
-		DBO_CRM_company_personnel dbo0 = new DBO_CRM_company_personnel();
-		return dbo0.newCompanyPersonnel(ccp);
+		return DBO_CRM_company_personnel.newCompanyPersonnel(ccp);
 	}
 
 	private ArrayList<CRM_user_information> getUserInfo(Integer companyId) {
-		DBO_CRM_user dbocu = new DBO_CRM_user();
-		DOB_CRM_user_information dboui = new DOB_CRM_user_information();
-		return dboui.getByIdFromList(dbocu.getAllForCompany(companyId));
+		return DBO_CRM_user_information.getByIdFromList(DBO_CRM_user.getAllForCompany(companyId));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

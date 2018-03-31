@@ -14,10 +14,10 @@ import com.crm.client.user.CRM_user;
 import com.crm.client.user.CRM_user_information;
 import com.crm.client.user.CRM_user_master;
 import com.db.mysql.models.DBO_CRM_user;
-import com.db.mysql.models.DOB_CRM_user_information;
-import com.db.mysql.models.DOB_CRM_user_master;
+import com.db.mysql.models.DBO_CRM_user_information;
+import com.db.mysql.models.DBO_CRM_user_master;
 
-public class userLoginUtils {
+public class LoginUtils {
 
 	private static final String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -42,8 +42,7 @@ public class userLoginUtils {
 	}
 
 	public static boolean validateLogin(String psw, String userName) {
-		DBO_CRM_user dbo = new DBO_CRM_user();
-		CRM_user cuc = dbo.getUserByUserName(userName);
+		CRM_user cuc = DBO_CRM_user.getUserByUserName(userName);
 
 		if (cuc == null) {
 			return false;
@@ -83,21 +82,18 @@ public class userLoginUtils {
 
 	public static HashMap<String, Object> logIn(String usrname, String psw) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
-		DBO_CRM_user dob0 = new DBO_CRM_user();
-		DOB_CRM_user_master dob1 = new DOB_CRM_user_master();
-		DOB_CRM_user_information dob2 = new DOB_CRM_user_information();
-		CRM_user cuc = dob0.getUserByUserName(usrname);
+		CRM_user cuc = DBO_CRM_user.getUserByUserName(usrname);
 
 		if (cuc == null) {
 			result.put("isLogged", "false");
 			return result;
 		}
 
-		CRM_user_master cum = dob1.getById(cuc.getId());
+		CRM_user_master cum = DBO_CRM_user_master.getById(cuc.getId());
 		CRM_user_information cui = new CRM_user_information();
 
 		try {
-			cui = dob2.getByUserId(cuc.getId());
+			cui = DBO_CRM_user_information.getByUserId(cuc.getId());
 		} catch (NumberFormatException e1) {
 			e1.printStackTrace();
 		} catch (ParseException e1) {
@@ -134,4 +130,5 @@ public class userLoginUtils {
 		}
 		return false;
 	}
+	
 }

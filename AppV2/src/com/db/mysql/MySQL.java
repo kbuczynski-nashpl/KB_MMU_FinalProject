@@ -13,17 +13,17 @@ import java.util.List;
 
 public class MySQL {
 
-	private final static String mysqlAddress = "localhost";
+	private final static String mysqlAddress = "167.99.202.160";
 	private final static String mysqlDataBase = "CRM";
-	private final static String mysqlUserName = "root";
-	private final static String mysqlPsw = "admin";
+	private final static String mysqlUserName = "webkbCRM";
+	private final static String mysqlPsw = "bpKD3YWCD6rfjKu";
 
 	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
 	private static PreparedStatement ps = null;
 
-	private void createConnection() {
+	private static void createConnection() {
 		try {
 			String driverName = "com.mysql.jdbc.Driver";
 			Class.forName(driverName).newInstance();
@@ -35,7 +35,7 @@ public class MySQL {
 		}
 	}
 
-	public ArrayList<HashMap<String, String>> query(String query) {
+	public static ArrayList<HashMap<String, String>> query(String query) {
 		createConnection();
 		ArrayList<HashMap<String, String>> resultSet = new ArrayList<HashMap<String, String>>();
 		try {
@@ -66,7 +66,7 @@ public class MySQL {
 
 	}
 
-	public HashMap<String, String> update(String query) {
+	public static HashMap<String, String> update(String query) {
 		createConnection();
 		HashMap<String, String> response = new HashMap<String, String>();
 		Integer generatedId = 0;
@@ -88,15 +88,15 @@ public class MySQL {
 		return response;
 	}
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		return con;
 	}
 
-	public String dataBaseConnectionInfo() {
+	public static String dataBaseConnectionInfo() {
 		return "Address: " + mysqlAddress + " Database: " + mysqlDataBase;
 	}
 
-	private void closeConnection() {
+	private static void closeConnection() {
 
 		if (rs != null) {
 			try {

@@ -49,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="containercol-12" style="padding-top: 1%;">
+		<div class="container col-12" style="padding-top: 1%;">
 			<div class="float-right">
 				<input  class="btn btn-danger" id="btnSubmit" type="submit" value="Submit"/>
 				<input style="display:none;" value="true" name="type" readonly/>

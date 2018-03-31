@@ -66,10 +66,15 @@ public class CRM_user_information {
 	}
 
 	public void setUser_dobFromString(String user_dob) throws ParseException {
-		DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		this.user_dob = format.parse(user_dob);
 	}
 
+	public String getUser_dobFromString() {
+		DateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return dataFormat.format(this.getUser_dob());
+
+	}
 	public String getFullName() {
 		return this.user_surname + " " + this.user_forname;
 	}

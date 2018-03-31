@@ -19,7 +19,7 @@ public class DBO_CRM_company_notes extends MySQL {
 		super();
 	}
 
-	public ArrayList<CRM_company_notes> getByCompanyId(int id) throws ParseException {
+	public static ArrayList<CRM_company_notes> getByCompanyId(int id) throws ParseException {
 		String queryString = "SELECT * from CRM_company_notes where company_id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_notes> companyNotes = new ArrayList<CRM_company_notes>();
@@ -38,7 +38,7 @@ public class DBO_CRM_company_notes extends MySQL {
 		return companyNotes;
 	}
 
-	public ArrayList<CRM_company_notes> getByCompanyIdTop5(Integer id) {
+	public static ArrayList<CRM_company_notes> getByCompanyIdTop5(Integer id) {
 		String queryString = "SELECT * from CRM_company_notes where company_note_by_id = " + id
 				+ " ORDER BY company_note_by_date DESC LIMIT 5";
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
@@ -59,7 +59,7 @@ public class DBO_CRM_company_notes extends MySQL {
 		return companyNotes;
 	}
 
-	public CRM_company_notes getById(Integer id) {
+	public static CRM_company_notes getById(Integer id) {
 		String queryString = "SELECT * from CRM_company_notes where id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		String companyNoteString = resultFromMysql.get(0).get("company_note").toString();
@@ -74,7 +74,7 @@ public class DBO_CRM_company_notes extends MySQL {
 		return ccn;
 	}
 
-	public HashMap<String, String> updateNote(HashMap<String, String> newValues, Integer id) {
+	public static HashMap<String, String> updateNote(HashMap<String, String> newValues, Integer id) {
 		String queryString = "UPDATE CRM_company_notes SET " + "company_note_title = '" + newValues.get("noteTitle")
 				+ "', " + "company_note = '" + newValues.get("note") + "', " + "company_note_by_id = '"
 				+ newValues.get("noteUserId") + "', " + "company_note_by_date = '" + newValues.get("noteDate") + "', "
@@ -84,24 +84,24 @@ public class DBO_CRM_company_notes extends MySQL {
 		return update(queryString);
 	}
 
-	public HashMap<String, String> updateNoteAssgine(Integer assigne, Integer noteId) {
+	public static HashMap<String, String> updateNoteAssgine(Integer assigne, Integer noteId) {
 		String queryString = "UPDATE CRM_company_notes SET " + "company_note_assigned_user = " + assigne
 				+ " WHERE id = " + noteId;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> updateNoteStatus(String status, Integer noteId) {
+	public static HashMap<String, String> updateNoteStatus(String status, Integer noteId) {
 		String queryString = "UPDATE CRM_company_notes SET " + "company_note_status = '" + status + "' WHERE id = "
 				+ noteId;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> removeNoteById(Integer id) {
+	public static HashMap<String, String> removeNoteById(Integer id) {
 		String queryString = "DELETE FROM CRM_company_notes where id = " + id;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> newNote(CRM_company_notes ccn) {
+	public static HashMap<String, String> newNote(CRM_company_notes ccn) {
 		String queryString = "INSERT INTO CRM_company_notes " + "(company_id, " + "company_note_title, "
 				+ "company_note, " + "company_note_by_id, " + "company_note_by_date, " + "company_note_assigned_user, "
 				+ "company_note_status, " + "company_note_duein" + ") " + "VALUES (" + ccn.getCompany_id() + ", " + "'"
@@ -112,7 +112,7 @@ public class DBO_CRM_company_notes extends MySQL {
 		return update(queryString);
 	}
 
-	public ArrayList<CRM_company_notes> getAllByDate(String date, Integer userId) {
+	public static ArrayList<CRM_company_notes> getAllByDate(String date, Integer userId) {
 		String queryString = "SELECT * FROM CRM_company_notes WHERE company_note_by_date <= '" + date
 				+ "' AND company_note_assigned_user = " + userId
 				+ " AND company_note_status NOT LIKE 'OPEN' ORDER BY company_note_by_date DESC LIMIT 5";

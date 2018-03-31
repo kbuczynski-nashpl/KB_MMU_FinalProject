@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2018 at 08:49 PM
--- Server version: 10.2.13-MariaDB-10.2.13+maria~xenial
--- PHP Version: 7.0.25-0ubuntu0.16.04.1
+-- Generation Time: Mar 30, 2018 at 09:52 PM
+-- Server version: 10.2.14-MariaDB-10.2.14+maria~xenial
+-- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -70,7 +70,7 @@ CREATE TABLE `CRM_company_address` (
 --
 
 INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, `company_address_line2`, `company_address_postcode`, `company_address_city`, `company_address_country`, `company_address_active`) VALUES
-(3, 1, 'TEST LINE1', 'TEST Line2', 'ol70aa', 'TEST CITY', 'TEST COUNTRY', 0),
+(3, 1, 'TEST 1111', 'TEST Line2', 'null', 'TEST CITY', 'TEST COUNTRY', 1),
 (11, 69, 'Line 1', 'Line 2', 'M12 2SE', 'Manchester', 'United Kingdom', 1),
 (12, 70, 'Line 1', 'Line 2', 'M12 3AR', 'Manchester', 'United', 1),
 (13, 71, 'Line1', '', 'OL12sd', 'sader', 'earfq', 1),
@@ -78,7 +78,8 @@ INSERT INTO `CRM_company_address` (`id`, `company_id`, `company_address_line1`, 
 (15, 73, 'test', 'test', 'test', 'test', 'test', 1),
 (16, 74, 'TEST', '', 'tEST', 'teas', 'teasd', 1),
 (17, 75, 'Test Line 1', '', 'OL7 0AA', 'TEST', 'TEST', 1),
-(18, 1, 'TEST LINE11231', 'TEST Line2', 'ol70aa', 'TEST CITY', 'TEST COUNTRY', 1);
+(18, 1, 'TEST LINE11231', 'TEST Line2', 'ol70aa', 'TEST CITY', 'TEST COUNTRY', 0),
+(21, 71, '12, Unit 1', 'Lane End Road', 'M19 1TU', 'Manchester', 'United Kingdom', 0);
 
 -- --------------------------------------------------------
 
@@ -99,15 +100,15 @@ CREATE TABLE `CRM_company_email_address` (
 --
 
 INSERT INTO `CRM_company_email_address` (`id`, `company_id`, `company_email_address`, `company_email_active`, `company_email_type`) VALUES
-(1, 1, 'nash25pl@gmail.com', 1, 'Private email address'),
-(7, 1, 'TEST@TEST.com', 0, 'TEST#'),
+(1, 1, 'nash25pl@gmail.com', 0, 'Private email address'),
 (15, 69, 'test@outlook.com', 1, 'outlook private'),
 (16, 70, 'outlook@outlook.omc', 1, 'type'),
 (17, 71, 'sadaS@asad.com', 1, 'aerqs'),
 (18, 72, 'TEST@TEST.com', 1, 'TEST'),
 (19, 73, 'test@test.com', 1, 'test'),
 (20, 74, 'asde', 1, 'wqdas'),
-(21, 75, 'nash25pl', 1, 'teairjdf');
+(21, 75, 'test@outlook.com', 1, 'test email'),
+(22, 1, 'test@test.com', 1, 'test EMAIL ENTRY');
 
 -- --------------------------------------------------------
 
@@ -121,16 +122,21 @@ CREATE TABLE `CRM_company_notes` (
   `company_note_title` text NOT NULL,
   `company_note` text NOT NULL,
   `company_note_by_id` int(11) NOT NULL,
-  `company_note_by_date` date NOT NULL
+  `company_note_by_date` datetime NOT NULL,
+  `company_note_assigned_user` int(11) NOT NULL,
+  `company_note_status` text NOT NULL,
+  `company_note_duein` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `CRM_company_notes`
 --
 
-INSERT INTO `CRM_company_notes` (`id`, `company_id`, `company_note_title`, `company_note`, `company_note_by_id`, `company_note_by_date`) VALUES
-(1, 1, 'Test 1', 'Note Test 1', 1, '2018-02-01'),
-(2, 1, 'Longer String Test 2', 'This is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.\r\nThis is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.\r\nThis is a very long note. Produced to test the javascript which should limit the amount of viewed characters in a <td> field.', 1, '2018-02-12');
+INSERT INTO `CRM_company_notes` (`id`, `company_id`, `company_note_title`, `company_note`, `company_note_by_id`, `company_note_by_date`, `company_note_assigned_user`, `company_note_status`, `company_note_duein`) VALUES
+(6, 1, 'test', 'test', 1, '2018-03-26 12:54:00', 1, 'IN REVIEW', '2018-03-19 12:54:00'),
+(7, 1, 'test', 'test', 1, '2018-03-19 14:22:00', 1, 'OPEN', '2018-03-19 12:12:00'),
+(8, 73, 'TEST FOR NEW LAYOUT', 'TESTING', 1, '2018-03-30 00:37:00', 1, 'REQUIRE RESPONSE', '2018-03-15 16:00:00'),
+(9, 73, 'Test Longer', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, '2018-03-26 19:04:00', 1, 'OPEN', '2018-03-26 20:07:00');
 
 -- --------------------------------------------------------
 
@@ -154,11 +160,13 @@ CREATE TABLE `CRM_company_personnel` (
 --
 
 INSERT INTO `CRM_company_personnel` (`id`, `company_id`, `company_personnel_surname`, `company_personnel_forname`, `company_personnel_email`, `company_personnel_phoneNo`, `company_personnel_phoneNo_prefix`, `company_personnel_position`) VALUES
-(1, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO'),
+(1, 1, 'Buczynskiss', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO'),
 (2, 1, 'Subject1', 'Test', 'testsubject1@gmail.com', 1234567, '+44', 'test subject'),
 (3, 1, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST'),
 (4, 2, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST'),
-(5, 3, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST');
+(5, 3, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'TEST'),
+(7, 71, 'Bu', 'KRZ', 'nash25@outlook.com', 770887361, '+22', 'CHEF'),
+(8, 73, 'Buczynski', 'Krzysztof', 'nash25pl@gmail.com', 7708873917, '+44', 'CEO');
 
 -- --------------------------------------------------------
 
@@ -279,7 +287,8 @@ ALTER TABLE `CRM_company_email_address`
 ALTER TABLE `CRM_company_notes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `company_id` (`company_id`),
-  ADD KEY `company_note_by_id` (`company_note_by_id`);
+  ADD KEY `company_note_by_id` (`company_note_by_id`),
+  ADD KEY `company_note_assigned_user` (`company_note_assigned_user`);
 
 --
 -- Indexes for table `CRM_company_personnel`
@@ -328,22 +337,22 @@ ALTER TABLE `CRM_company`
 -- AUTO_INCREMENT for table `CRM_company_address`
 --
 ALTER TABLE `CRM_company_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `CRM_company_email_address`
 --
 ALTER TABLE `CRM_company_email_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `CRM_company_notes`
 --
 ALTER TABLE `CRM_company_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `CRM_company_personnel`
 --
 ALTER TABLE `CRM_company_personnel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `CRM_company_phoneNo`
 --

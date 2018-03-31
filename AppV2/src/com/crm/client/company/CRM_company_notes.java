@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.crm.client.user.CRM_user_information;
-import com.db.mysql.models.DOB_CRM_user_information;
+import com.db.mysql.models.DBO_CRM_user_information;
 
 public class CRM_company_notes {
 	private Integer id;
@@ -176,11 +176,9 @@ public class CRM_company_notes {
 	}
 
 	public CRM_user_information getCompany_note_assignedToName() throws NumberFormatException, ParseException {
-		DOB_CRM_user_information cui = new DOB_CRM_user_information();
-		return cui.getByUserId(this.company_note_assigned_user);
+		return DBO_CRM_user_information.getByUserId(this.company_note_assigned_user);
 	}
 	public CRM_user_information getLastEditedBy() throws NumberFormatException, ParseException {
-		DOB_CRM_user_information cui = new DOB_CRM_user_information();
-		return cui.getByUserId(this.company_note_by_id);
+		return DBO_CRM_user_information.getByUserId(this.company_note_by_id);
 	}
 }

@@ -54,20 +54,13 @@ public class ViewCustomerServlet extends HttpServlet {
 			return;
 		}
 
-		DBO_CRM_company dbo0 = new DBO_CRM_company();
-		DBO_CRM_company_address dbo1 = new DBO_CRM_company_address();
-		DBO_CRM_company_email_address dbo2 = new DBO_CRM_company_email_address();
-		DBO_CRM_company_notes dbo3 = new DBO_CRM_company_notes();
-		DBO_CRM_company_phoneNo dbo4 = new DBO_CRM_company_phoneNo();
-		DBO_CRM_company_personnel dbo5 = new DBO_CRM_company_personnel();
-
 		try {
-			Object crmCompany = dbo0.getById(id);
-			ArrayList<CRM_company_address> crmCompanyAddresses = dbo1.getByCompanyId(id);
-			ArrayList<CRM_company_email_address> crmCompanyEmailAddresses = dbo2.getByCompanyId(id);
-			ArrayList<CRM_company_notes> crmCompanyNotes = dbo3.getByCompanyId(id);
-			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = dbo4.getByCompanyId(id);
-			ArrayList<CRM_company_personnel> crmCompanyPersonnel = dbo5.getByCompanyId(id);
+			Object crmCompany = DBO_CRM_company.getById(id);
+			ArrayList<CRM_company_address> crmCompanyAddresses = DBO_CRM_company_address.getByCompanyId(id);
+			ArrayList<CRM_company_email_address> crmCompanyEmailAddresses = DBO_CRM_company_email_address.getByCompanyId(id);
+			ArrayList<CRM_company_notes> crmCompanyNotes = DBO_CRM_company_notes.getByCompanyId(id);
+			ArrayList<CRM_company_phoneNo> crmPhoneNumbers = DBO_CRM_company_phoneNo.getByCompanyId(id);
+			ArrayList<CRM_company_personnel> crmCompanyPersonnel = DBO_CRM_company_personnel.getByCompanyId(id);
 
 			request.setAttribute("crmCompany", crmCompany);
 			request.setAttribute("crmCompanyAddresses", crmCompanyAddresses);

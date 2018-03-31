@@ -11,7 +11,7 @@ public class DBO_CRM_company_personnel extends MySQL {
 		super();
 	}
 
-	public ArrayList<CRM_company_personnel> getByCompanyId(int id) {
+	public static ArrayList<CRM_company_personnel> getByCompanyId(int id) {
 		String queryString = "SELECT * FROM CRM_company_personnel WHERE company_id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		ArrayList<CRM_company_personnel> companyPersonnel = new ArrayList<CRM_company_personnel>();
@@ -30,7 +30,7 @@ public class DBO_CRM_company_personnel extends MySQL {
 		return companyPersonnel;
 	}
 
-	public CRM_company_personnel getById(int id) {
+	public static CRM_company_personnel getById(int id) {
 		String queryString = "SELECT * from CRM_company_personnel where id = " + id;
 		ArrayList<HashMap<String, String>> resultFromMysql = query(queryString);
 		if (resultFromMysql.size() > 0) {
@@ -50,7 +50,7 @@ public class DBO_CRM_company_personnel extends MySQL {
 		}
 	}
 
-	public HashMap<String, String> updateRecordById(HashMap<String, String> newValues, Integer id) {
+	public static HashMap<String, String> updateRecordById(HashMap<String, String> newValues, Integer id) {
 		String queryString = "UPDATE CRM_company_personnel SET " + "company_personnel_surname = '"
 				+ newValues.get("surname") + "'" + " ,company_personnel_forname = '" + newValues.get("forname") + "'"
 				+ " ,company_personnel_email = '" + newValues.get("email") + "'" + " ,company_personnel_phoneNo = '"
@@ -60,12 +60,12 @@ public class DBO_CRM_company_personnel extends MySQL {
 		return update(queryString);
 	}
 
-	public HashMap<String, String> removePersonnelById(Integer id) {
+	public static HashMap<String, String> removePersonnelById(Integer id) {
 		String queryString = "DELETE FROM CRM_company_personnel where id = " + id;
 		return update(queryString);
 	}
 
-	public HashMap<String, String> newCompanyPersonnel(CRM_company_personnel ccp) {
+	public static HashMap<String, String> newCompanyPersonnel(CRM_company_personnel ccp) {
 		String queryString = "INSERT INTO CRM_company_personnel " + "(company_id, " + "company_personnel_surname, "
 				+ "company_personnel_forname, " + "company_personnel_email, " + "company_personnel_phoneNo, "
 				+ "company_personnel_phoneNo_prefix, " + "company_personnel_position) " + "VALUES ("

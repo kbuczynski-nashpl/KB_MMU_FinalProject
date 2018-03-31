@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.crm.utils.ApplicationUtils;
-import com.crm.utils.userLoginUtils;
+import com.crm.utils.LoginUtils;
 
 /**
  * A login servlet which will perform login functions based on given information
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
 		response.setHeader("Pragma", "no-cache");
 
-		if (userLoginUtils.getUserLoginSession(request) == true) {
+		if (LoginUtils.getUserLoginSession(request) == true) {
 			if (request.getSession().getAttribute("REDIRECT") != null) {
 				response.sendRedirect(request.getSession().getAttribute("REDIRECT").toString());
 				return;
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			String psw = request.getParameter("password");
 			String usr = request.getParameter("username");
 
-			HashMap<String, Object> res = userLoginUtils.logIn(usr, psw);
+			HashMap<String, Object> res = LoginUtils.logIn(usr, psw);
 
 			if (res.get("isLogged").equals("true")) {
 				this.buildUpSession(res, request);

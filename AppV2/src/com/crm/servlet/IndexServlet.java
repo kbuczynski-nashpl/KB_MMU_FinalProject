@@ -1,7 +1,6 @@
 package com.crm.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,11 +31,9 @@ public class IndexServlet extends HttpServlet {
 		HttpSession _SESSION = request.getSession();
 
 		request.setAttribute("LAST5CUST", _SESSION.getAttribute("LAST5CUST"));
-		
-		DBO_CRM_company_notes dbo0 = new DBO_CRM_company_notes();
-		
-		request.setAttribute("LAST5NOTES", dbo0.getByCompanyIdTop5(((CRM_user) _SESSION.getAttribute("CLIENT")).getId()));
-		request.setAttribute("DUEINNOTES", dbo0.getAllByDate(ApplicationUtils.getDate(7, "yyyy-MM-dd HH:mm"), ((CRM_user) _SESSION.getAttribute("CLIENT")).getId()));
+				
+		request.setAttribute("LAST5NOTES", DBO_CRM_company_notes.getByCompanyIdTop5(((CRM_user) _SESSION.getAttribute("CLIENT")).getId()));
+		request.setAttribute("DUEINNOTES", DBO_CRM_company_notes.getAllByDate(ApplicationUtils.getDate(7, "yyyy-MM-dd HH:mm"), ((CRM_user) _SESSION.getAttribute("CLIENT")).getId()));
 
 		ApplicationUtils.openJSP(request, response, "/WEB-INF/views/index.jsp");
 		return;
