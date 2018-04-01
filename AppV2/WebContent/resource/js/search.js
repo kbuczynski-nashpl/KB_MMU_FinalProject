@@ -1,5 +1,5 @@
 function ajaxCall(path, data) {
-	let url = window.location.origin + "/AppV2/" + path;
+	let url = window.location.origin + "/" + path;
 	$.ajax({
 		type : "POST",
 		url : url,
