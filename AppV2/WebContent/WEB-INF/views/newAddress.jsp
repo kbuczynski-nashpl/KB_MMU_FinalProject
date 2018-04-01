@@ -22,11 +22,14 @@
 			String error_msg = (String) request.getAttribute("error");
 			String success_msg = (String) request.getAttribute("success");
 			if (error_msg != null) {
-				out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg +"',true); };</script>");
+				out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg
+						+ "',true); };</script>");
 			}
 			if (success_msg != null) {
-						out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg +"',true); };</script>");
-			}%>
+				out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg
+						+ "',true); };</script>");
+			}
+		%>
 	</div>
 	<form
 		action="${pageContext.request.contextPath}/new/postaddress/${COMPANY_ID}"
@@ -70,7 +73,11 @@
 					<label class="col-form-label">Address Country: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="addressCountry" value="" required />
+					<select class="form-control" name="addressCountry">
+						<c:forEach items="${COUNTRIES}" var="country">
+							<option>${country}</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 		</div>

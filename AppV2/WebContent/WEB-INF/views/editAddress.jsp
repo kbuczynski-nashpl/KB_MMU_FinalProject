@@ -13,17 +13,19 @@
 		<h1 class="page-header">New Address</h1>
 	</div>
 	<div class="container">
-	<%
-		String error_msg = (String) request.getAttribute("error");
-		String success_msg = (String) request.getAttribute("success");
-		if (error_msg != null) {
-			out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg +"',true); };</script>");
-		}
-		if (success_msg != null) {
-					out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg +"',true); };</script>");
-		}
-		 request.getSession().removeAttribute("EDIT_RESPONSE");
-	%>	
+		<%
+			String error_msg = (String) request.getAttribute("error");
+			String success_msg = (String) request.getAttribute("success");
+			if (error_msg != null) {
+				out.println("<script>window.onload = function() { createNewAlert('ERROR','" + error_msg
+						+ "',true); };</script>");
+			}
+			if (success_msg != null) {
+				out.println("<script>window.onload = function() { createNewAlert('SUCCESS','" + success_msg
+						+ "',true); };</script>");
+			}
+			request.getSession().removeAttribute("EDIT_RESPONSE");
+		%>
 	</div>
 	<form
 		action="${pageContext.request.contextPath}/edit/address/${CCA.getId()}"
@@ -35,7 +37,7 @@
 				</div>
 				<div class="col-8">
 					<input class="form-control" name="addressLine1"
-						value="${CCA.getCompany_address_line1()}" required/>
+						value="${CCA.getCompany_address_line1()}" required />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
@@ -44,7 +46,7 @@
 				</div>
 				<div class="col-8">
 					<input class="form-control" name="addressLine2"
-						value="${CCA.getCompany_address_line2()}"/>
+						value="${CCA.getCompany_address_line2()}" />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
@@ -53,7 +55,7 @@
 				</div>
 				<div class="col-8">
 					<input class="form-control" name="addressPostcode" maxlength="10"
-						value="${CCA.getCompany_address_postcode()}" required/>
+						value="${CCA.getCompany_address_postcode()}" required />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
@@ -62,7 +64,7 @@
 				</div>
 				<div class="col-8">
 					<input class="form-control" name="addressCity"
-						value="${CCA.getCompany_address_city()}" required/>
+						value="${CCA.getCompany_address_city()}" required />
 				</div>
 			</div>
 			<div class="form-group row container col-12">
@@ -70,15 +72,26 @@
 					<label class="col-form-label">Address Country: </label>
 				</div>
 				<div class="col-8">
-					<input class="form-control" name="addressCountry"
-						value="${CCA.getCompany_address_country()}" required/>
+					<select class="form-control" name="addressCountry">
+						<c:forEach items="${COUNTRY}" var="country">
+							<c:choose>
+							<c:when test="${CCA.getCompany_address_country() eq country}">
+									<option selected>${country}</option>
+								</c:when>
+								<c:when test="${CCA.getCompany_address_country() != country}">
+									<option>${country}</option>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 		</div>
 		<div class="containercol-12" style="padding-top: 1%;">
 			<div class="float-right">
-				<input  class="btn btn-danger" id="btnSubmit" type="submit" value="Submit"/>
-				<input style="display:none;" value="true" name="type" readonly/>
+				<input class="btn btn-danger" id="btnSubmit" type="submit"
+					value="Submit" /> <input style="display: none;" value="true"
+					name="type" readonly />
 			</div>
 			<div class="float-left">
 				<a href="${pageContext.request.contextPath}/view/${CC.getId()}"

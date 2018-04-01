@@ -218,7 +218,7 @@ public class EditServlet extends HttpServlet {
 			break;
 		case "address":
 			CRM_company_address cca = DBO_CRM_company_address.getById(id);
-
+			request.setAttribute("COUNTRY", ApplicationUtils.countires);
 			cc = DBO_CRM_company.getById(cca.getCompany_id());
 
 			if (request.getParameter("type") != null) {
@@ -240,7 +240,7 @@ public class EditServlet extends HttpServlet {
 				response.sendRedirect(baseURI + "edit/address/" + id);
 				return;
 			}
-
+			
 			request.setAttribute("USER", (CRM_user) _SESSION.getAttribute("CLIENT"));
 			request.setAttribute("CC", cc);
 			request.setAttribute("CCA", cca);

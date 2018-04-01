@@ -149,6 +149,7 @@ public class NewServlet extends HttpServlet {
 			ApplicationUtils.openJSP(request, response, "/WEB-INF/views/newNote.jsp");
 			break;
 		case "address":
+			request.setAttribute("COUNTRIES", ApplicationUtils.countires);
 			ApplicationUtils.openJSP(request, response, "/WEB-INF/views/newAddress.jsp");
 			break;
 		case "postaddress":
