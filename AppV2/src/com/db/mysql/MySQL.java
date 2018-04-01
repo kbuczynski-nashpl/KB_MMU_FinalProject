@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.crm.utils.ApplicationErrorLoging;
+
 public class MySQL {
 
 	private final static String mysqlAddress = "167.99.202.160";
@@ -54,11 +56,7 @@ public class MySQL {
 				resultSet.add(newEntry);
 			}
 		} catch (SQLException e) {
-			// handle any error
-			// TODO: Add error handler from applicationErrorHanlderys
-			System.out.println("SQLException: " + e.getMessage());
-			System.out.println("SQLState: " + e.getSQLState());
-			System.out.println("VendorError: " + e.getErrorCode());
+			ApplicationErrorLoging.log("MySQLDriver", e);
 		} finally {
 			closeConnection();
 		}
@@ -74,13 +72,16 @@ public class MySQL {
 			ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
-			rs.next();
-			if (rs.isBeforeFirst()) {
+			if (rs.next()) {
 				generatedId = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			ApplicationErrorLoging.log("MySQLDriver", e);
+
+			// Put response so we can notify user the request could not be saved.
 			response.put("STATUS", "ERROR");
+		} finally {
+			closeConnection();
 		}
 		response.put("STATUS", "OK");
 		response.put("GEN_ID", generatedId.toString());
