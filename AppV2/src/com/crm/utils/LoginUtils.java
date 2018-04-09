@@ -89,7 +89,7 @@ public class LoginUtils {
 			return result;
 		}
 
-		CRM_user_master cum = DBO_CRM_user_master.getById(cuc.getId());
+		CRM_user_master cum = DBO_CRM_user_master.getById(cuc.getUser_master_id());
 		CRM_user_information cui = new CRM_user_information();
 
 		try {

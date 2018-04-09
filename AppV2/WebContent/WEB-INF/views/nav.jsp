@@ -88,8 +88,8 @@ body {
 	height: 0px;
 	width: 105px;
 	position: fixed;
-	left: 94%;
-	top: 30%;
+	left: 93%;
+	top: 92%;
 	z-index: 1000;
 	border-radius: 25px;
 	transform: rotate(-90deg);

@@ -13,7 +13,7 @@
 		<div class="container text-center">
 			<h3>WebKB CRM Platform</h3>
 			<br />
-			<h3>- The Future builded from The Past -</h3>
+			<h3 class="text-muted">- The Future Built From The Past -</h3>
 			<br />
 			<h4>About</h4>
 			<br />
