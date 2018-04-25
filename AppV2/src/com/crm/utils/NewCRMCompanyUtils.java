@@ -155,7 +155,7 @@ public class NewCRMCompanyUtils {
 	}
 
 	private static void cleanUpDatabase(Integer companyId) {
-		if (DBO_CRM_company.getById(companyId).getCompany_name() != null) {
+		if (DBO_CRM_company.getById(companyId, null).getCompany_name() != null) {
 			DBO_CRM_company.removeById(companyId);
 		}
 		if (DBO_CRM_company_address.getByCompanyId(companyId).isEmpty() != true) {

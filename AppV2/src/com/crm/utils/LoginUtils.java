@@ -74,9 +74,9 @@ public class LoginUtils {
 		pattern = Pattern.compile(emailPattern);
 		matcher = pattern.matcher(email);
 		if (matcher.matches()) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -15,6 +15,7 @@ import com.crm.client.company.CRM_company_email_address;
 import com.crm.client.company.CRM_company_notes;
 import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.company.CRM_company_phoneNo;
+import com.crm.client.user.CRM_user_master;
 import com.crm.utils.ApplicationErrorLoging;
 import com.crm.utils.ApplicationUtils;
 import com.db.mysql.models.DBO_CRM_company;
@@ -55,7 +56,7 @@ public class ViewCustomerServlet extends HttpServlet {
 		}
 
 		try {
-			Object crmCompany = DBO_CRM_company.getById(id);
+			Object crmCompany = DBO_CRM_company.getById(id, ((CRM_user_master) _SESSION.getAttribute("CLIENT_MASTER_INFO")).getId());
 			ArrayList<CRM_company_address> crmCompanyAddresses = DBO_CRM_company_address.getByCompanyId(id);
 			ArrayList<CRM_company_email_address> crmCompanyEmailAddresses = DBO_CRM_company_email_address.getByCompanyId(id);
 			ArrayList<CRM_company_notes> crmCompanyNotes = DBO_CRM_company_notes.getByCompanyId(id);

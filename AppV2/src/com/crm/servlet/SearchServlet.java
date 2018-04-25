@@ -28,7 +28,8 @@ public class SearchServlet extends HttpServlet {
 			String url = request.getRequestURL().toString();
 			String keyword = url.substring(url.lastIndexOf('/') + 1);
 			keyword = java.net.URLDecoder.decode(keyword, "UTF-8");
-			HashMap<Integer, CRM_company> result = this.search(keyword);
+			HashMap<Integer, CRM_company> result = new HashMap<Integer, CRM_company>();
+			result = this.search(keyword);
 			if (!result.isEmpty()) {
 				request.setAttribute("SEARCHRESULT", result);
 			} else {
@@ -58,7 +59,7 @@ public class SearchServlet extends HttpServlet {
 
 		if (StringUtils.isStrictlyNumeric(keyword) == true) {
 			type = new String("NUMBER");
-		} else if (LoginUtils.validateEmail(keyword) != true) {
+		} else if (LoginUtils.validateEmail(keyword) == true) {
 			type = new String("EMAIL");
 		} else {
 			type = new String("ALL");

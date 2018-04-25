@@ -1,5 +1,14 @@
 package com.crm.client.company;
 
+import java.lang.reflect.Field;
+
+/**
+ * A class which holds a personal information. It has been designed to hold any
+ * user information.
+ * 
+ * @author kbuczynski
+ *
+ */
 public class CRM_company_personnel {
 
 	private Integer id;
@@ -14,6 +23,29 @@ public class CRM_company_personnel {
 	public CRM_company_personnel() {
 	};
 
+	/**
+	 * Constructor which populates object variables from argument values.
+	 * 
+	 * @param id
+	 *            Integer holds an object id
+	 * @param companyId
+	 *            Integer holds a company unique it reference to a master table
+	 *            record.
+	 * @param surname
+	 *            String holding a surname of a personnel
+	 * @param forname
+	 *            String holds a forname of a personnel
+	 * @param email
+	 *            String holds a email value of a personnel
+	 * @param phoneNo
+	 *            String holds a phone number of a personnel (it might contain
+	 *            character)
+	 * @param phoneNoPrefix
+	 *            String holds a phone prefix value
+	 * @param position
+	 *            String holds a description value for a personnel status within the
+	 *            business
+	 */
 	public CRM_company_personnel(Integer id, Integer companyId, String surname, String forname, String email,
 			String phoneNo, String phoneNoPrefix, String position) {
 		this.id = new Integer(id);
@@ -26,6 +58,26 @@ public class CRM_company_personnel {
 		this.company_personnel_position = new String(position);
 	}
 
+	/**
+	 * 
+	 * @param companyId
+	 *            Integer holds a company unique it reference to a master table
+	 *            record.
+	 * @param surname
+	 *            String holding a surname of a personnel
+	 * @param forname
+	 *            String holds a forname of a personnel
+	 * @param email
+	 *            String holds a email value of a personnel
+	 * @param phoneNo
+	 *            String holds a phone number of a personnel (it might contain
+	 *            character)
+	 * @param phoneNoPrefix
+	 *            String holds a phone prefix value
+	 * @param position
+	 *            String holds a description value for a personnel status within the
+	 *            business
+	 */
 	public CRM_company_personnel(Integer companyId, String surname, String forname, String email, String phoneNo,
 			String phoneNoPrefix, String position) {
 		this.company_id = new Integer(companyId);
@@ -100,4 +152,33 @@ public class CRM_company_personnel {
 	public void setCompany_personnel_position(String company_personnel_position) {
 		this.company_personnel_position = company_personnel_position;
 	}
+
+	@Override
+	/**
+	 * toString method which is a override. It creates a much more readable output
+	 * of a object
+	 * 
+	 * @return String with a build up JSON like format output.
+	 */
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		String NEW_LINE = System.getProperty("line.separator");
+		Field[] fields = this.getClass().getDeclaredFields();
+		result.append(this.getClass().getName() + " Object {" + NEW_LINE);
+		for (Field field : fields) {
+			field.setAccessible(true);
+			try {
+				result.append(field.getName() + ": " + field.get(this) + " ");
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+
+		result.append("}");
+
+		return result.toString();
+	}
+
 }

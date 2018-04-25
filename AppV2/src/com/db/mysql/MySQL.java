@@ -12,12 +12,28 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.crm.utils.ApplicationErrorLoging;
-
+/**
+ * A class MySQL.
+ * Designed to handle a connection and mysql manipulation by executing SQL statements on a server.
+ * The class will handle connection disconnection using  JDBC driver
+ * @author kbuczynski
+ *
+ */
 public class MySQL {
 
+	//LIVE MYSQL DB
 	private final static String mysqlAddress = "167.99.202.160";
+	
+	//DEBUG MYSQL DB
+	//private final static String mysqlAddress = "localhost";
 	private final static String mysqlDataBase = "CRM";
-	private final static String mysqlUserName = "webkbCRM";
+	
+	//DEGBU DB
+	//private final static String mysqlUserName = "root"; 
+	//private final static String mysqlPsw = "admin";
+	
+	//LIVE DB
+	private final static String mysqlUserName = "webkbCRM"; 
 	private final static String mysqlPsw = "bpKD3YWCD6rfjKu";
 
 	private static Connection con = null;

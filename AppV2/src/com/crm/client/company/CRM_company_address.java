@@ -1,6 +1,20 @@
 package com.crm.client.company;
 
+import java.lang.reflect.Field;
+
+/**
+ * CRM_company_address class.
+ * 
+ * The class has been designed to store and manipulate a company address objects.
+ * It variables names are names the same as database table headers.  
+ * 
+ * @author kbuczynski
+ * @version 1.2
+ * 
+ *
+ */
 public class CRM_company_address {
+	
 	private Integer id = 0;
 	private Integer company_id;
 	private String company_address_line1;
@@ -10,10 +24,23 @@ public class CRM_company_address {
 	private String company_address_country;
 	private Boolean company_address_active = false;
 
+	/**
+	 * Empty constructor placed so the object can be build dynamically.
+	 */
 	public CRM_company_address() {
 	}
 
-	public CRM_company_address(int companyId, String companyAddressLine1, String companyAddressPostcode,
+	/**
+	 * A standard constructor which populates the object variables (except address line 2 due to no guarantee variable)
+	 *  
+	 * @param companyId Integer Holds a company id value
+	 * @param companyAddressLine1 String Holds a company address line 1 entry
+	 * @param companyAddressPostcode String Holds a company address post code entry
+	 * @param companyAddressCity String Holds a company address city
+	 * @param companyAddressCountry String Holds a company Country
+	 * @param companyAddressIsActive Boolean Holds a true or false value which determinate if the address object is the main address to use or not. 
+	 */
+	public CRM_company_address(Integer companyId, String companyAddressLine1, String companyAddressPostcode,
 			String companyAddressCity, String companyAddressCountry, Boolean companyAddressIsActive) {
 		this.company_id = new Integer(companyId);
 		this.company_address_line1 = new String(companyAddressLine1);
@@ -86,15 +113,32 @@ public class CRM_company_address {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	@Override
+	/**
+	 * A toString method which overwrites the build in function
+	 * @return String with a class variables and values
+	 */
 	public String toString() {
-		if (this.company_address_line2 != null) {
-			return this.company_address_line1 + " " + this.company_address_line2 + " " + this.company_address_postcode
-					+ " " + this.company_address_city + " " + this.company_address_country;
-		} else {
-			return this.company_address_line1 + " " + this.company_address_postcode + " " + this.company_address_city
-					+ " " + this.company_address_country;
-		}
+	    StringBuilder result = new StringBuilder();
+	    String NEW_LINE = System.getProperty("line.separator");
+	    Field[] fields = this.getClass().getDeclaredFields();
+	    result.append(this.getClass().getName() + " Object {" + NEW_LINE);
+	    for (Field field : fields) {
+	        field.setAccessible(true);
+	    	try {
+				result.append(field.getName() + ": " + field.get(this) + " ");
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    
+	    result.append("}");
+
+	    return result.toString();
 	}
 
 }

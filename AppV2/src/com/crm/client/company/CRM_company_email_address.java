@@ -1,5 +1,16 @@
 package com.crm.client.company;
 
+import java.lang.reflect.Field;
+
+/**
+ * CRM_company_email_address class.
+ * 
+ * Its main design to story a company email address object. The main functions
+ * of the object is to manipulate and store email information
+ * 
+ * @author kbuczynski
+ *
+ */
 public class CRM_company_email_address {
 	private Integer id = 0;
 	private Integer company_id;
@@ -10,6 +21,21 @@ public class CRM_company_email_address {
 	public CRM_company_email_address() {
 	}
 
+	/**
+	 * A constructor which accepts information as parameter. It stores given
+	 * information creating a object.
+	 * 
+	 * @param companyId
+	 *            Integer holds a company id unique value which links to master
+	 *            table.
+	 * @param companyEmailAddress
+	 *            String holds a email address value
+	 * @param companyEmailType
+	 *            String holds email type description
+	 * @param companyEmailIsActive
+	 *            Boolean holds a true/false value if the email object is used or
+	 *            not withing the context of application
+	 */
 	public CRM_company_email_address(Integer companyId, String companyEmailAddress, String companyEmailType,
 			Boolean companyEmailIsActive) {
 		this.company_id = new Integer(companyId);
@@ -17,12 +43,38 @@ public class CRM_company_email_address {
 		this.company_email_type = new String(companyEmailType);
 	}
 
+	/**
+	 * A constructor which accepts information as parameter. It stores given
+	 * information creating a object.
+	 * 
+	 * @param companyId
+	 *            Integer holds a company id unique value which links to master
+	 *            table.
+	 * @param companyEmailAddress
+	 *            String holds a email address value
+	 * @param companyEmailType
+	 *            String holds email type description
+	 */
 	public CRM_company_email_address(Integer companyId, String companyEmailAddress, String companyEmailType) {
 		this.company_id = new Integer(companyId);
 		this.company_email_address = new String(companyEmailAddress);
 		this.company_email_type = new String(companyEmailType);
 	}
 
+	/**
+	 * A constructor which acepts information as paramter. It stores given
+	 * information creating a object.
+	 * 
+	 * @param id
+	 *            Integer holds a object unique value
+	 * @param companyId
+	 *            Integer holds a company id unique value which links to master
+	 *            table.
+	 * @param companyEmailAddress
+	 *            String holds an email address value
+	 * @param companyEmailType
+	 *            String holds email type description
+	 */
 	public CRM_company_email_address(Integer id, Integer companyId, String companyEmailAddress,
 			String companyEmailType) {
 		this.id = new Integer(id);
@@ -63,7 +115,13 @@ public class CRM_company_email_address {
 		this.company_email_type = company_email_Type;
 	}
 
-	public int getCompany_email_activeToInt() {
+	/**
+	 * A function witch return a integer value of a 1 or 0 depending if the email
+	 * object is active or not
+	 * 
+	 * @return Integer value
+	 */
+	public Integer getCompany_email_activeToInt() {
 		if (this.company_email_active.equals(true)) {
 			return 1;
 		} else {
@@ -71,10 +129,31 @@ public class CRM_company_email_address {
 		}
 	}
 
+	@Override
+	/**
+	 * A toString method which overwrites the build in function
+	 * 
+	 * @return String with a class variables and values
+	 */
 	public String toString() {
-		String str = " Company ID: " + this.company_id + " Email Address: " + this.company_email_address
-				+ " Email Active: " + this.company_email_active + " Email Type: " + this.company_email_type;
-		return str;
+		StringBuilder result = new StringBuilder();
+		String NEW_LINE = System.getProperty("line.separator");
+		Field[] fields = this.getClass().getDeclaredFields();
+		result.append(this.getClass().getName() + " Object {" + NEW_LINE);
+		for (Field field : fields) {
+			field.setAccessible(true);
+			try {
+				result.append(field.getName() + ": " + field.get(this) + " ");
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+
+		result.append("}");
+
+		return result.toString();
 	}
 
 	public Integer getId() {

@@ -17,6 +17,7 @@ import com.crm.client.company.CRM_company_notes;
 import com.crm.client.company.CRM_company_personnel;
 import com.crm.client.user.CRM_user;
 import com.crm.client.user.CRM_user_information;
+import com.crm.client.user.CRM_user_master;
 import com.crm.utils.ApplicationErrorLoging;
 import com.crm.utils.ApplicationUtils;
 import com.db.mysql.models.DBO_CRM_company;
@@ -38,7 +39,7 @@ public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Integer id = 0;
 	private static String type;
-
+	private static Integer masterId = 0;
 	public EditServlet() {
 		super();
 	}
@@ -61,6 +62,7 @@ public class EditServlet extends HttpServlet {
 
 			type = urlSplit[urlSplit.length - 2];
 			id = Integer.parseInt(idStr);
+			masterId = ((CRM_user_master) _SESSION.getAttribute("CLIENT_MASTER_INFO")).getId();
 		} catch (NumberFormatException e) {
 			ApplicationErrorLoging.log("EditServlet.java", e);
 			response.sendRedirect(baseURI + "404");
@@ -74,7 +76,7 @@ public class EditServlet extends HttpServlet {
 
 		switch (type) {
 		case "main":
-			cc = DBO_CRM_company.getById(id);
+			cc = DBO_CRM_company.getById(id, masterId);
 
 			ArrayList<CRM_company_email_address> companyEmailAddressList = DBO_CRM_company_email_address.getByCompanyId(id);
 			ArrayList<CRM_company_address> companyAddressList = DBO_CRM_company_address.getByCompanyId(id);
@@ -111,7 +113,7 @@ public class EditServlet extends HttpServlet {
 		case "personnel":
 			CRM_company_personnel ccp = DBO_CRM_company_personnel.getById(id);
 
-			cc = DBO_CRM_company.getById(ccp.getCompany_id());
+			cc = DBO_CRM_company.getById(ccp.getCompany_id(), masterId);
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -147,7 +149,7 @@ public class EditServlet extends HttpServlet {
 		case "email":
 			CRM_company_email_address ccea = DBO_CRM_company_email_address.getById(id);
 
-			cc = DBO_CRM_company.getById(ccea.getCompany_id());
+			cc = DBO_CRM_company.getById(ccea.getCompany_id(), masterId);
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -179,7 +181,7 @@ public class EditServlet extends HttpServlet {
 		case "note":
 			CRM_company_notes ccn = DBO_CRM_company_notes.getById(id);
 
-			cc = DBO_CRM_company.getById(ccn.getCompany_id());
+			cc = DBO_CRM_company.getById(ccn.getCompany_id(),masterId);
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
@@ -219,7 +221,7 @@ public class EditServlet extends HttpServlet {
 		case "address":
 			CRM_company_address cca = DBO_CRM_company_address.getById(id);
 			request.setAttribute("COUNTRY", ApplicationUtils.countires);
-			cc = DBO_CRM_company.getById(cca.getCompany_id());
+			cc = DBO_CRM_company.getById(cca.getCompany_id(), masterId);
 
 			if (request.getParameter("type") != null) {
 				HashMap<String, String> newValues = new HashMap<String, String>();
